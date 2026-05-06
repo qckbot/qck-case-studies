@@ -298,17 +298,17 @@
         <div class="grid sm:grid-cols-3 gap-8 text-center">
           <div>
             <div class="text-3xl font-black text-success">68k</div>
-            <div class="text-sm text-gray-400 mt-1">Searches/mo - "period underwear"</div>
+            <div class="text-sm text-gray-400 mt-1">Searches/mo - "dairy free protein shakes"</div>
             <div class="text-xs text-success mt-1 font-semibold">Ranking #3</div>
           </div>
           <div>
             <div class="text-3xl font-black text-brand">24k</div>
-            <div class="text-sm text-gray-400 mt-1">Searches/mo - "period panties"</div>
+            <div class="text-sm text-gray-400 mt-1">Searches/mo - "protein soda"</div>
             <div class="text-xs text-brand mt-1 font-semibold">Ranking #3</div>
           </div>
           <div>
             <div class="text-3xl font-black text-warn">12k</div>
-            <div class="text-sm text-gray-400 mt-1">Searches/mo - "best period underwear"</div>
+            <div class="text-sm text-gray-400 mt-1">Searches/mo - "is sunflower lecithin bad for you"</div>
             <div class="text-xs text-warn mt-1 font-semibold">Ranking #3</div>
           </div>
         </div>
@@ -553,31 +553,31 @@
     // Chart: Oct '25 (traffic low) → Feb '26 (peak) - lowest to highest, 4-month story
     const labels = ["Jan'23","May'23","Jan'24","Jan'25","Jan'26","May'26"];
     const trafficData = [5694, 5719, 5769, 9783, 9002, 12371, 21552, 13175, 12179, 9651, 13058, 9565, 16616, 16127, 17124, 18022, 16711, 15299, 20185, 21543, 25517];
-    const engagementStart = 6; // ~Apr 2023 when growth began
+    const engagementStart = 6; // ~Apr 2023 when QCK engagement began
 
     // Non-branded keywords only - branded terms excluded from showcase
     const topKws = [
-      { kw: "period underwear",                    pos: 3, vol: 68000 },
-      { kw: "period panties",                      pos: 3, vol: 24000 },
-      { kw: "best period underwear",               pos: 3, vol: 12100 },
-      { kw: "menstrual cup",                       pos: 5, vol: 14800 },
-      { kw: "menstrual disc",                      pos: 4, vol: 6600  },
-      { kw: "period underwear for heavy periods",  pos: 4, vol: 5400  },
-      { kw: "period underwear for teens",          pos: 2, vol: 4400  },
-      { kw: "best menstrual cup",                  pos: 3, vol: 3500  },
-      { kw: "best menstrual disc",                 pos: 2, vol: 2400  },
-      { kw: "period underwear for swimming",       pos: 3, vol: 2200  },
-      { kw: "how long do menstrual cups last",     pos: 4, vol: 1800  },
-      { kw: "menstrual cup vs disc",               pos: 2, vol: 1600  },
+      { kw: "dairy free protein shakes",                    pos: 1, vol: 7100 },
+      { kw: "protein soda",                                 pos: 3, vol: 4900 },
+      { kw: "is sunflower lecithin bad for you",            pos: 2, vol: 3700 },
+      { kw: "sunflower lecithin benefits",                  pos: 6, vol: 5700 },
+      { kw: "dairy free protein shake",                     pos: 2, vol: 3200 },
+      { kw: "lactose free protein shakes ready-to-drink",   pos: 1, vol: 1200 },
+      { kw: "best dairy free protein shakes",               pos: 4, vol: 2800 },
+      { kw: "plant based protein shake",                    pos: 5, vol: 2100 },
+      { kw: "sunflower lecithin side effects",              pos: 3, vol: 1800 },
+      { kw: "dairy free protein powder",                    pos: 6, vol: 4400 },
+      { kw: "keto protein shake dairy free",                pos: 4, vol: 1500 },
+      { kw: "protein drinks without dairy",                 pos: 3, vol: 1900 },
     ].sort((a, b) => b.vol - a.vol);
 
     const topPages = [
-      { url: "/collections/saalt-period-underwear", traffic: 9997, kw: "period panties",    pos: 3 },
-      { url: "/collections/menstrual-cups-discs",   traffic: 6063, kw: "best menstrual cup", pos: 3 },
-      { url: "/",                                    traffic: 4590, kw: "saalt",              pos: 1 },
-      { url: "/blogs/news/best-period-underwear",    traffic: 3200, kw: "best period underwear", pos: 3 },
-      { url: "/collections/period-underwear-sale",   traffic: 2800, kw: "period underwear",   pos: 4 },
-      { url: "/blogs/news/menstrual-cup-vs-disc",    traffic: 2100, kw: "menstrual cup vs disc", pos: 2 },
+      { url: "https://drinkkoia.com/collections/protein-drinks", traffic: 9997, kw: "dairy free protein shakes",    pos: 1 },
+      { url: "https://drinkkoia.com/blogs/nutrition/sunflower-lecithin", traffic: 6063, kw: "is sunflower lecithin bad for you", pos: 2 },
+      { url: "https://drinkkoia.com/",                          traffic: 4590, kw: "koia",              pos: 1 },
+      { url: "https://drinkkoia.com/blogs/nutrition/dairy-free-protein", traffic: 3200, kw: "best dairy free protein shakes", pos: 4 },
+      { url: "https://drinkkoia.com/collections/protein-shakes", traffic: 2800, kw: "dairy free protein shake",   pos: 2 },
+      { url: "https://drinkkoia.com/blogs/nutrition/protein-soda", traffic: 2100, kw: "protein soda",   pos: 3 },
     ];
 
     // ── TRAFFIC CHART ────────────────────────────────────────────
