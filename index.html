@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QCK Case Studies - SEO Results for E-Commerce Brands</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: #0a0f1e; font-family: 'Inter', sans-serif; }
+    .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .card-hover:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .gradient-text { background: linear-gradient(135deg, #3b82f6, #22c55e); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    input::placeholder { color: #4b5563; }
+    input:focus { outline: none; }
+    .filter-btn { background: #111827; border: 1px solid #1f2937; color: #9ca3af; }
+    .filter-btn.active, .filter-btn:hover { background: #1e3a8a; border-color: #3b82f6; color: white; }
+  </style>
+</head>
+<body class="text-gray-100 antialiased">
+
+  <!-- NAV -->
+  <nav style="background:rgba(10,15,30,0.95); border-bottom:1px solid #1f2937;" class="fixed top-0 w-full z-50">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <span class="text-2xl font-black" style="color:#3b82f6">QCK</span>
+      <a href="https://fun.qck.co/lp-1/page_v3z9b/" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-colors">
+        Get Free Audit
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="pt-32 pb-20 px-6 text-center" style="background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(59,130,246,0.15), transparent), #0a0f1e;">
+    <div class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm text-gray-400 mb-8" style="background:#111827; border:1px solid #1f2937;">
+      <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
+      Real results. Real clients. Verified Ahrefs data.
+    </div>
+    <h1 class="text-4xl sm:text-6xl font-black mb-6">
+      QCK <span class="gradient-text">Case Studies</span>
+    </h1>
+    <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-12">
+      Every case study is built from real Ahrefs data and ClickUp work history.
+      No estimates. No projections. Just what actually happened.
+    </p>
+    <div class="flex flex-wrap justify-center gap-12 text-center">
+      <div><div class="text-3xl font-black text-green-400">228+</div><div class="text-sm text-gray-500 mt-1">Clients served</div></div>
+      <div><div class="text-3xl font-black text-blue-400">60k+</div><div class="text-sm text-gray-500 mt-1">Pages created</div></div>
+      <div><div class="text-3xl font-black text-white">12x</div><div class="text-sm text-gray-500 mt-1">Avg traffic increase</div></div>
+      <div><div class="text-3xl font-black text-yellow-400">22</div><div class="text-sm text-gray-500 mt-1">Clutch reviews</div></div>
+    </div>
+  </section>
+
+  <!-- FILTER BAR -->
+  <div class="sticky top-16 z-40 py-4 px-6" style="background:rgba(10,15,30,0.97); border-bottom:1px solid #1f2937;">
+    <div class="max-w-6xl mx-auto flex flex-wrap gap-3 items-center">
+      <input id="search" type="text" placeholder="Search brands or categories..."
+        class="flex-1 min-w-48 px-4 py-2.5 rounded-lg text-sm text-white"
+        style="background:#111827; border:1px solid #1f2937;"
+        oninput="filterCards()" />
+      <button onclick="filterBy('all')"     class="filter-btn active px-4 py-2 rounded-lg text-sm font-medium" data-filter="all">All</button>
+      <button onclick="filterBy('health')"  class="filter-btn px-4 py-2 rounded-lg text-sm font-medium" data-filter="health">Health</button>
+      <button onclick="filterBy('apparel')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium" data-filter="apparel">Apparel</button>
+      <button onclick="filterBy('medical')" class="filter-btn px-4 py-2 rounded-lg text-sm font-medium" data-filter="medical">Medical</button>
+      <button onclick="filterBy('ecom')"    class="filter-btn px-4 py-2 rounded-lg text-sm font-medium" data-filter="ecom">E-Commerce</button>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <section class="py-16 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- SAALT -->
+        <div data-industry="health apparel ecom" data-name="saalt period underwear menstrual cups">
+        <a href="/case-studies/saalt" class="case-card block rounded-2xl overflow-hidden card-hover" style="background:#111827; border:1px solid #1f2937;">
+          <div class="h-2" style="background:linear-gradient(90deg,#3b82f6,#22c55e)"></div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:linear-gradient(135deg,#ec4899,#a855f7)">S</div>
+              <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(34,197,94,0.15); color:#4ade80; border:1px solid rgba(34,197,94,0.3)">Health &amp; Wellness</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Saalt</h3>
+            <p class="text-gray-500 text-xs mb-5">Period Underwear &amp; Menstrual Care - Active Client</p>
+            <div class="grid grid-cols-2 gap-3 mb-5">
+              <div class="rounded-lg p-3" style="background:#0a0f1e;">
+                <div class="text-xl font-black text-green-400">+69%</div>
+                <div class="text-xs text-gray-500 mt-0.5">Traffic in 4 months</div>
+              </div>
+              <div class="rounded-lg p-3" style="background:#0a0f1e;">
+                <div class="text-xl font-black text-blue-400">#3</div>
+                <div class="text-xs text-gray-500 mt-0.5">"Period Underwear" 68k/mo</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-sm font-semibold" style="color:#3b82f6;">View Case Study &rarr;</div>
+          </div>
+        </a>
+        </div>
+
+        <!-- MEDICAL SAUNAS -->
+        <div data-industry="medical health ecom" data-name="medical saunas infrared sauna therapy wellness">
+        <a href="/case-studies/medical-saunas" class="case-card block rounded-2xl overflow-hidden card-hover" style="background:#111827; border:1px solid #1f2937;">
+          <div class="h-2" style="background:linear-gradient(90deg,#22c55e,#0891b2)"></div>
+          <div class="p-6">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:linear-gradient(135deg,#22c55e,#0891b2)">MS</div>
+              <span class="text-xs px-2.5 py-1 rounded-full" style="background:rgba(34,197,94,0.15); color:#4ade80; border:1px solid rgba(34,197,94,0.3)">Medical</span>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Medical Saunas</h3>
+            <p class="text-gray-500 text-xs mb-5">Medical-Grade Infrared Saunas - Mar-Sep 2025</p>
+            <div class="grid grid-cols-2 gap-3 mb-5">
+              <div class="rounded-lg p-3" style="background:#0a0f1e;">
+                <div class="text-xl font-black text-green-400">+386%</div>
+                <div class="text-xs text-gray-500 mt-0.5">Traffic growth</div>
+              </div>
+              <div class="rounded-lg p-3" style="background:#0a0f1e;">
+                <div class="text-xl font-black text-blue-400">0 to 124</div>
+                <div class="text-xs text-gray-500 mt-0.5">Page-1 keywords</div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-sm font-semibold" style="color:#3b82f6;">View Case Study &rarr;</div>
+          </div>
+        </a>
+        </div>
+
+        <!-- COMING SOON -->
+        <div data-industry="all" data-name="">
+        <div class="rounded-2xl p-8 flex flex-col items-center justify-center text-center" style="background:#111827; border:2px dashed #1f2937; min-height:280px;">
+          <div class="text-5xl mb-4">+</div>
+          <div class="text-white font-bold text-lg mb-2">20+ More Loading</div>
+          <div class="text-gray-500 text-sm leading-relaxed">Scanning 228 clients for top results. New case studies drop weekly as we verify the data.</div>
+        </div>
+        </div>
+
+      </div>
+      <div id="no-results" class="hidden text-center py-20 text-gray-500 text-lg">
+        No matches yet - <a href="https://fun.qck.co/lp-1/page_v3z9b/" class="text-blue-400 hover:underline">become a case study</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 px-6 text-center" style="background:linear-gradient(135deg,#1e3a8a,#1d4ed8,#0a0f1e);">
+    <h2 class="text-3xl sm:text-5xl font-black mb-6">Want results like these?</h2>
+    <p class="text-xl mb-10 max-w-xl mx-auto" style="color:#bfdbfe;">We audit your site and show you exactly where you're losing ground to competitors - free, within 48 hours.</p>
+    <a href="https://fun.qck.co/lp-1/page_v3z9b/"
+       class="inline-flex items-center gap-2 font-black text-lg px-10 py-5 rounded-2xl transition-all hover:scale-105"
+       style="background:#22c55e; color:#0a0f1e;">
+      Get Your Free SEO Audit
+    </a>
+    <p class="text-sm mt-5" style="color:rgba(191,219,254,0.5)">No commitment. No fluff. Just a clear picture of your opportunity.</p>
+  </section>
+
+  <footer class="py-8 px-6 text-center" style="border-top:1px solid #1f2937;">
+    <div class="text-sm" style="color:#4b5563;">QCK - <a href="https://qck.co" class="hover:text-white transition-colors">qck.co</a> - &copy; 2026 QCKBOT LLC</div>
+  </footer>
+
+  <script>
+    function filterCards() {
+      const q = document.getElementById('search').value.toLowerCase();
+      document.querySelectorAll('#grid > div').forEach(wrapper => {
+        const name = (wrapper.dataset.name || '').toLowerCase();
+        wrapper.style.display = (!q || name.includes(q)) ? '' : 'none';
+      });
+      checkEmpty();
+    }
+    function filterBy(filter) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-filter="' + filter + '"]').classList.add('active');
+      document.querySelectorAll('#grid > div').forEach(wrapper => {
+        const ind = (wrapper.dataset.industry || '').toLowerCase();
+        wrapper.style.display = (filter === 'all' || ind.includes(filter)) ? '' : 'none';
+      });
+      checkEmpty();
+    }
+    function checkEmpty() {
+      const visible = [...document.querySelectorAll('#grid > div')].filter(c => c.style.display !== 'none');
+      document.getElementById('no-results').classList.toggle('hidden', visible.length > 0);
+    }
+  </script>
+</body>
+</html>
