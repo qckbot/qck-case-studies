@@ -257,7 +257,7 @@
             <div class="flex items-center gap-1.5"><div class="w-3 h-0.5 bg-success rounded"></div><span>Organic Traffic</span></div>
           </div>
         </div>
-        <div style="position:relative; height:280px;"><canvas id="trafficChart"></canvas></div>
+        <div style="position:relative; height:280px;"><canvas id="trafficChart" width="800" height="280"></canvas></div>
       </div>
 
       <div class="bg-navy-700 border border-navy-600 rounded-2xl overflow-hidden mb-12"><table class="w-full text-sm"><thead><tr style="border-bottom:1px solid #1f2937; background:#111827;"><th class="text-left px-4 sm:px-6 py-4 text-gray-400 font-semibold uppercase tracking-wider text-xs">Keyword</th><th class="text-center px-4 py-4 text-gray-400 font-semibold uppercase tracking-wider text-xs">Position</th><th class="text-right px-4 sm:px-6 py-4 text-gray-400 font-semibold uppercase tracking-wider text-xs">Monthly Searches</th></tr></thead><tbody>
@@ -476,7 +476,6 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
     const ctx = document.getElementById('trafficChart').getContext('2d');
     new Chart(ctx, {
       type: 'line',
@@ -512,6 +511,5 @@
         }
       }
     });
-    }); // end DOMContentLoaded
   </script>
 </body></html>
