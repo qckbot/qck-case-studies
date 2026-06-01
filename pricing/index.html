@@ -1,0 +1,1764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QCK · Pricing</title>
+  <!-- v5: new-client trust layer, a la carte add-on, how-it-works, page delivery detail, human-edited callout, chip + compare table tweaks -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --surface: #f8f8f8;
+      --surface2: #f0f0f0;
+      --border: #e5e5e5;
+      --border-hi: #d0d0d0;
+      --text: #111111;
+      --muted: #888;
+      --dim: #aaa;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --green-border: #bbf7d0;
+      --blue: #2563eb;
+      --blue-light: #dbeafe;
+      --amber: #d97706;
+      --amber-light: #fef3c7;
+      --black: #111111;
+      --white: #ffffff;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --radius-sm: 7px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── TOP NAV — removed in v3 ── */
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center;
+      padding: 72px 24px 20px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--green);
+      background: var(--green-light);
+      border: 1px solid var(--green-border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      margin-bottom: 18px;
+    }
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -.8px;
+      line-height: 1.1;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+    h1 em { font-style: normal; color: var(--green); }
+    .hero-sub {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.5;
+    }
+
+    /* ── SOCIAL PROOF STRIP ── */
+    .proof-strip {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      padding: 18px 24px 36px;
+      flex-wrap: wrap;
+    }
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .proof-icon { font-size: 14px; }
+
+    /* ── TERM BAR ── */
+    .term-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 16px;
+      margin-bottom: 0;
+      gap: 0;
+    }
+    .term-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 4px;
+      width: 100%;
+      max-width: 480px;
+    }
+    @media (min-width: 540px) {
+      .term-bar {
+        display: flex;
+        gap: 0;
+        max-width: 560px;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .term-bar::-webkit-scrollbar { display: none; }
+    }
+    .term-btn {
+      flex-shrink: 0;
+      padding: 9px 14px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-align: center;
+    }
+    @media (max-width: 539px) {
+      .term-btn { font-size: 12px; padding: 10px 8px; }
+      .save-pill { font-size: 9px; padding: 1px 5px; }
+    }
+    .term-btn:hover { color: var(--text); background: var(--surface2); }
+    .term-btn.active { background: var(--black); color: #fff; }
+    .save-pill {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--green);
+      color: #fff;
+      border-radius: 4px;
+      padding: 1px 6px;
+    }
+    .term-btn.active .save-pill { background: #15803d; }
+
+    /* ── CARDS ── */
+    .cards-wrap { padding: 0 20px; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 1040px;
+      margin: 0 auto 28px;
+    }
+    @media (max-width: 820px) {
+      .cards { grid-template-columns: 1fr; max-width: 440px; }
+    }
+
+    .card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .card.featured {
+      border-color: var(--black);
+      border-width: 2px;
+    }
+    .card.featured-pro {
+      border-color: var(--amber);
+      border-width: 2px;
+    }
+    .plan-chip {
+      display: none;
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      padding: 3px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .card.featured .plan-chip { display: block; background: var(--black); color: #fff; }
+    .card.featured-pro .plan-chip { display: block; background: var(--amber); color: #fff; }
+
+    .plan-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+    .plan-tag {
+      font-size: 12px;
+      color: var(--dim);
+      margin-bottom: 16px;
+      line-height: 1.45;
+    }
+
+    /* ── PRICE ── */
+    .price-row { display: flex; align-items: flex-end; gap: 3px; margin-bottom: 2px; }
+    .price-num {
+      font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      color: var(--black);
+    }
+    .price-unit { font-size: 13px; color: var(--muted); padding-bottom: 5px; }
+    .price-was { font-size: 12px; color: #bbb; text-decoration: line-through; min-height: 18px; margin-bottom: 6px; }
+    .savings-chip {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-light);
+      border: 1px solid var(--green-border);
+      border-radius: 5px;
+      padding: 3px 9px;
+      min-height: 22px;
+      margin-bottom: 18px;
+      opacity: 1;
+    }
+    .savings-chip.hidden { opacity: 0; pointer-events: none; }
+
+    .divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+    .page-hero.tier-1 { background: #f0fdf4; border-color: #bbf7d0; }
+    .page-hero.tier-2 { background: #f0fdf4; border-color: #86efac; }
+    .page-hero.tier-3 { background: #fffbeb; border-color: #fde68a; }
+
+    .page-num {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1;
+    }
+    .tier-1 .page-num { color: var(--green); }
+    .tier-2 .page-num { color: var(--green); }
+    .tier-3 .page-num { color: var(--amber); }
+
+    .page-stack {}
+    .page-label-main { font-size: 13px; font-weight: 700; color: var(--black); }
+    .page-label-types { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .page-label-comp { font-size: 11px; color: var(--green); font-weight: 600; margin-top: 2px; }
+    .tier-3 .page-label-comp { color: var(--amber); }
+
+    /* ── FEATURE ROWS ── */
+    .section-hd {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 8px;
+    }
+    .feats {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .feats li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: #333;
+      line-height: 1.4;
+    }
+    .fi {
+      flex-shrink: 0;
+      width: 16px;
+      margin-top: 1px;
+      font-size: 12px;
+      text-align: center;
+    }
+    .fi-check { color: var(--green); }
+    .fi-up    { color: var(--blue); font-size: 11px; }
+    .fi-star  { color: var(--amber); font-size: 11px; }
+    .fi-dash  { color: #ccc; }
+
+    /* ── TOGGLE ROWS ── */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin-bottom: 6px;
+      transition: border-color .18s, background .18s;
+    }
+    .toggle-row.t-on-green  { border-color: var(--green-border); background: var(--green-light); }
+    .toggle-row.t-on-blue   { border-color: #bfdbfe; background: var(--blue-light); }
+    .tr-title { font-size: 13px; font-weight: 600; color: var(--text); }
+    .tr-sub   { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    .toggle { position: relative; width: 38px; height: 21px; flex-shrink: 0; }
+    .toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .ttrack {
+      position: absolute; inset: 0;
+      background: #d1d5db;
+      border-radius: 21px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .toggle input:checked + .ttrack { background: var(--green); }
+    .toggle.ads-toggle input:checked + .ttrack { background: var(--blue); }
+    .ttrack::after {
+      content: '';
+      position: absolute;
+      top: 2.5px; left: 2.5px;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform .2s;
+      box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    }
+    .toggle input:checked + .ttrack::after { transform: translateX(17px); }
+
+    /* ── CTA ── */
+    .cta {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-hi);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      margin-top: auto;
+      padding-top: 20px;
+      transition: all .15s;
+      text-decoration: none;
+    }
+    .cta:hover { background: var(--surface2); border-color: #aaa; }
+    .card.featured .cta { background: var(--black); color: #fff; border-color: var(--black); }
+    .card.featured .cta:hover { background: #2a2a2a; }
+    .card.featured-pro .cta { background: var(--amber); color: #fff; border-color: var(--amber); }
+    .card.featured-pro .cta:hover { background: #c2780c; }
+
+    /* ── COMPARISON TABLE ── */
+    .compare-wrap { padding: 0 20px 28px; }
+    .compare {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .compare-header {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      gap: 8px;
+    }
+    .compare-header div { font-size: 12px; font-weight: 700; color: var(--muted); }
+    .compare-header div:not(:first-child) { text-align: center; }
+    .compare-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      padding: 10px 20px;
+      gap: 8px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row:nth-child(even) { background: var(--surface); }
+    .compare-feat { font-size: 13px; color: #333; }
+    .compare-cell { text-align: center; font-size: 13px; font-weight: 600; }
+    .c-yes { color: var(--green); }
+    .c-no  { color: #ddd; }
+    .c-val { color: var(--black); }
+    @media (max-width: 560px) {
+      .compare-header, .compare-row { grid-template-columns: 1.5fr 1fr 1fr 1fr; font-size: 11px; padding: 9px 12px; }
+    }
+
+    /* ── SUMMARY BAR ── */
+    .summary-wrap { padding: 0 20px 40px; }
+    .summary {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: var(--black);
+      border-radius: var(--radius-lg);
+      padding: 20px 20px 24px;
+      color: #fff;
+    }
+    .summary-hd { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #555; margin-bottom: 16px; }
+    /* Matches compare table: 2fr 1fr 1fr 1fr, gap 8px, horizontal padding 20px */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+        .get-started-link {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      margin-top: 4px;
+      cursor: pointer;
+      transition: color .15s;
+    }
+    .get-started-link:hover { color: #ddd; }
+    .sitem { display: flex; flex-direction: column; gap: 3px; }
+    .slabel { font-size: 11px; color: #666; }
+    .sval { font-size: 22px; font-weight: 800; letter-spacing: -.5px; color: #fff; }
+    .ssub { font-size: 11px; color: #555; }
+
+    /* ── AM SECTION ── */
+    .am-section {
+      padding: 0 20px 20px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .am-hd {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .am-hd h2 {
+      font-size: clamp(22px, 3.5vw, 32px);
+      font-weight: 800;
+      letter-spacing: -.5px;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .am-hd p {
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 28px;
+      line-height: 1.5;
+    }
+    .am-tier-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 12px;
+      margin-top: 24px;
+    }
+    .am-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    /* flip card */
+    .flip-card {
+      perspective: 900px;
+      height: 260px;
+      cursor: pointer;
+    }
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+      transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-lg);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      overflow: hidden;
+    }
+    .flip-front {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px 16px;
+      gap: 8px;
+      text-align: center;
+    }
+    .flip-front:hover { border-color: #aaa; background: #fafafa; }
+    .am-avatar {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      background: var(--surface2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--black);
+      flex-shrink: 0;
+      border: 2px solid var(--border);
+    }
+    .am-name { font-size: 16px; font-weight: 800; color: var(--black); }
+    .am-title { font-size: 11px; color: var(--muted); }
+    .am-tenure {
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--green-light);
+      color: var(--green);
+      border: 1px solid var(--green-border);
+      border-radius: 20px;
+      padding: 2px 10px;
+    }
+    .am-spec { font-size: 12px; color: #555; line-height: 1.4; }
+    .am-hint { font-size: 10px; color: #bbb; margin-top: 4px; }
+
+    .flip-back {
+      background: var(--black);
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      padding: 20px 18px 16px;
+      color: #fff;
+    }
+    .back-name { font-size: 14px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .back-feats {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      flex: 1;
+      overflow: hidden;
+    }
+    .back-feats li {
+      font-size: 11px;
+      color: #ccc;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+    .back-feats li::before { content: "✓"; color: var(--green); flex-shrink: 0; font-size: 11px; }
+    .am-book-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      text-decoration: none;
+      margin-top: 12px;
+      transition: background .15s;
+    }
+    .am-book-btn:hover { background: #15803d; }
+
+    /* plan filter tabs */
+    .am-filter-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .am-filter-btn {
+      padding: 8px 20px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .am-filter-btn:hover { border-color: #aaa; color: var(--text); }
+    .am-filter-btn.active { background: var(--black); color: #fff; border-color: var(--black); }
+
+    /* ── AM FLIP CARDS ── */
+    .am-filter-wrap {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .am-filter-btn {
+      padding: 8px 20px;
+      border-radius: 8px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .am-filter-btn:hover { border-color: #aaa; color: var(--text); }
+    .am-filter-btn.active { background: var(--black); color: #fff; border-color: var(--black); }
+
+    .am-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .am-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+      margin-top: 4px;
+    }
+    .am-tag {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 20px;
+      background: var(--surface2);
+      color: #555;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .flip-card {
+      perspective: 900px;
+      height: 290px;
+      cursor: pointer;
+    }
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform .5s cubic-bezier(.4,0,.2,1);
+      transform-style: preserve-3d;
+    }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+    .flip-front, .flip-back {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-lg);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+    .flip-front {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 16px 16px;
+      gap: 6px;
+      text-align: center;
+      transition: border-color .15s;
+    }
+    .flip-front:hover { border-color: #aaa; }
+    .am-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; font-weight: 900;
+      color: var(--black);
+      border: 2px solid var(--border);
+    }
+    .am-name { font-size: 16px; font-weight: 800; color: var(--black); }
+    .am-role { font-size: 11px; color: var(--muted); }
+    .am-title { font-size: 11px; color: var(--muted); }
+    .am-tenure {
+      font-size: 10px; font-weight: 700;
+      background: var(--green-light); color: var(--green);
+      border: 1px solid var(--green-border);
+      border-radius: 20px; padding: 2px 10px;
+    }
+    .am-spec { font-size: 11px; color: #555; line-height: 1.4; text-align: center; }
+    .am-hint { font-size: 10px; color: #bbb; }
+    .flip-back {
+      background: var(--black);
+      transform: rotateY(180deg);
+      display: flex; flex-direction: column;
+      padding: 18px 16px 14px;
+      color: #fff;
+      border-radius: var(--radius-lg);
+    }
+    .back-name { font-size: 13px; font-weight: 800; color: #fff; margin-bottom: 10px; }
+    .back-feats {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 6px;
+      flex: 1; overflow: hidden;
+    }
+    .back-feats li {
+      font-size: 11px; color: #ccc;
+      display: flex; gap: 6px; align-items: flex-start; line-height: 1.35;
+    }
+    .back-feats li::before { content: "✓"; color: var(--green); flex-shrink: 0; }
+    .am-book-btn {
+      display: block; width: 100%;
+      padding: 9px; margin-top: 10px;
+      background: var(--green); color: #fff;
+      font-size: 12px; font-weight: 700;
+      border-radius: var(--radius-sm);
+      text-align: center; text-decoration: none;
+      transition: background .15s;
+    }
+    .am-book-btn:hover { background: #15803d; }
+    .flip-card.am-hidden { display: none; }
+
+    /* ── FOOTNOTE ── */
+    .footnote { text-align: center; font-size: 11px; color: #aaa; padding: 12px 24px 48px; line-height: 1.7; max-width: 600px; margin: 0 auto; }
+
+    /* ── NEW CLIENT MICRO-COPY ── */
+    .new-client-note-wrap {
+      text-align: center;
+      padding: 10px 20px 24px;
+    }
+    .new-client-note {
+      display: inline-block;
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+      padding: 3px 12px 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+    .new-client-note strong { color: var(--text); }
+
+    /* ── CHECKBOX ADD-ON (Growth card) ── */
+    .addon-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 11px 12px;
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: border-color .18s, background .18s;
+    }
+    .addon-checkbox-row:hover { border-color: #aaa; }
+    .addon-checkbox-row.checked { border-color: var(--green-border); background: var(--green-light); }
+    .addon-cb {
+      width: 17px; height: 17px;
+      border: 1.5px solid #ccc;
+      border-radius: 4px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      background: #fff;
+      transition: all .15s;
+    }
+    .addon-checkbox-row.checked .addon-cb {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+      font-size: 11px;
+    }
+    .addon-cb-text {}
+    .addon-cb-title { font-size: 13px; font-weight: 600; color: var(--text); }
+    .addon-cb-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── TOOLTIP ── */
+    .tooltip-wrap { position: relative; display: inline-block; }
+    .tooltip-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: #ddd;
+      color: #555;
+      font-size: 9px;
+      font-weight: 700;
+      cursor: help;
+      margin-left: 4px;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+    .tooltip-box {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      background: #111;
+      color: #eee;
+      font-size: 11px;
+      line-height: 1.5;
+      padding: 10px 12px;
+      border-radius: 8px;
+      z-index: 99;
+      pointer-events: none;
+    }
+    .tooltip-box::after {
+      content: '';
+      position: absolute;
+      top: 100%; left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: #111;
+    }
+    .tooltip-wrap:hover .tooltip-box { display: block; }
+
+    /* ── A LA CARTE SECTION ── */
+    .addon-wrap {
+      padding: 0 20px 28px;
+    }
+    .addon-bar {
+      max-width: 1040px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .addon-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .addon-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .addon-label { font-size: 14px; font-weight: 700; color: var(--black); }
+    .addon-sub { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+    .addon-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .addon-price-num { font-size: 28px; font-weight: 800; letter-spacing: -1px; color: var(--black); }
+    .addon-price-unit { font-size: 13px; color: var(--muted); }
+    .addon-cta {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: var(--radius-md);
+      background: var(--black);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background .15s;
+      flex-shrink: 0;
+    }
+    .addon-cta:hover { background: #2a2a2a; }
+    .proof-badge-dr { font-size: 10px; color: var(--green); font-weight: 700; }
+
+    /* ── HOW IT WORKS ── */
+    .hiw-wrap {
+      padding: 0 20px 32px;
+    }
+    .hiw-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .hiw-hd {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .hiw-hd h2 {
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 800;
+      letter-spacing: -.4px;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .hiw-hd p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .hiw-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    @media (max-width: 700px) {
+      .hiw-steps { grid-template-columns: 1fr 1fr; }
+      .hiw-step:nth-child(2) { border-right: none; }
+    }
+    @media (max-width: 420px) {
+      .hiw-steps { grid-template-columns: 1fr; }
+      .hiw-step { border-right: none !important; border-bottom: 1px solid var(--border); }
+      .hiw-step:last-child { border-bottom: none; }
+    }
+    .hiw-step {
+      padding: 20px 18px 18px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .hiw-step:last-child { border-right: none; }
+    .hiw-num {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 8px;
+    }
+    .hiw-title { font-size: 14px; font-weight: 800; color: var(--black); margin-bottom: 5px; }
+    .hiw-body { font-size: 12px; color: #555; line-height: 1.5; }
+    .hiw-human-badge { display: none; }
+
+    /* ── PAGE DELIVERY DETAIL ── */
+    .delivery-detail {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 13px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: #555;
+      line-height: 1.6;
+    }
+    .delivery-detail strong { color: var(--black); font-weight: 700; }
+
+    @media (max-width: 500px) {
+      .hero { padding: 52px 16px 16px; }
+      .card { padding: 22px 16px 18px; }
+      .summary { padding: 18px 16px; }
+      .term-btn { padding: 9px 12px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Transparent Pricing</div>
+    <h1>More pages. More rankings.<br><em>More revenue.</em></h1>
+    <p class="hero-sub">Every plan includes net-new SEO pages built for you each month - commercial pages, collection pages, and blogs that actually drive traffic and convert.</p>
+  </div>
+
+  <!-- SOCIAL PROOF -->
+  <div class="proof-strip">
+    <div class="proof-item"><span class="proof-icon">✦</span>150+ Shopify brands</div>
+    <div class="proof-item"><span class="proof-icon">✦</span>First results in 30 days</div>
+    <div class="proof-item"><span class="proof-icon">✦</span>AI citation tracking included</div>
+    <div class="proof-item"><span class="proof-icon">✦</span>Dedicated account manager</div>
+  </div>
+
+  <!-- TERM SELECTOR -->
+  <div class="term-wrap">
+    <div class="term-bar" id="termBar">
+      <button class="term-btn" data-term="monthly" onclick="setTerm('monthly')">Month-to-Month</button>
+      <button class="term-btn" data-term="3mo" onclick="setTerm('3mo')">3-Month <span class="save-pill">-15%</span></button>
+      <button class="term-btn active" data-term="6mo" onclick="setTerm('6mo')">6-Month <span class="save-pill">-35%</span></button>
+      <button class="term-btn" data-term="12mo" onclick="setTerm('12mo')">12-Month <span class="save-pill">-50%</span></button>
+    </div>
+  </div>
+  <div class="new-client-note-wrap">
+    <p class="new-client-note">New to QCK? Start month-to-month — upgrade to a term discount anytime and <strong>your rate locks in from the day you switch.</strong></p>
+  </div>
+
+  <!-- CARDS -->
+  <div class="cards-wrap">
+    <div class="cards">
+
+      <!-- GROWTH -->
+      <div class="card" id="card-growth">
+        <span class="plan-chip">MOST POPULAR</span>
+        <div class="plan-name">Growth</div>
+        <div class="plan-tag">Plant the seeds. Build authority.</div>
+
+        <div class="price-row">
+          <span class="price-num" id="pnum-growth">$5,000</span>
+          <span class="price-unit">/mo</span>
+        </div>
+        <div class="price-was" id="pwas-growth"></div>
+        <div class="savings-chip hidden" id="pchip-growth"></div>
+
+        <div class="divider"></div>
+
+        <!-- PAGE HERO -->
+        <div class="page-hero tier-1">
+          <div class="page-num">10</div>
+          <div class="page-stack">
+            <div class="page-label-main">Net-new SEO pages / mo</div>
+            <div class="page-label-types">Collection pages · Blogs · Service pages</div>
+          </div>
+        </div>
+        <div class="delivery-detail"><strong>What's included in every page:</strong> keyword targeting, custom H1 structure, FAQ schema, internal linking, Shopify build &amp; publish. Human-edited — no AI slop.</div>
+
+        <div class="section-hd" style="margin-top:12px">🏆 PR &amp; Brand Authority</div>
+        <ul class="feats">
+          <li><span class="fi fi-check">✓</span>Brand SERP lockdown - review page, FAQ, branded article</li>
+          <li><span class="fi fi-check">✓</span>1 RetailHub brand feature / mo <span style="font-size:11px;color:#aaa">(DR 65–70)</span></li>
+          <li><span class="fi fi-check">✓</span>1 Standard press release / mo</li>
+        </ul>
+
+        <div class="section-hd">➕ Add-On</div>
+        <div class="addon-checkbox-row" id="pr-addon-row" onclick="togglePRAddon()">
+          <div class="addon-cb" id="pr-addon-cb"></div>
+          <div class="addon-cb-text">
+            <div class="addon-cb-title">Premium Press Release — $1,000/mo</div>
+            <div class="addon-cb-sub">Yahoo Finance, MSN, AP News · avg DR 80+ · page 1 in 30–60 days</div>
+          </div>
+        </div>
+
+        <div class="section-hd">SEO Foundation</div>
+        <ul class="feats">
+          <li><span class="fi fi-check">✓</span>Technical SEO - 404s, meta titles, schema</li>
+          <li><span class="fi fi-check">✓</span>AI Visibility / LLM citation ranking</li>
+          <li><span class="fi fi-check">✓</span>Internal linking + shoppable templates</li>
+        </ul>
+
+        <div class="section-hd">Conversion Optimization</div>
+        <ul class="feats">
+          <li><span class="fi fi-check">✓</span>Full audit + roadmap</li>
+          <li><span class="fi fi-dash">-</span><span style="color:#bbb">No test execution</span></li>
+        </ul>
+
+        <a href="#am-section" class="cta">Start with Growth</a>
+      </div>
+
+      <!-- CORE -->
+      <div class="card featured" id="card-core">
+        <span class="plan-chip">RECOMMENDED</span>
+        <div class="plan-name">Core</div>
+        <div class="plan-tag">Where the machine starts running.</div>
+
+        <div class="price-row">
+          <span class="price-num" id="pnum-core">$8,125</span>
+          <span class="price-unit">/mo</span>
+        </div>
+        <div class="price-was" id="pwas-core">List: $12,500/mo</div>
+        <div class="savings-chip" id="pchip-core">You save $26,250 over 6 months</div>
+
+        <div class="divider"></div>
+
+        <!-- PAGE HERO -->
+        <div class="page-hero tier-2">
+          <div class="page-num">25</div>
+          <div class="page-stack">
+            <div class="page-label-main">Net-new SEO pages / mo</div>
+            <div class="page-label-types">Collection pages · Blogs · Service pages</div>
+            <div class="page-label-comp">2.5× more than Growth</div>
+          </div>
+        </div>
+        <div class="delivery-detail"><strong>What's included in every page:</strong> keyword targeting, custom H1 structure, FAQ schema, internal linking, Shopify build &amp; publish. Human-edited — no AI slop.</div>
+
+        <div class="section-hd" style="margin-top:12px">🏆 PR &amp; Brand Authority</div>
+        <ul class="feats">
+          <li><span class="fi fi-up">↑</span><strong>Premium press release</strong> (Yahoo Finance, MSN, AP News)</li>
+          <li><span class="fi fi-up">↑</span>Branded authority article (off-site, DR 70–80 publication)</li>
+          <li><span class="fi fi-check">✓</span>RetailHub + standard press release</li>
+        </ul>
+
+        <div class="section-hd">SEO &amp; Ads</div>
+        <ul class="feats">
+          <li><span class="fi fi-up">↑</span>Branded Google Ads (included)</li>
+          <li><span class="fi fi-up">↑</span>Translation SEO</li>
+          <li><span class="fi fi-check">✓</span>Everything in Growth SEO</li>
+        </ul>
+        <!-- Google Ads summary line - shown/hidden via JS -->
+        <div id="ads-summary-line" style="display:none"></div>
+
+        <div class="section-hd">Conversion Optimization</div>
+        <div class="toggle-row t-on-green" id="crorow-core">
+          <div>
+            <div class="tr-title">1 Conversion Test / mo</div>
+            <div class="tr-sub" id="crosub-core">Execution included · toggle to remove</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="cro-core" checked onchange="recalc()">
+            <div class="ttrack"></div>
+          </label>
+        </div>
+
+        <a href="#am-section" class="cta" onclick="setTimeout(()=>filterAMs('core'),100)">Start with Core →</a>
+      </div>
+
+      <!-- PRO -->
+      <div class="card featured-pro" id="card-pro">
+        <span class="plan-chip">ELITE</span>
+        <div class="plan-name">Pro</div>
+        <div class="plan-tag">Full ecosystem. Dominate your category.</div>
+
+        <div class="price-row">
+          <span class="price-num" id="pnum-pro">$13,000</span>
+          <span class="price-unit">/mo</span>
+        </div>
+        <div class="price-was" id="pwas-pro">List: $20,000/mo</div>
+        <div class="savings-chip" id="pchip-pro">You save $42,000 over 6 months</div>
+
+        <div class="divider"></div>
+
+        <!-- PAGE HERO -->
+        <div class="page-hero tier-3">
+          <div class="page-num">50</div>
+          <div class="page-stack">
+            <div class="page-label-main">Net-new SEO pages / mo</div>
+            <div class="page-label-types">Collection pages · Blogs · Service pages</div>
+            <div class="page-label-comp">5× more than Growth</div>
+          </div>
+        </div>
+        <div class="delivery-detail"><strong>What's included in every page:</strong> keyword targeting, custom H1 structure, FAQ schema, internal linking, Shopify build &amp; publish. Human-edited — no AI slop.</div>
+
+        <div class="section-hd" style="margin-top:12px">🏆 PR &amp; Brand Authority</div>
+        <ul class="feats">
+          <li><span class="fi fi-star">★</span><strong>Full off-page PR ecosystem</strong>
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Includes monthly premium press releases (Yahoo Finance, MSN, AP News), double branded authority article placements, RetailHub features, and standard press releases — all coordinated to build a dominant review + citation profile.</span></span>
+          </li>
+          <li><span class="fi fi-star">★</span>Double branded authority placements</li>
+          <li><span class="fi fi-check">✓</span>Everything in Core PR</li>
+        </ul>
+
+        <div class="section-hd">SEO &amp; Ads</div>
+        <ul class="feats">
+          <li><span class="fi fi-check">✓</span>Everything in Core SEO</li>
+        </ul>
+
+        <!-- GOOGLE ADS TOGGLE -->
+        <div class="toggle-row t-on-blue" id="adsrow-pro">
+          <div>
+            <div class="tr-title">Full Google Ads Management</div>
+            <div class="tr-sub" id="adssub-pro">+$3,000/mo · toggle to remove</div>
+          </div>
+          <label class="toggle ads-toggle">
+            <input type="checkbox" id="ads-pro" checked onchange="recalc()">
+            <div class="ttrack"></div>
+          </label>
+        </div>
+
+        <div class="section-hd" style="margin-top:10px">Conversion Optimization</div>
+        <div class="toggle-row t-on-green" id="crorow-pro">
+          <div>
+            <div class="tr-title">3 Conversion Tests / mo</div>
+            <div class="tr-sub" id="crosub-pro">Incl. PDP testing · toggle to remove</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="cro-pro" checked onchange="recalc()">
+            <div class="ttrack"></div>
+          </label>
+        </div>
+
+        <a href="#am-section" class="cta" onclick="setTimeout(()=>filterAMs('pro'),100)">Start with Pro</a>
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <!-- COMPARISON TABLE -->
+  <div class="compare-wrap">
+    <div class="compare">
+      <div class="compare-header">
+        <div>What's included</div>
+        <div>Growth</div>
+        <div>Core</div>
+        <div>Pro</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Net-new SEO pages / mo</div>
+        <div class="compare-cell c-val">10</div>
+        <div class="compare-cell c-val">25</div>
+        <div class="compare-cell c-val">50</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Brand SERP lockdown</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">RetailHub brand feature</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Premium press release (Yahoo, MSN, AP) <span style="font-size:11px;color:#aaa">— +$1K/mo add-on</span></div>
+        <div class="compare-cell" style="color:#d97706;font-size:11px;font-weight:700;">+$1K/mo</div>
+        <div class="compare-cell c-yes">✓ included</div>
+        <div class="compare-cell c-yes">✓ included</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Branded authority article (off-site)</div>
+        <div class="compare-cell c-no">-</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">AI Visibility / LLM rankings</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Branded Google Ads</div>
+        <div class="compare-cell c-no">-</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Translation SEO</div>
+        <div class="compare-cell c-no">-</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Conversion tests / mo</div>
+        <div class="compare-cell c-no">Roadmap only</div>
+        <div class="compare-cell c-val">1</div>
+        <div class="compare-cell c-val">3</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Full Google Ads management</div>
+        <div class="compare-cell c-no">-</div>
+        <div class="compare-cell c-no">-</div>
+        <div class="compare-cell c-yes">Add-on</div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-feat">Dedicated account manager</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+        <div class="compare-cell c-yes">✓</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUMMARY BAR -->
+  <div class="summary-wrap">
+    <div class="summary">
+      <div class="summary-hd">Your Investment Summary</div>
+      <div class="summary-grid">
+        <div class="sitem">
+          <div class="slabel">Selected term</div>
+          <select id="sterm-select" onchange="setTerm(this.value)" style="
+            background:#1e1e1e; color:#fff; border:1px solid #444;
+            border-radius:8px; padding:8px 12px; font-size:15px;
+            font-weight:800; cursor:pointer; width:100%; margin-top:4px;
+            -webkit-appearance:none; appearance:none;
+            background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E\");
+            background-repeat:no-repeat; background-position:right 12px center;
+            padding-right:32px;
+          ">
+            <option value="monthly">Month-to-Month</option>
+            <option value="3mo">3-Month (-15%)</option>
+            <option value="6mo" selected>6-Month (-35%)</option>
+            <option value="12mo">12-Month (-50%)</option>
+          </select>
+          <div class="ssub" id="sterm-sub" style="margin-top:6px; color:#555;">Locked-in rate</div>
+        </div>
+        <div class="sitem">
+          <div class="slabel">Growth / mo</div>
+          <div class="sval" id="sgrowth">$5,000</div>
+          <div class="ssub" id="sgrowth-sub">list $5,000</div>
+          <a class="get-started-link" href="#am-section" onclick="setTimeout(()=>filterAMs('growth'),100)">Get Started</a>
+        </div>
+        <div class="sitem">
+          <div class="slabel">Core / mo</div>
+          <div class="sval" id="score">$8,125</div>
+          <div class="ssub" id="score-sub">list $12,500 · save 35%</div>
+          <a class="get-started-link" href="#am-section" onclick="setTimeout(()=>filterAMs('core'),100)">Get Started</a>
+        </div>
+        <div class="sitem">
+          <div class="slabel">Pro / mo</div>
+          <div class="sval" id="spro">$13,000</div>
+          <div class="ssub" id="spro-sub">list $20,000 · save 35%</div>
+          <a class="get-started-link" href="#am-section" onclick="setTimeout(()=>filterAMs('pro'),100)">Get Started</a>
+        </div>
+      </div>      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS — between summary bar and AM section -->
+  <div class="hiw-wrap">
+    <div class="hiw-inner">
+      <div class="hiw-hd">
+        <h2>We do the work. You approve. It goes live.</h2>
+        <p>No dev work required from your team. We’re in your Shopify, building pages A to Z.</p>
+      </div>
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <div class="hiw-num">Step 01</div>
+          <div class="hiw-title">We Brief You</div>
+          <div class="hiw-body">We build your keyword &amp; content plan — pages to target, terms to own, seasonal priorities. We present it to you for input or approval.</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">Step 02</div>
+          <div class="hiw-title">We Build</div>
+          <div class="hiw-body">Our team creates every page A to Z — custom H1 structure, FAQ schema, human-edited copy, product curation, internal links. We’re in your Shopify, doing the work.</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">Step 03</div>
+          <div class="hiw-title">You Approve</div>
+          <div class="hiw-body">We walk you through the month’s output in your bi-weekly call. You review, request changes, or give the green light. Nothing goes live without your sign-off.</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">Step 04</div>
+          <div class="hiw-title">It Goes Live</div>
+          <div class="hiw-body">Pages publish, press releases go out, citations start moving. We track rankings, AI citation velocity, and traffic — and report back every cycle.</div>
+          <div class="hiw-human-badge">✦ Human-edited · No AI slop</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AM SECTION -->
+  <div id="am-section" style="padding: 0 20px 20px;">
+    <div style="max-width:1040px; margin:0 auto;">
+
+      <div style="text-align:center; margin-bottom:28px; padding-top:20px;">
+        <div class="hero-eyebrow" style="margin-bottom:12px;">Your Account Manager</div>
+        <h2 style="font-size:clamp(22px,3.5vw,32px); font-weight:800; letter-spacing:-.5px; color:var(--black); margin-bottom:8px;">Choose who you work with</h2>
+        <p style="font-size:14px; color:var(--muted); max-width:480px; margin:0 auto; line-height:1.5;">Every client gets a dedicated AM. Click a card to learn more — then book directly on their calendar.</p>
+      </div>
+
+      <!-- filter tabs -->
+      <div class="am-filter-wrap">
+        <button class="am-filter-btn active" onclick="filterAMs('all')">All Plans</button>
+        <button class="am-filter-btn" onclick="filterAMs('growth')">Growth</button>
+        <button class="am-filter-btn" onclick="filterAMs('core')">Core</button>
+        <button class="am-filter-btn" onclick="filterAMs('pro')">Pro</button>
+      </div>
+
+      <!-- AM cards grid -->
+      <div class="am-cards" id="am-cards">
+
+        <!-- Quaron — Growth · Core · Pro -->
+        <div class="flip-card" data-plans="growth,core,pro" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="am-avatar">Q</div>
+              <div class="am-name">Quaron</div>
+              <div class="am-role">Senior SEO Account Manager</div>
+              <div class="am-tenure">3+ yrs at QCK</div>
+              <div class="am-tags">
+                <span class="am-tag">Health &amp; Wellness</span>
+                <span class="am-tag">Grooming</span>
+                <span class="am-tag">Fitness</span>
+                <span class="am-tag">Local SEO</span>
+              </div>
+              <div class="am-hint">Click to learn more ↓</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-name">Quaron — Growth · Core · Pro</div>
+              <ul class="back-feats">
+                <li>Manages complex multi-site accounts with overlapping keyword strategies</li>
+                <li>Strong communicator — proactive updates &amp; structured recap emails every cycle</li>
+                <li>Deep fluency in GSC, local geo-targeting, and organic growth measurement</li>
+                <li>Verticals: health &amp; wellness, fitness, specialty retail, B2B services</li>
+              </ul>
+              <a href="https://meetings.hubspot.com/qjones/quaron-jones-kickoff-link" class="am-book-btn" target="_blank" rel="noopener" onclick="event.stopPropagation()">Book with Quaron →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Santi — Growth · Core · Pro -->
+        <div class="flip-card" data-plans="growth,core,pro" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="am-avatar">S</div>
+              <div class="am-name">Santi</div>
+              <div class="am-role">Senior SEO Account Manager</div>
+              <div class="am-tenure">3+ yrs at QCK</div>
+              <div class="am-tags">
+                <span class="am-tag">Supplements</span>
+                <span class="am-tag">Apparel</span>
+                <span class="am-tag">Outdoor Gear</span>
+                <span class="am-tag">Multi-brand</span>
+              </div>
+              <div class="am-hint">Click to learn more ↓</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-name">Santi — Growth · Core · Pro</div>
+              <ul class="back-feats">
+                <li>Tracks 10+ keyword momentum signals per account — data-first approach</li>
+                <li>Identifies quick-win opportunities before competitors can capitalize</li>
+                <li>Proactive content planning tied directly to search volume windows</li>
+                <li>Verticals: supplements, outdoor gear, fashion, multi-brand portfolios</li>
+              </ul>
+              <a href="https://meetings.hubspot.com/santiago-sgrilletti/santiago-kickoff-link" class="am-book-btn" target="_blank" rel="noopener" onclick="event.stopPropagation()">Book with Santi →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kayla — Growth · Core -->
+        <div class="flip-card" data-plans="growth,core" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="am-avatar">K</div>
+              <div class="am-name">Kayla</div>
+              <div class="am-role">Senior SEO Account Manager</div>
+              <div class="am-tenure">2+ yrs at QCK</div>
+              <div class="am-tags">
+                <span class="am-tag">Cycling &amp; Sporting</span>
+                <span class="am-tag">Home &amp; Lifestyle</span>
+                <span class="am-tag">B2B Services</span>
+                <span class="am-tag">Local Business</span>
+              </div>
+              <div class="am-hint">Click to learn more ↓</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-name">Kayla — Growth · Core</div>
+              <ul class="back-feats">
+                <li>Excels at content-heavy accounts needing consistent output and quality</li>
+                <li>Google Business Profile specialist — drives local ranking momentum</li>
+                <li>Warm, high-trust client relationships and strong retention record</li>
+                <li>Verticals: health services, lifestyle &amp; candles, specialty retail, cycling</li>
+              </ul>
+              <a href="https://meetings.hubspot.com/kayla-stavridis/kayla-stavridis-kickoff" class="am-book-btn" target="_blank" rel="noopener" onclick="event.stopPropagation()">Book with Kayla →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Holden — Growth · Core -->
+        <div class="flip-card" data-plans="growth,core" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="am-avatar">H</div>
+              <div class="am-name">Holden</div>
+              <div class="am-role">Senior SEO Account Manager</div>
+              <div class="am-tenure">2+ yrs at QCK</div>
+              <div class="am-tags">
+                <span class="am-tag">Wellness Tech</span>
+                <span class="am-tag">Food &amp; Specialty</span>
+                <span class="am-tag">Gaming</span>
+                <span class="am-tag">Outdoors &amp; Marine</span>
+              </div>
+              <div class="am-hint">Click to learn more ↓</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-name">Holden — Growth · Core</div>
+              <ul class="back-feats">
+                <li>Pioneer on QCK's AI Visibility team — FAQ schema &amp; LLM citation strategy</li>
+                <li>Thorough delivery tracking — every open item followed through to completion</li>
+                <li>Handles large books with multiple simultaneous deliverable tracks</li>
+                <li>Verticals: jewelry, gaming, sports performance, service businesses</li>
+              </ul>
+              <a href="https://meetings.hubspot.com/holden-heyser/holden-heyser-kickoff-link" class="am-book-btn" target="_blank" rel="noopener" onclick="event.stopPropagation()">Book with Holden →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jordan — Core · Pro -->
+        <div class="flip-card" data-plans="core,pro" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="am-avatar">J</div>
+              <div class="am-name">Jordan</div>
+              <div class="am-role">Senior SEO Account Manager</div>
+              <div class="am-tenure">2+ yrs at QCK</div>
+              <div class="am-tags">
+                <span class="am-tag">Fashion &amp; Beauty</span>
+                <span class="am-tag">Supplements</span>
+                <span class="am-tag">Jewelry</span>
+                <span class="am-tag">Baby &amp; Kids</span>
+              </div>
+              <div class="am-hint">Click to learn more ↓</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-name">Jordan — Core · Pro</div>
+              <ul class="back-feats">
+                <li>Runs multi-site programs — simultaneously grows 3–4 properties per client</li>
+                <li>Deep GSC &amp; analytics fluency — clicks doubled, impressions 2× on key accounts</li>
+                <li>High client satisfaction — proactive, detailed communication every cycle</li>
+                <li>Verticals: event rentals, B2B, specialty consumer, multi-location brands</li>
+              </ul>
+              <a href="https://meetings.hubspot.com/jordan-moon/jordan-moon-kickoff-link" class="am-book-btn" target="_blank" rel="noopener" onclick="event.stopPropagation()">Book with Jordan →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doug — Core · Pro -->
+        <div class="flip-card" data-plans="core,pro" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="am-avatar">D</div>
+              <div class="am-name">Doug</div>
+              <div class="am-role">VP of SEO, Account Management</div>
+              <div class="am-tenure">4+ yrs at QCK</div>
+              <div class="am-tags">
+                <span class="am-tag">High-Growth DTC</span>
+                <span class="am-tag">Health &amp; Wellness</span>
+                <span class="am-tag">Enterprise Retail</span>
+                <span class="am-tag">PR-Led SEO</span>
+              </div>
+              <div class="am-hint">Click to learn more ↓</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-name">Doug — VP of SEO, Account Mgmt</div>
+              <ul class="back-feats">
+                <li>Director-level oversight — shapes strategy across QCK's top accounts</li>
+                <li>Oversees all PR placements: Yahoo Finance, MSN, AP News</li>
+                <li>Expert in client delivery standards, call quality &amp; AM coaching</li>
+                <li>Verticals: high-growth DTC, enterprise retail, health &amp; wellness</li>
+              </ul>
+              <a href="https://meetings.hubspot.com/douglas-gargaro/douglas-gargaro-kickoff-link" class="am-book-btn" target="_blank" rel="noopener" onclick="event.stopPropagation()">Book with Doug →</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Will — Pro only -->
+        <div class="flip-card" data-plans="pro" onclick="this.classList.toggle('flipped')">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="am-avatar">W</div>
+              <div class="am-name">Will</div>
+              <div class="am-role">VP of AI Search</div>
+              <div class="am-tenure">5+ yrs at QCK</div>
+              <div class="am-tags">
+                <span class="am-tag">Nutrition &amp; Wellness</span>
+                <span class="am-tag">Multi-site</span>
+                <span class="am-tag">Scale Local SEO</span>
+                <span class="am-tag">National Brands</span>
+              </div>
+              <div class="am-hint">Click to learn more ↓</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-name">Will — VP of AI Search · Pro</div>
+              <ul class="back-feats">
+                <li>Leads QCK's SEO practice and AEO / AI Visibility framework</li>
+                <li>Architect of full-domain strategies that move brands from page 2 to #1</li>
+                <li>Manages QCK's highest-investment accounts; sets the standard for the team</li>
+                <li>Verticals: luxury DTC, high-AOV brands, enterprise multi-brand portfolios</li>
+              </ul>
+              <a href="https://meetings.hubspot.com/will-morriss/will-morriss-kickoff-link" class="am-book-btn" target="_blank" rel="noopener" onclick="event.stopPropagation()">Book with Will →</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /am-cards -->
+    </div>
+  </div><!-- /am-section -->
+
+  <!-- footnote-only below -->
+  <!-- HOW IT WORKS moved to between summary bar and AM section -->
+  <div class="hiw-wrap" style="display:none">
+    <div class="hiw-inner">
+      <div class="hiw-hd">
+        <h2>We do the work. You approve. It goes live.</h2>
+        <p>No dev work required from your team. We’re in your Shopify, building pages A to Z.</p>
+      </div>
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <div class="hiw-num">Step 01</div>
+          <div class="hiw-title">We Brief You</div>
+          <div class="hiw-body">We build your keyword &amp; content plan — pages to target, terms to own, seasonal priorities. We present it to you for input or approval.</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">Step 02</div>
+          <div class="hiw-title">We Build</div>
+          <div class="hiw-body">Our team creates every page A to Z — custom H1 structure, FAQ schema, human-edited copy, product curation, internal links. We’re in your Shopify, doing the work.</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">Step 03</div>
+          <div class="hiw-title">You Approve</div>
+          <div class="hiw-body">We walk you through the month’s output in your bi-weekly call. You review, request changes, or give the green light. Nothing goes live without your sign-off.</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">Step 04</div>
+          <div class="hiw-title">It Goes Live</div>
+          <div class="hiw-body">Pages publish, press releases go out, citations start moving. We track rankings, AI citation velocity, and traffic — and report back every cycle.</div>
+          <div class="hiw-human-badge">✦ Human-edited · No AI slop</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footnote">
+    All plans include dedicated account management, monthly performance reporting, and AI citation tracking across ChatGPT, Perplexity &amp; Google AI Overviews.<br>
+    Pricing subject to change for new clients.
+  </p>
+
+<script>
+  const LIST = { growth: 5000, core: 12500, pro: 17000 };
+  const PR_ADDON = 1000; // flat, never discounted
+  const ADS_DELTA = 3000;
+  const CRO_DELTA = { core: 1000, pro: 2000 };
+  const DISC = { monthly: 0, '3mo': 0.15, '6mo': 0.35, '12mo': 0.50 };
+  const MONTHS = { monthly: 0, '3mo': 3, '6mo': 6, '12mo': 12 };
+  const TERM_LABEL = { monthly: 'Month-to-Month', '3mo': '3-Month', '6mo': '6-Month', '12mo': '12-Month' };
+  const TERM_SUB = {
+    monthly: 'No commitment · Cancel anytime',
+    '3mo': '3-month lock-in · Buyout clause applies',
+    '6mo': 'Locked-in rate · Buyout clause applies',
+    '12mo': 'Best value · Buyout clause applies'
+  };
+
+  let term = '6mo';
+
+  function setTerm(t) {
+    term = t;
+    // Sync top bar buttons
+    document.querySelectorAll('.term-btn').forEach(b => b.classList.toggle('active', b.dataset.term === t));
+    // Sync bottom dropdown
+    const sel = document.getElementById('sterm-select');
+    if (sel) sel.value = t;
+    recalc();
+  }
+
+  function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
+  function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+
+  function recalc() {
+    const disc = DISC[term];
+    const mos  = MONTHS[term];
+    const croCoreOn = document.getElementById('cro-core').checked;
+    const croProOn  = document.getElementById('cro-pro').checked;
+    const adsProOn  = document.getElementById('ads-pro').checked;
+
+    const listGrow = LIST.growth;
+    const listCore = LIST.core - (croCoreOn ? 0 : CRO_DELTA.core);
+    const listPro  = LIST.pro  - (croProOn  ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0);
+
+    // Growth PR add-on is always $1,000 flat regardless of term discount
+    const prAddonTotal = prAddonChecked ? PR_ADDON : 0;
+
+    const pGrow = Math.round(listGrow * (1 - disc)) + prAddonTotal;
+    const pCore = Math.round(listCore * (1 - disc));
+    const pPro  = Math.round(listPro  * (1 - disc));
+
+    set('pnum-growth', fmt(pGrow));
+    set('pnum-core',   fmt(pCore));
+    set('pnum-pro',    fmt(pPro));
+
+    // For Growth: show base list price (before PR add-on) in strikethrough
+    set('pwas-growth', disc > 0 ? `List: ${fmt(listGrow + prAddonTotal)}/mo` : (prAddonChecked ? `Base: ${fmt(listGrow)}/mo + $1,000 PR add-on` : ''));
+    set('pwas-core',   disc > 0 ? `List: ${fmt(listCore)}/mo` : '');
+    set('pwas-pro',    disc > 0 ? `List: ${fmt(listPro)}/mo`  : '');
+
+    badge('pchip-growth', disc, listGrow, mos);
+    badge('pchip-core',   disc, listCore, mos);
+    badge('pchip-pro',    disc, listPro,  mos);
+
+    set('crosub-core', croCoreOn ? 'Execution included · toggle to remove' : 'Not included · toggle to add');
+    set('crosub-pro',  croProOn  ? 'Incl. PDP testing · toggle to remove'  : 'Not included · toggle to add');
+    // Show discounted Ads price in toggle sub-label when a term discount is active
+    const adsDisplayPrice = disc > 0
+      ? `+${fmt(Math.round(ADS_DELTA * (1 - disc)))}/mo (list +${fmt(ADS_DELTA)}) · toggle to remove`
+      : `+${fmt(ADS_DELTA)}/mo · toggle to remove`;
+    set('adssub-pro', adsProOn ? adsDisplayPrice : 'Not included · toggle to add');
+
+    // Show/hide Google Ads summary item in bottom bar
+    const sAdsItem = document.getElementById('sads-item');
+    const sGrid = document.querySelector('.summary-grid');
+    if (sAdsItem) sAdsItem.style.display = adsProOn ? '' : 'none';
+    if (sGrid) sGrid.classList.toggle('has-ads', adsProOn);
+    const adsDiscounted = Math.round(ADS_DELTA * (1 - disc));
+    set('sads', fmt(adsDiscounted));
+
+    const adsRow = document.getElementById('adsrow-pro');
+    if (adsRow) { adsRow.classList.toggle('t-on-blue', adsProOn); adsRow.classList.toggle('toggle-row', true); }
+
+    const croRowCore = document.getElementById('crorow-core');
+    if (croRowCore) croRowCore.classList.toggle('t-on-green', croCoreOn);
+    const croRowPro = document.getElementById('crorow-pro');
+    if (croRowPro) croRowPro.classList.toggle('t-on-green', croProOn);
+
+    set('sterm',      TERM_LABEL[term]);
+    set('sterm-sub',  TERM_SUB[term]);
+    set('sgrowth',    fmt(pGrow));
+    set('score',      fmt(pCore));
+    set('spro',       fmt(pPro));
+    set('sgrowth-sub', disc > 0 ? `list ${fmt(listGrow)} · save ${Math.round(disc*100)}%` : 'list price');
+    set('score-sub',   disc > 0 ? `list ${fmt(listCore)} · save ${Math.round(disc*100)}%` : 'list price');
+    set('spro-sub',    disc > 0 ? `list ${fmt(listPro)}  · save ${Math.round(disc*100)}%` : 'list price');
+  }
+
+  function badge(id, disc, list, mos) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (disc === 0 || mos === 0) { el.classList.add('hidden'); return; }
+    el.classList.remove('hidden');
+    el.textContent = `You save ${fmt(Math.round(list * disc * mos))} over ${mos} months`;
+  }
+
+  recalc();
+
+  // Premium Press Release checkbox (Growth card) — fixed at $1,000/mo, never term-discounted
+  // Default: unchecked
+  let prAddonChecked = false;
+  function togglePRAddon() {
+    prAddonChecked = !prAddonChecked;
+    const row = document.getElementById('pr-addon-row');
+    const cb  = document.getElementById('pr-addon-cb');
+    if (row) row.classList.toggle('checked', prAddonChecked);
+    if (cb)  cb.textContent = prAddonChecked ? '✓' : '';
+    // Recalc price display — PR add-on is always flat $1,000 regardless of term
+    recalc();
+  }
+
+  // AM filter
+  function filterAMs(plan) {
+    document.querySelectorAll('.am-filter-btn').forEach(b => {
+      b.classList.toggle('active', b.textContent.toLowerCase().includes(plan) || plan === 'all');
+    });
+    document.querySelectorAll('.flip-card').forEach(card => {
+      const plans = card.dataset.plans || '';
+      card.classList.toggle('am-hidden', plan !== 'all' && !plans.split(',').includes(plan));
+    });
+  }
+
+</script>
+</body>
+</html>
+<!-- v1779313899 -->
+<!-- v1779314013 -->
+<!-- v1779317537 -->
+<!-- v1779318583 -->
