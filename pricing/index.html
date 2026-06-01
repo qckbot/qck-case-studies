@@ -1642,6 +1642,8 @@
   };
 
   let term = '6mo';
+  // Premium Press Release checkbox state — must be declared before recalc()
+  let prAddonChecked = false;
 
   function setTerm(t) {
     term = t;
@@ -1654,7 +1656,7 @@
   }
 
   function fmt(n) { return '$' + Math.round(n).toLocaleString('en-US'); }
-  function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+  function set(id, val) { const el = document.getElementById(id); if (el && el.tagName !== 'SELECT') el.textContent = val; }
 
   function recalc() {
     const disc = DISC[term];
@@ -1674,51 +1676,49 @@
     const pCore = Math.round(listCore * (1 - disc));
     const pPro  = Math.round(listPro  * (1 - disc));
 
+    // Card prices
     set('pnum-growth', fmt(pGrow));
     set('pnum-core',   fmt(pCore));
     set('pnum-pro',    fmt(pPro));
 
-    // For Growth: show base list price (before PR add-on) in strikethrough
-    set('pwas-growth', disc > 0 ? `List: ${fmt(listGrow + prAddonTotal)}/mo` : (prAddonChecked ? `Base: ${fmt(listGrow)}/mo + $1,000 PR add-on` : ''));
-    set('pwas-core',   disc > 0 ? `List: ${fmt(listCore)}/mo` : '');
-    set('pwas-pro',    disc > 0 ? `List: ${fmt(listPro)}/mo`  : '');
+    // Strikethrough list prices on cards
+    set('pwas-growth', disc > 0 ? `List: ${fmt(LIST.growth + prAddonTotal)}/mo` : (prAddonChecked ? `Base: ${fmt(LIST.growth)}/mo + $1,000 PR` : ''));
+    set('pwas-core',   disc > 0 ? `List: ${fmt(LIST.core - (croCoreOn ? 0 : CRO_DELTA.core))}/mo` : '');
+    set('pwas-pro',    disc > 0 ? `List: ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0))}/mo` : '');
 
+    // Savings badges on cards
     badge('pchip-growth', disc, listGrow, mos);
     badge('pchip-core',   disc, listCore, mos);
     badge('pchip-pro',    disc, listPro,  mos);
 
+    // Toggle sub-labels
     set('crosub-core', croCoreOn ? 'Execution included · toggle to remove' : 'Not included · toggle to add');
     set('crosub-pro',  croProOn  ? 'Incl. PDP testing · toggle to remove'  : 'Not included · toggle to add');
-    // Show discounted Ads price in toggle sub-label when a term discount is active
     const adsDisplayPrice = disc > 0
       ? `+${fmt(Math.round(ADS_DELTA * (1 - disc)))}/mo (list +${fmt(ADS_DELTA)}) · toggle to remove`
       : `+${fmt(ADS_DELTA)}/mo · toggle to remove`;
     set('adssub-pro', adsProOn ? adsDisplayPrice : 'Not included · toggle to add');
 
-    // Show/hide Google Ads summary item in bottom bar
-    const sAdsItem = document.getElementById('sads-item');
-    const sGrid = document.querySelector('.summary-grid');
-    if (sAdsItem) sAdsItem.style.display = adsProOn ? '' : 'none';
-    if (sGrid) sGrid.classList.toggle('has-ads', adsProOn);
-    const adsDiscounted = Math.round(ADS_DELTA * (1 - disc));
-    set('sads', fmt(adsDiscounted));
-
+    // Toggle row highlight states
     const adsRow = document.getElementById('adsrow-pro');
-    if (adsRow) { adsRow.classList.toggle('t-on-blue', adsProOn); adsRow.classList.toggle('toggle-row', true); }
-
+    if (adsRow) adsRow.classList.toggle('t-on-blue', adsProOn);
     const croRowCore = document.getElementById('crorow-core');
     if (croRowCore) croRowCore.classList.toggle('t-on-green', croCoreOn);
     const croRowPro = document.getElementById('crorow-pro');
     if (croRowPro) croRowPro.classList.toggle('t-on-green', croProOn);
 
-    set('sterm',      TERM_LABEL[term]);
+    // ── INVESTMENT SUMMARY BAR ──
+    // Sync the dropdown to match current term
+    const sel = document.getElementById('sterm-select');
+    if (sel) sel.value = term;
+
     set('sterm-sub',  TERM_SUB[term]);
     set('sgrowth',    fmt(pGrow));
     set('score',      fmt(pCore));
     set('spro',       fmt(pPro));
-    set('sgrowth-sub', disc > 0 ? `list ${fmt(listGrow)} · save ${Math.round(disc*100)}%` : 'list price');
-    set('score-sub',   disc > 0 ? `list ${fmt(listCore)} · save ${Math.round(disc*100)}%` : 'list price');
-    set('spro-sub',    disc > 0 ? `list ${fmt(listPro)}  · save ${Math.round(disc*100)}%` : 'list price');
+    set('sgrowth-sub', disc > 0 ? `list ${fmt(LIST.growth + prAddonTotal)} · save ${Math.round(disc*100)}%` : 'list price');
+    set('score-sub',   disc > 0 ? `list ${fmt(LIST.core - (croCoreOn ? 0 : CRO_DELTA.core))} · save ${Math.round(disc*100)}%` : 'list price');
+    set('spro-sub',    disc > 0 ? `list ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0))} · save ${Math.round(disc*100)}%` : 'list price');
   }
 
   function badge(id, disc, list, mos) {
@@ -1729,18 +1729,17 @@
     el.textContent = `You save ${fmt(Math.round(list * disc * mos))} over ${mos} months`;
   }
 
-  recalc();
+  // Run initial calculation after DOM is ready
+  document.addEventListener('DOMContentLoaded', function() {
+    recalc();
+  });
 
-  // Premium Press Release checkbox (Growth card) — fixed at $1,000/mo, never term-discounted
-  // Default: unchecked
-  let prAddonChecked = false;
   function togglePRAddon() {
     prAddonChecked = !prAddonChecked;
     const row = document.getElementById('pr-addon-row');
     const cb  = document.getElementById('pr-addon-cb');
     if (row) row.classList.toggle('checked', prAddonChecked);
     if (cb)  cb.textContent = prAddonChecked ? '✓' : '';
-    // Recalc price display — PR add-on is always flat $1,000 regardless of term
     recalc();
   }
 
