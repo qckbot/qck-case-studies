@@ -1,1 +1,14 @@
-{"cleanUrls":true,"trailingSlash":false}
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/brand-snapshot",
+      "destination": "https://qck-brand-snapshot.vercel.app/"
+    },
+    {
+      "source": "/brand-snapshot/:path*",
+      "destination": "https://qck-brand-snapshot.vercel.app/:path*"
+    }
+  ]
+}
