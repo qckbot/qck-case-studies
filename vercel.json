@@ -4,11 +4,11 @@
   "rewrites": [
     {
       "source": "/brand-snapshot",
-      "destination": "https://qck-brand-snapshot.vercel.app/"
+      "destination": "https://qck-brand-snapshot.vercel.app/brand-snapshot"
     },
     {
       "source": "/brand-snapshot/:path*",
-      "destination": "https://qck-brand-snapshot.vercel.app/:path*"
+      "destination": "https://qck-brand-snapshot.vercel.app/brand-snapshot/:path*"
     }
   ]
 }
