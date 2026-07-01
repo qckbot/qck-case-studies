@@ -1069,10 +1069,10 @@
         <div class="addon-checkbox-row" id="local-addon-row-growth" onclick="toggleLocalGrowth()">
           <div class="addon-cb" id="local-addon-cb-growth"></div>
           <div class="addon-cb-text">
-            <div class="addon-cb-title">Local SEO — $2,000/mo <span style="font-size:11px;font-weight:400;color:#888">(flat · no term discount)</span>
+            <div class="addon-cb-title">Local SEO — $2,000/mo
               <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box"><strong>Local SEO Package includes:</strong><br>• GMB / Google Maps profile optimization<br>• Local citation building (50+ directories)<br>• NAP consistency audit &amp; cleanup<br>• Local schema markup implementation<br>• Google Business Profile post management<br>• Local keyword targeting &amp; on-page optimization<br>• Monthly local rank tracking report<br><br><em>Flat $2,000/mo — does not discount with term.</em></span></span>
             </div>
-            <div class="addon-cb-sub">GMB/Google Maps · Citation building · NAP consistency · Local schema · GBP posts</div>
+            <div class="addon-cb-sub">+$2,000/mo · GMB/Google Maps · Citation building · NAP consistency · Local schema · GBP posts</div>
           </div>
         </div>
 
@@ -1127,7 +1127,7 @@
             <div class="tr-title">Local SEO Package
               <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box"><strong>Local SEO Package includes:</strong><br>• GMB / Google Maps profile optimization<br>• Local citation building (50+ directories)<br>• NAP consistency audit &amp; cleanup<br>• Local schema markup implementation<br>• Google Business Profile post management<br>• Local keyword targeting &amp; on-page optimization<br>• Monthly local rank tracking report<br><br><em>Flat $2,000/mo — does not discount with term.</em></span></span>
             </div>
-            <div class="tr-sub" id="localsub-core">Not included · toggle to add</div>
+            <div class="tr-sub" id="localsub-core">+$2,000/mo · toggle to add</div>
           </div>
           <label class="toggle">
             <input type="checkbox" id="local-core" onchange="recalc()">
@@ -1199,7 +1199,7 @@
             <div class="tr-title">Local SEO Package
               <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box"><strong>Local SEO Package includes:</strong><br>• GMB / Google Maps profile optimization<br>• Local citation building (50+ directories)<br>• NAP consistency audit &amp; cleanup<br>• Local schema markup implementation<br>• Google Business Profile post management<br>• Local keyword targeting &amp; on-page optimization<br>• Reputation management &amp; review strategy<br>• Monthly local rank tracking report<br><br><em>Flat $2,000/mo — does not discount with term.</em></span></span>
             </div>
-            <div class="tr-sub" id="localsub-pro">Not included · toggle to add</div>
+            <div class="tr-sub" id="localsub-pro">+$2,000/mo · toggle to add</div>
           </div>
           <label class="toggle">
             <input type="checkbox" id="local-pro" onchange="recalc()">
@@ -1279,7 +1279,7 @@
         <div class="compare-cell c-yes">✓</div>
       </div>
       <div class="compare-row">
-        <div class="compare-feat">Local SEO (GMB, citations, local schema) <span style="font-size:11px;color:#888">— flat, no term discount</span></div>
+        <div class="compare-feat">Local SEO (GMB, citations, local schema)</div>
         <div class="compare-cell" style="color:#d97706;font-size:11px;font-weight:700;">+$2K/mo</div>
         <div class="compare-cell" style="color:#d97706;font-size:11px;font-weight:700;">+$2K/mo</div>
         <div class="compare-cell" style="color:#d97706;font-size:11px;font-weight:700;">+$2K/mo</div>
@@ -1718,9 +1718,9 @@
     badge('pchip-pro',    disc, LIST.pro + (adsProOn ? ADS_DELTA : 0), mos);
 
     // Toggle sub-labels
-    // Local SEO always $2K flat — no term discount
-    set('localsub-core', localCoreOn ? '+$2,000/mo flat · no term discount · toggle to remove' : 'Not included · toggle to add');
-    set('localsub-pro',  localProOn  ? '+$2,000/mo flat · no term discount · toggle to remove'  : 'Not included · toggle to add');
+    // Local SEO always $2K flat
+    set('localsub-core', localCoreOn ? '+$2,000/mo · toggle to remove' : '+$2,000/mo · toggle to add');
+    set('localsub-pro',  localProOn  ? '+$2,000/mo · toggle to remove' : '+$2,000/mo · toggle to add');
     const adsDisplayPrice = disc > 0
       ? `+${fmt(Math.round(ADS_DELTA * (1 - disc)))}/mo (list +${fmt(ADS_DELTA)}) · toggle to remove`
       : `+${fmt(ADS_DELTA)}/mo · toggle to remove`;
