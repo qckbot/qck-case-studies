@@ -101,7 +101,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 16px;
+      padding: 28px 16px;
       margin-bottom: 0;
       gap: 0;
     }
@@ -1133,11 +1133,11 @@
         <div class="plan-tag">Full ecosystem. Dominate your category.</div>
 
         <div class="price-row">
-          <span class="price-num" id="pnum-pro">$13,000</span>
+          <span class="price-num" id="pnum-pro">$11,220</span>
           <span class="price-unit">/mo</span>
         </div>
-        <div class="price-was" id="pwas-pro">List: $20,000/mo</div>
-        <div class="savings-chip" id="pchip-pro">You save $42,000 over 6 months</div>
+        <div class="price-was" id="pwas-pro">List: $20,400/mo</div>
+        <div class="savings-chip" id="pchip-pro">You save $44,880 over 6 months</div>
 
         <div class="divider"></div>
 
@@ -1630,11 +1630,12 @@
   </p>
 
 <script>
-  const LIST = { growth: 5000, core: 12500, pro: 17000 };
+  const LIST = { growth: 5000, core: 12500, pro: 20400 };
   const PR_ADDON = 1000; // flat, never discounted
   const ADS_DELTA = 3000;
   const CRO_DELTA = { core: 1000, pro: 2000 };
   const DISC = { '3mo': 0.15, '6mo': 0.35, '12mo': 0.40 };
+  const DISC_PRO_12MO = 0.45; // Pro 12mo gets deeper discount
   const MONTHS = { '3mo': 3, '6mo': 6, '12mo': 12 };
   const TERM_LABEL = { '3mo': '3-Month', '6mo': '6-Month', '12mo': '12-Month' };
   const TERM_SUB = {
@@ -1674,9 +1675,12 @@
     // Growth PR add-on is always $1,000 flat regardless of term discount
     const prAddonTotal = prAddonChecked ? PR_ADDON : 0;
 
+    // Pro gets a deeper 12mo discount (45% vs 40%)
+    const discPro = (term === '12mo') ? DISC_PRO_12MO : disc;
+
     const pGrow = Math.round(listGrow * (1 - disc)) + prAddonTotal;
     const pCore = Math.round(listCore * (1 - disc));
-    const pPro  = Math.round(listPro  * (1 - disc));
+    const pPro  = Math.round(listPro  * (1 - discPro));
 
     // Card prices
     set('pnum-growth', fmt(pGrow));
@@ -1689,9 +1693,9 @@
     set('pwas-pro',    disc > 0 ? `List: ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0))}/mo` : '');
 
     // Savings badges on cards
-    badge('pchip-growth', disc, listGrow, mos);
-    badge('pchip-core',   disc, listCore, mos);
-    badge('pchip-pro',    disc, listPro,  mos);
+    badge('pchip-growth', disc,    listGrow, mos);
+    badge('pchip-core',   disc,    listCore, mos);
+    badge('pchip-pro',    discPro, listPro,  mos);
 
     // Toggle sub-labels
     set('crosub-core', croCoreOn ? 'Execution included · toggle to remove' : 'Not included · toggle to add');
@@ -1720,7 +1724,7 @@
     set('spro',       fmt(pPro));
     set('sgrowth-sub', disc > 0 ? `list ${fmt(LIST.growth + prAddonTotal)} · save ${Math.round(disc*100)}%` : 'list price');
     set('score-sub',   disc > 0 ? `list ${fmt(LIST.core - (croCoreOn ? 0 : CRO_DELTA.core))} · save ${Math.round(disc*100)}%` : 'list price');
-    set('spro-sub',    disc > 0 ? `list ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0))} · save ${Math.round(disc*100)}%` : 'list price');
+    set('spro-sub',    discPro > 0 ? `list ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0))} · save ${Math.round(discPro*100)}%` : 'list price');
   }
 
   function badge(id, disc, list, mos) {
