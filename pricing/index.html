@@ -1003,14 +1003,10 @@
   <!-- TERM SELECTOR -->
   <div class="term-wrap">
     <div class="term-bar" id="termBar">
-      <button class="term-btn" data-term="monthly" onclick="setTerm('monthly')">Month-to-Month</button>
       <button class="term-btn" data-term="3mo" onclick="setTerm('3mo')">3-Month <span class="save-pill">-15%</span></button>
       <button class="term-btn active" data-term="6mo" onclick="setTerm('6mo')">6-Month <span class="save-pill">-35%</span></button>
-      <button class="term-btn" data-term="12mo" onclick="setTerm('12mo')">12-Month <span class="save-pill">-50%</span></button>
+      <button class="term-btn" data-term="12mo" onclick="setTerm('12mo')">12-Month <span class="save-pill">-40%</span></button>
     </div>
-  </div>
-  <div class="new-client-note-wrap">
-    <p class="new-client-note">New to QCK? Start month-to-month — upgrade to a term discount anytime and <strong>your rate locks in from the day you switch.</strong></p>
   </div>
 
   <!-- CARDS -->
@@ -1036,7 +1032,7 @@
         <div class="page-hero tier-1">
           <div class="page-num">10</div>
           <div class="page-stack">
-            <div class="page-label-main">Net-new SEO pages / mo</div>
+            <div class="page-label-main">Net-new SEO pages / mo <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Pages ramp over the first 3 months: Month 1 = 30% of your page count, Month 2 = 60%, Month 3 = 100% going forward.</span></span></div>
             <div class="page-label-types">Collection pages · Blogs · Service pages</div>
           </div>
         </div>
@@ -1093,7 +1089,7 @@
         <div class="page-hero tier-2">
           <div class="page-num">25</div>
           <div class="page-stack">
-            <div class="page-label-main">Net-new SEO pages / mo</div>
+            <div class="page-label-main">Net-new SEO pages / mo <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Pages ramp over the first 3 months: Month 1 = 30% of your page count, Month 2 = 60%, Month 3 = 100% going forward.</span></span></div>
             <div class="page-label-types">Collection pages · Blogs · Service pages</div>
             <div class="page-label-comp">2.5× more than Growth</div>
           </div>
@@ -1150,7 +1146,7 @@
         <div class="page-hero tier-3">
           <div class="page-num">50</div>
           <div class="page-stack">
-            <div class="page-label-main">Net-new SEO pages / mo</div>
+            <div class="page-label-main">Net-new SEO pages / mo <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Pages ramp over the first 3 months: Month 1 = 30% of your page count, Month 2 = 60%, Month 3 = 100% going forward.</span></span></div>
             <div class="page-label-types">Collection pages · Blogs · Service pages</div>
             <div class="page-label-comp">5× more than Growth</div>
           </div>
@@ -1181,7 +1177,7 @@
             <div class="tr-sub" id="adssub-pro">+$3,000/mo · toggle to remove</div>
           </div>
           <label class="toggle ads-toggle">
-            <input type="checkbox" id="ads-pro" checked onchange="recalc()">
+            <input type="checkbox" id="ads-pro" onchange="recalc()">
             <div class="ttrack"></div>
           </label>
         </div>
@@ -1306,10 +1302,9 @@
             background-repeat:no-repeat; background-position:right 12px center;
             padding-right:32px;
           ">
-            <option value="monthly">Month-to-Month</option>
             <option value="3mo">3-Month (-15%)</option>
             <option value="6mo" selected>6-Month (-35%)</option>
-            <option value="12mo">12-Month (-50%)</option>
+            <option value="12mo">12-Month (-40%)</option>
           </select>
           <div class="ssub" id="sterm-sub" style="margin-top:6px; color:#555;">Locked-in rate</div>
         </div>
@@ -1640,11 +1635,10 @@
   const PR_ADDON = 1000; // flat, never discounted
   const ADS_DELTA = 3000;
   const CRO_DELTA = { core: 1000, pro: 2000 };
-  const DISC = { monthly: 0, '3mo': 0.15, '6mo': 0.35, '12mo': 0.50 };
-  const MONTHS = { monthly: 0, '3mo': 3, '6mo': 6, '12mo': 12 };
-  const TERM_LABEL = { monthly: 'Month-to-Month', '3mo': '3-Month', '6mo': '6-Month', '12mo': '12-Month' };
+  const DISC = { '3mo': 0.15, '6mo': 0.35, '12mo': 0.40 };
+  const MONTHS = { '3mo': 3, '6mo': 6, '12mo': 12 };
+  const TERM_LABEL = { '3mo': '3-Month', '6mo': '6-Month', '12mo': '12-Month' };
   const TERM_SUB = {
-    monthly: 'No commitment · Cancel anytime',
     '3mo': '3-month lock-in · Buyout clause applies',
     '6mo': 'Locked-in rate · Buyout clause applies',
     '12mo': 'Best value · Buyout clause applies'
