@@ -9,6 +9,14 @@
     {
       "source": "/brand-snapshot/:path*",
       "destination": "https://qck-brand-snapshot.vercel.app/brand-snapshot/:path*"
+    },
+    {
+      "source": "/qck-case-studies",
+      "destination": "/case-studies/qck-case-studies"
+    },
+    {
+      "source": "/adorama-cro",
+      "destination": "/case-studies/adorama-cro"
     }
   ]
 }
