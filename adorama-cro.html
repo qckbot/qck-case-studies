@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adorama, CRO Directional Plan · QCK</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --ad-ink: #0B1526;
+  --ad-ink2: #0E1A2F;
+  --ad-panel: #111E33;
+  --ad-panel2: #16263F;
+  --ad-line: #24354F;
+  --ad-line2: #2E4160;
+  --ad-cream: #FFFFFF;
+  --ad-silver: #D9E1EE;
+  --ad-grey: #9AA7BD;
+  --ad-grey2: #7C89A0;
+  --ad-amber: #00D6F7;
+  --ad-amber-soft: rgba(0,214,247,0.14);
+  --ad-orange: #6EE6FA;
+  --ad-orange-soft: rgba(110,230,250,0.13);
+  --ad-jade: #5FBF8F;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--ad-ink);
+  color: var(--ad-silver);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14.5px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+.ad-report h1, .ad-report h2, .ad-report h3 { font-family: 'Poppins', sans-serif; font-weight: 800; margin: 0; }
+.ad-report .mono { font-family: 'Poppins', sans-serif; font-weight: 600; }
+.ad-report b { color: var(--ad-cream); font-weight: 700; }
+.ad-report a { color: inherit; }
+
+/* ============ COVER ============ */
+.ad-cover {
+  position: relative;
+  background: linear-gradient(148deg, #0B1526 0%, #0F1F38 55%, #132844 100%);
+  padding: 64px 48px 56px;
+  border-bottom: 1px solid var(--ad-line);
+  overflow: hidden;
+}
+.ad-cover::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--ad-amber) 0%, var(--ad-orange) 45%, var(--ad-amber) 100%);
+}
+.ad-cover::after {
+  content: ""; position: absolute; top: -180px; right: -140px; width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(0,214,247,0.09) 0%, transparent 68%);
+  pointer-events: none;
+}
+.ad-logo { margin-bottom: 30px; }
+.ad-logo img { height: 30px; width: auto; display: block; }
+.ad-eyebrow {
+  font-family: 'Poppins', sans-serif; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase; font-size: 12px;
+  color: var(--ad-amber);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 24px;
+}
+.ad-eyebrow .slash { color: var(--ad-grey2); }
+.ad-eyebrow .tag {
+  border: 1px solid rgba(0,214,247,0.45); border-radius: 3px;
+  padding: 2px 9px; font-size: 10.5px; background: var(--ad-amber-soft);
+}
+.ad-cover h1 { font-size: 52px; color: var(--ad-cream); max-width: 1180px; line-height: 1.06; letter-spacing: -0.005em; }
+.ad-cover h1 em { font-style: normal; color: var(--ad-amber); }
+.ad-cover .sub { font-size: 16px; color: var(--ad-silver); margin-top: 22px; max-width: 1180px; font-weight: 400; }
+.ad-meta-row {
+  display: flex; flex-wrap: wrap; gap: 44px;
+  margin-top: 42px; padding-top: 28px; border-top: 1px solid rgba(169,182,201,0.16);
+}
+.ad-meta-item .lbl { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ad-grey); }
+.ad-meta-item .val { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 19px; color: var(--ad-cream); margin-top: 5px; font-weight: 700; }
+
+/* ============ NAV ============ */
+.ad-nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(11,21,38,0.96); backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--ad-line);
+  padding: 13px 48px; display: flex; gap: 8px; flex-wrap: wrap;
+}
+.ad-nav a {
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.05em;
+  color: var(--ad-grey); text-decoration: none;
+  border: 1px solid var(--ad-line); border-radius: 4px; padding: 5px 11px;
+  transition: all 0.15s;
+}
+.ad-nav a:hover { color: var(--ad-amber); border-color: rgba(0,214,247,0.5); }
+
+/* ============ SECTIONS ============ */
+.ad-section { padding: 58px 48px 20px; max-width: 1280px; }
+.ad-section-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px; }
+.ad-section-head .bar { width: 5px; height: 30px; background: var(--ad-amber); border-radius: 2px; align-self: center; flex: none; }
+.ad-section-head h2 { font-size: 30px; color: var(--ad-cream); }
+.ad-lead { max-width: 1180px; font-size: 15px; color: var(--ad-silver); margin-bottom: 8px; }
+
+/* ============ PIPELINE ============ */
+.ad-pipeline { margin-top: 34px; position: relative; padding-left: 30px; }
+.ad-pipeline::before {
+  content: ""; position: absolute; left: 30px; top: 26px; bottom: 26px; width: 2px;
+  background: linear-gradient(180deg, var(--ad-amber) 0%, var(--ad-orange) 60%, var(--ad-line2) 100%);
+  opacity: 0.55;
+}
+.ad-stage { display: flex; gap: 22px; margin-bottom: 22px; position: relative; }
+.ad-stage-num {
+  flex: none; width: 42px; height: 42px; border-radius: 50%;
+  background: var(--ad-ink2); border: 2px solid var(--ad-line2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 17px; font-weight: 700; color: var(--ad-grey);
+  position: relative; z-index: 3; margin-left: -22px; margin-top: 2px;
+}
+.ad-stage.live .ad-stage-num { border-color: var(--ad-amber); color: var(--ad-amber); box-shadow: 0 0 0 5px rgba(0,214,247,0.10); }
+.ad-stage-card {
+  flex: 1; background: var(--ad-panel); border: 1px solid var(--ad-line);
+  border-radius: 10px; padding: 20px 24px;
+}
+.ad-stage.live .ad-stage-card { border-color: rgba(0,214,247,0.4); }
+.ad-stage:nth-child(2) .ad-stage-card { margin-right: 5%; }
+.ad-stage:nth-child(3) .ad-stage-card { margin-right: 10%; }
+.ad-stage:nth-child(4) .ad-stage-card { margin-right: 15%; }
+.ad-stage:nth-child(5) .ad-stage-card { margin-right: 20%; }
+.ad-stage:nth-child(6) .ad-stage-card { margin-right: 25%; }
+.ad-stage:nth-child(7) .ad-stage-card { margin-right: 30%; }
+.ad-stage-card .row1 { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+.ad-stage-card h3 { font-size: 20px; color: var(--ad-cream); }
+.ad-stage-card p { font-size: 13.5px; color: var(--ad-silver); }
+.ad-stage-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+.ad-chip {
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10.5px; letter-spacing: 0.03em;
+  border: 1px solid var(--ad-line2); border-radius: 4px; padding: 3px 9px; color: var(--ad-grey);
+  background: var(--ad-ink2);
+}
+.ad-chip.hot { border-color: rgba(0,214,247,0.45); color: var(--ad-amber); background: var(--ad-amber-soft); }
+.ad-chip.win { border-color: rgba(95,191,143,0.4); color: var(--ad-jade); background: rgba(95,191,143,0.1); }
+.ad-status {
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 9.5px; letter-spacing: 0.13em;
+  text-transform: uppercase; border-radius: 3px; padding: 3px 9px; white-space: nowrap;
+}
+.ad-status.done { background: rgba(95,191,143,0.12); color: var(--ad-jade); border: 1px solid rgba(95,191,143,0.32); }
+.ad-status.live { background: var(--ad-amber-soft); color: var(--ad-amber); border: 1px solid rgba(0,214,247,0.4); }
+.ad-status.next { background: var(--ad-orange-soft); color: #6EE6FA; border: 1px solid rgba(110,230,250,0.38); }
+.ad-status.queued { background: rgba(169,182,201,0.07); color: var(--ad-silver); border: 1px solid rgba(169,182,201,0.22); }
+.ad-funnel-note {
+  margin: 6px 0 0 52px; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 11px;
+  color: var(--ad-grey2); letter-spacing: 0.06em;
+}
+.ad-funnel-note b { color: var(--ad-amber); font-weight: 600; }
+
+/* ============ PHASE SECTIONS ============ */
+.ad-phase {
+  margin: 42px 48px; max-width: 1184px;
+  background: var(--ad-panel); border: 1px solid var(--ad-line); border-radius: 12px;
+  padding: 36px 38px 28px; position: relative; overflow: hidden;
+}
+.ad-phase::before { content: ""; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: var(--ad-line2); }
+.ad-phase.hot::before { background: linear-gradient(180deg, var(--ad-amber), var(--ad-orange)); }
+.ad-phase-head { margin-bottom: 18px; }
+.ad-phase-head .lot {
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.14em;
+  color: var(--ad-amber); text-transform: uppercase; margin-bottom: 9px;
+}
+.ad-phase-head h2 { font-size: 27px; color: var(--ad-cream); letter-spacing: -0.005em; }
+.ad-phase-head .where { font-size: 12px; color: var(--ad-grey); margin-top: 8px; font-family: 'Poppins', sans-serif; font-weight: 600; }
+.ad-objective {
+  background: var(--ad-ink2); border: 1px solid var(--ad-line); border-left: 3px solid var(--ad-amber);
+  border-radius: 6px; padding: 14px 18px; margin: 18px 0; font-size: 14px;
+}
+.ad-objective b { color: var(--ad-amber); }
+.ad-phase-body { font-size: 14.5px; color: var(--ad-silver); padding-bottom: 16px; max-width: 1080px; }
+.ad-tests { margin-top: 6px; }
+.ad-test-row {
+  display: flex; align-items: flex-start; gap: 16px;
+  border-top: 1px solid var(--ad-line); padding: 13px 4px;
+}
+.ad-test-row:last-child { border-bottom: 1px solid var(--ad-line); }
+.ad-test-row .tid { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10.5px; color: var(--ad-amber); letter-spacing: 0.06em; flex: none; width: 88px; padding-top: 3px; }
+.ad-test-row .tbody { flex: 1; }
+.ad-test-row .tname { font-size: 14px; color: var(--ad-cream); font-weight: 600; }
+.ad-test-row .tdetail { font-size: 12.5px; color: var(--ad-grey); margin-top: 3px; }
+.ad-test-row .tstat { flex: none; padding-top: 2px; }
+
+/* ============ DELIVERABLES ============ */
+.ad-delivs { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin: 20px 0 8px; }
+.ad-deliv {
+  background: var(--ad-ink2); border: 1px solid var(--ad-line); border-radius: 9px; padding: 19px 21px;
+}
+.ad-deliv .dtag {
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ad-amber); background: var(--ad-amber-soft); border: 1px solid rgba(0,214,247,0.35);
+  border-radius: 3px; padding: 2px 8px; display: inline-block; margin-bottom: 11px;
+}
+.ad-deliv .dtag.rec { color: #6EE6FA; background: var(--ad-orange-soft); border-color: rgba(110,230,250,0.4); }
+.ad-deliv h4 { font-family: 'Poppins', sans-serif; font-weight: 800; font-size: 16.5px; color: var(--ad-cream); margin: 0 0 7px; font-weight: 700; }
+.ad-deliv p { font-size: 13px; color: var(--ad-silver); }
+.ad-deliv ul { margin: 10px 0 0 17px; font-size: 12.5px; color: var(--ad-silver); }
+.ad-deliv li { margin-bottom: 6px; }
+.ad-deliv ul b { color: var(--ad-amber); font-weight: 600; }
+.ad-deliv-link {
+  display: inline-block; margin-top: 11px;
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.02em;
+  color: var(--ad-amber); text-decoration: none;
+  border-bottom: 1px solid rgba(0,214,247,0.45); padding-bottom: 1px;
+}
+.ad-deliv-link:hover { color: #6EE6FA; border-color: rgba(110,230,250,0.5); }
+
+/* ============ FOOTER ROWS ============ */
+.ad-footer-row {
+  display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap;
+  border-top: 1px solid var(--ad-line); margin-top: 18px; padding-top: 15px;
+}
+.ad-metric-chip {
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10.5px; letter-spacing: 0.03em;
+  color: var(--ad-amber); border: 1px solid rgba(0,214,247,0.35); background: var(--ad-amber-soft);
+  border-radius: 5px; padding: 6px 12px;
+}
+.ad-effort { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10.5px; color: var(--ad-grey); }
+.ad-effort b { color: var(--ad-cream); font-weight: 600; }
+
+/* ============ SUMMARY TABLE ============ */
+.ad-table-wrap { margin: 26px 48px 0; max-width: 1184px; overflow-x: auto; }
+table.ad-summary { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+table.ad-summary th {
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ad-grey); text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--ad-line2);
+}
+table.ad-summary td { padding: 10px 12px; border-bottom: 1px solid var(--ad-line); color: var(--ad-silver); vertical-align: top; }
+table.ad-summary td.ad-mono-cell { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10.5px; color: var(--ad-amber); white-space: nowrap; }
+table.ad-summary tr:hover td { background: rgba(0,214,247,0.03); }
+
+/* ============ ENDNOTE ============ */
+.ad-endnote {
+  margin: 34px 48px 0; max-width: 1184px; font-size: 12.5px; color: var(--ad-grey);
+  border-top: 1px solid var(--ad-line); padding-top: 20px;
+}
+.ad-endnote b { color: var(--ad-silver); font-weight: 600; }
+.ad-final-footer {
+  display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  margin: 40px 48px 0; max-width: 1184px; padding: 22px 0 46px;
+  font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 10.5px; letter-spacing: 0.1em;
+  color: var(--ad-grey2); text-transform: uppercase;
+}
+.ad-final-footer .right { color: var(--ad-amber); }
+
+@media (max-width: 900px) {
+  .ad-cover, .ad-section, .ad-nav { padding-left: 20px; padding-right: 20px; }
+  .ad-phase, .ad-table-wrap, .ad-endnote, .ad-final-footer { margin-left: 20px; margin-right: 20px; }
+  .ad-cover h1 { font-size: 34px; }
+  .ad-stage-card { margin-right: 0 !important; }
+}
+
+  /* ===== TAB NAV ===== */
+  .tab-nav {
+    background: rgba(7,11,20,0.97);
+    border-bottom: 2px solid #22304A;
+    padding: 14px 48px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 60;
+  }
+  .tab-btn {
+    display: inline-block;
+    padding: 10px 28px;
+    border-radius: 6px;
+    border: 2px solid #22304A;
+    color: #A9B4C7;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    letter-spacing: 0.02em;
+  }
+  .tab-btn:hover {
+    border-color: #00D6F7;
+    color: #00D6F7;
+  }
+  .tab-btn.active-tab {
+    background: #00D6F7;
+    border-color: #00D6F7;
+    color: #0B1220;
+  }
+  @media (max-width: 860px) {
+    .tab-nav { padding: 12px 22px; }
+    .tab-btn { padding: 8px 18px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+<div class="tab-nav">
+  <a href="/qck-case-studies" class="tab-btn">SEO Case Studies</a>
+  <a href="/adorama-cro" class="tab-btn active-tab">CRO Case Studies</a>
+</div>
+
+<div class="ad-report">
+
+  <!-- ============ COVER ============ -->
+  <div class="ad-cover">
+    <div class="ad-logo"><img src="data:image/png;base64,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" alt="QCK logo" style="height:30px;width:auto;display:block;"></div>
+    <div class="ad-eyebrow">
+      <span class="tag">QCK</span><span class="slash">//</span><span>CRO Directional Plan</span><span class="slash">//</span><span>Ref. AD-2026</span>
+    </div>
+    <h1>Adorama<br><em>CRO Directional Plan</em></h1>
+    <div class="sub">A seven-stage optimization program for Adorama.com, mapping how QCK moves from diagnosed bottlenecks to a fully optimized purchase path across the product detail page, sitewide assets, a dedicated landing page, homepage, collections pages, and cart. Every experiment runs as an isolated, single-variant A/B test built and measured in SiteSpect, Adorama's testing platform. The full 2026 roadmap is built and prioritized: 18 experiments specified, each with a written hypothesis, device scope, and traffic split.</div>
+    <div class="ad-meta-row">
+      <div class="ad-meta-item"><div class="lbl">Client</div><div class="val">Adorama</div></div>
+      <div class="ad-meta-item"><div class="lbl">Testing Platform</div><div class="val">SiteSpect</div></div>
+      <div class="ad-meta-item"><div class="lbl">Program</div><div class="val">2026 Roadmap</div></div>
+      <div class="ad-meta-item"><div class="lbl">Stages</div><div class="val">7</div></div>
+      <div class="ad-meta-item"><div class="lbl">Tests Specified</div><div class="val">18</div></div>
+      <div class="ad-meta-item"><div class="lbl">Prepared By</div><div class="val">QCK</div></div>
+    </div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <div class="ad-nav">
+    <a href="#pipeline">Directional Overview</a>
+    <a href="#p1">01 Diagnose</a>
+    <a href="#p2">02 PDP</a>
+    <a href="#p3">03 Sitewide</a>
+    <a href="#p4">04 Landing Page</a>
+    <a href="#p5">05 Homepage</a>
+    <a href="#p6">06 Collections</a>
+    <a href="#p7">07 Cart</a>
+    <a href="#summary">Full Roadmap</a>
+  </div>
+
+  <!-- ============ PIPELINE OVERVIEW ============ -->
+  <div class="ad-section" id="pipeline">
+    <div class="ad-section-head"><div class="bar"></div><h2>The Directional Plan, Stage by Stage</h2></div>
+    <p class="ad-lead">Each stage answers one question about the Adorama funnel, and each gates or feeds the next. <b>Stage 1 sets direction for everything.</b> Stages 2-6 run as parallel testing lanes on separate page types and site surfaces, so results never contaminate each other. Stage 7 runs last, because cart behavior is downstream of every improvement made upstream.</p>
+
+    <div class="ad-pipeline">
+
+      <div class="ad-stage live">
+        <div class="ad-stage-num">1</div>
+        <div class="ad-stage-card">
+          <div class="row1"><h3>Identify Bottlenecks</h3><span class="ad-status live">In Progress, Roadmap Delivered</span></div>
+          <p>Funnel drop-off analysis and a structural audit determine where Adorama loses buyers, then sets the priority order for every test that follows. Behavioral data from Heatmap.com, which we strongly recommend installing, would sharpen that prioritization further. The CRO Roadmap deliverable is complete: 18 fully specified experiments, each with a written hypothesis, location, device scope, and traffic split.</p>
+          <div class="ad-stage-chips">
+            <span class="ad-chip win">✓ CRO Roadmap, DELIVERED (18 tests)</span>
+            <span class="ad-chip hot">Deliverable · PDP Redesign (Figma)</span>
+            <span class="ad-chip hot">Deliverable · Heatmap Audit (Strongly Recommended)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-stage">
+        <div class="ad-stage-num">2</div>
+        <div class="ad-stage-card">
+          <div class="row1"><h3>Optimize the PDP</h3><span class="ad-status next">First Testing Lane, 8 Tests Specified</span></div>
+          <p>The deepest lane in the roadmap: eight single-variant A/B tests restructuring the page closest to the transaction, review stars, image carousel, stock availability placement, shipping trust signals, bundle and protection plan order, description accordion, and mobile engagement and sticky Add-to-Cart.</p>
+          <div class="ad-stage-chips">
+            <span class="ad-chip">Gold stars overtop carousel</span>
+            <span class="ad-chip">Bundles before protection plans</span>
+            <span class="ad-chip">Sticky Add-to-Cart mobile</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-stage">
+        <div class="ad-stage-num">3</div>
+        <div class="ad-stage-card">
+          <div class="row1"><h3>Optimize Sitewide Assets</h3><span class="ad-status next">Parallel Lane, 2 Tests Specified</span></div>
+          <p>Elements that touch every page get their own isolated lane: introducing an announcement bar in Adorama's brand palette (#F35125), then testing stickiness on scroll, so the offer stays visible through the entire session without any layout changes.</p>
+          <div class="ad-stage-chips">
+            <span class="ad-chip">Announcement bar, brand color</span>
+            <span class="ad-chip">Sticky on scroll</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-stage">
+        <div class="ad-stage-num">4</div>
+        <div class="ad-stage-card">
+          <div class="row1"><h3>Landing Page Design &amp; Testing</h3><span class="ad-status next">New Lane, Deliverable In Production</span></div>
+          <p>Paid traffic deserves a page built to convert it. QCK designs a dedicated landing page matched to ad messaging, one offer, one call to action, navigation stripped down, delivered as a standalone deliverable. Once live, it becomes its own testing lane, with the first round of tests specified from initial traffic data.</p>
+          <div class="ad-stage-chips">
+            <span class="ad-chip hot">Deliverable · Landing Page Design</span>
+            <span class="ad-chip">Message match to ad copy</span>
+            <span class="ad-chip">Single offer, single CTA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-stage">
+        <div class="ad-stage-num">5</div>
+        <div class="ad-stage-card">
+          <div class="row1"><h3>Optimize the Homepage</h3><span class="ad-status next">Parallel Lane, 4 Tests Specified</span></div>
+          <p>Every test here is judged on whether it moves visitors forward to the pages that convert: a static best-seller hero versus the carousel, "Today's Top Deals" promoted to the second section, a tabbed product grid replacing the category carousel, and an FAQ accordion in the third section.</p>
+          <div class="ad-stage-chips">
+            <span class="ad-chip">Static hero vs carousel</span>
+            <span class="ad-chip">Top Deals second section</span>
+            <span class="ad-chip">Tabbed product grid</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-stage">
+        <div class="ad-stage-num">6</div>
+        <div class="ad-stage-card">
+          <div class="row1"><h3>Optimize Collections Pages</h3><span class="ad-status next">Parallel Lane, 3 Tests Specified</span></div>
+          <p>The discovery layer: doubling product density from one product per row to two, relocating SEO content below the product grid, and adding an FAQ accordion, so shoppers reach products faster and objections get handled on-page.</p>
+          <div class="ad-stage-chips">
+            <span class="ad-chip">2 products per row</span>
+            <span class="ad-chip">SEO content below grid</span>
+            <span class="ad-chip">Collections FAQ accordion</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-stage">
+        <div class="ad-stage-num">7</div>
+        <div class="ad-stage-card">
+          <div class="row1"><h3>Optimize the Cart Experience</h3><span class="ad-status queued">Stage 7, By Design</span></div>
+          <p>A cart drawer, designed in the Figma deliverable, replaces the current cart handoff, tested sitewide against the existing flow to lift Conversion Rate, Average Order Value, and Revenue Per Visitor at the point closest to checkout.</p>
+          <div class="ad-stage-chips">
+            <span class="ad-chip">Cart drawer vs current cart</span>
+            <span class="ad-chip">Design source: Figma</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="ad-funnel-note">Wide at discovery → narrow at checkout · <b>the funnel is the plan</b></div>
+  </div>
+
+  <!-- ============ STAGE 1 ============ -->
+  <div class="ad-phase" id="p1">
+    <div class="ad-phase-head">
+      <div class="lot">STAGE 01 // DIAGNOSE</div>
+      <h2>Identify Bottlenecks and Set Direction for the Roadmap</h2>
+      <div class="where">Scope: Sitewide · Funnel analysis + structural audit · Heatmap.com optional, strongly recommended · Status: In progress, roadmap delivered</div>
+    </div>
+    <div class="ad-objective"><b>Objective:</b> Build the evidence base that decides what gets tested, in what order, on which page, so the roadmap is driven by observed user behavior rather than assumption.</div>
+    <div class="ad-phase-body">
+      The first output of this stage is already in hand: the <b>Adorama CRO Roadmap</b>, with all 18 experiments fully specified, every test carries a written hypothesis, control and variant definitions, location, device scope, and a 50/50 traffic split, ready to be built in SiteSpect. Prioritization currently stands on the funnel analysis and structural audit. Installing Heatmap.com is optional, and nothing in this roadmap is blocked without it, but we <b>strongly recommend it</b>: revenue-tied behavioral data is the single largest upgrade available to how this roadmap gets sequenced, because it shows not just where visitors click, but which elements actually produce revenue.
+    </div>
+
+    <div class="ad-phase-body" style="padding-bottom:0;"><b>Stage 1 produces three client deliverables.</b> These are the working documents the rest of the engagement runs on:</div>
+    <div class="ad-delivs">
+      <div class="ad-deliv">
+        <span class="dtag">Deliverable 01 · Delivered</span>
+        <h4>CRO Roadmap</h4>
+        <p>The living master document of the testing program, every experiment as a fully specified row: <b>hypothesis written in full</b> (if / then / because), page location, device scope, test type, traffic split, and live status from queued through concluded. All 18 Adorama tests are specified and prioritized; start dates populate as each test enters traffic in SiteSpect, and prioritization is re-scored as results land.</p>
+        <a class="ad-deliv-link" href="https://docs.google.com/spreadsheets/d/1VxVOggHBk299h2AA2oUfOL2N_Np3CeSP9YKeBOJ7lzY/edit?usp=sharing" target="_blank" rel="noopener">Open the CRO Roadmap →</a>
+      </div>
+      <div class="ad-deliv">
+        <span class="dtag">Deliverable 02</span>
+        <h4>PDP Redesign, Figma File</h4>
+        <p>A complete redesign of the product detail page delivered as a working Figma file, review star placement, image carousel and thumbnail row, stock availability, shipping trust signals, bundle and protection plan order, description accordion, and mobile layout designed as a coherent whole. Each section maps to one of the eight Stage 2 tests, so the file doubles as the <b>visual source of truth</b> the SiteSpect variants are built from, section by section, never as one unmeasurable overhaul. The cart drawer design for Stage 7 ships in the same file.</p>
+        <a class="ad-deliv-link" href="https://www.figma.com/design/tMLQkbJIWfrlevipAfHGP1/Adorama-PDP?t=hkynTHvGzyD50Y8d-0" target="_blank" rel="noopener">Open the Figma File →</a>
+      </div>
+      <div class="ad-deliv">
+        <span class="dtag rec">Deliverable 03 · Optional, Strongly Recommended</span>
+        <h4>Initial Heatmap Audit</h4>
+        <p>Optional, pending Adorama's decision to install <b>Heatmap.com</b>, but this is the one optional item we strongly recommend. It is the on-site analytics platform that ties revenue to every element on every page, rather than just counting clicks, and nothing else in this roadmap depends on it. If installed, Heatmap.com adds:</p>
+        <ul>
+          <li><b>Revenue Per Click &amp; Revenue Per Session</b> on every button, image, and link, we see which elements actually make money, not just which get touched</li>
+          <li><b>Conversion Killers exposed</b>, elements that attract clicks but drive little-to-no revenue get demoted or removed</li>
+          <li><b>Revenue-weighted scrollmaps</b>, where revenue potential drops off down the page, not just where attention does</li>
+          <li><b>Every engaged session tracked, no sampling</b>, with an 8kb snippet that has no measurable impact on site speed</li>
+          <li><b>Funnels &amp; session recordings</b>, the full path to purchase, filterable by Average Order Value, traffic source, and behavior</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ad-footer-row">
+      <div class="ad-metric-chip">Metrics: Revenue Per Session · Revenue Per Click · Conversion Rate · Funnel Drop-Off</div>
+      <div class="ad-effort">Deliverables: <b>Roadmap · Figma PDP · Heatmap Audit (Strongly Recommended)</b> &nbsp;|&nbsp; Status: <b>Roadmap delivered</b></div>
+    </div>
+  </div>
+
+  <!-- ============ STAGE 2 ============ -->
+  <div class="ad-phase hot" id="p2">
+    <div class="ad-phase-head">
+      <div class="lot">STAGE 02 // PDP</div>
+      <h2>Optimize the Product Detail Page</h2>
+      <div class="where">Scope: PDP, Desktop + Mobile · Eight single-variant A/B tests in SiteSpect, 50/50 split · Revisions: Brandon (sticky Add-to-Cart with Emily)</div>
+    </div>
+    <div class="ad-objective"><b>Objective:</b> Lift Conversion Rate, Add-to-Cart Rate, Average Order Value, and Revenue Per Visitor on the page closest to the transaction. Every change runs as an isolated single-variant test so results stay attributable, eight tests, eight clean answers.</div>
+    <div class="ad-phase-body">
+      This is the deepest lane in the roadmap, and it restructures the PDP from top to bottom. Social proof leads, <b>gold review stars move overtop the carousel image</b>, and the gallery deepens with a <b>five-image carousel below the main image</b>. Confidence signals move up: <b>"Available in Stock" relocates above the product title</b> and <b>shipping information with an icon appears below the title and price</b>. Revenue architecture gets reordered, <b>bundles are presented before protection plans</b>, so shoppers see higher-value package upgrades before easier-to-skip add-ons. Visual clutter comes down: the <b>product description collapses into an accordion</b>. And mobile gets two dedicated tests: <b>"Add to List" and "Get Sale Alert" become visible</b>, keeping shoppers in the consideration funnel who would otherwise leave to track prices elsewhere, and a <b>sticky Add-to-Cart bar</b> keeps purchase one tap away past the buy box.
+    </div>
+    <div class="ad-tests">
+      <div class="ad-test-row">
+        <span class="tid">AD-S2-01</span>
+        <div class="tbody">
+          <div class="tname">Gold Review Stars Overtop Image Carousel</div>
+          <div class="tdetail">Current: stars below the carousel · Variant: gold stars overtop the carousel image · gold stars at the top of the PDP lift Conversion Rate</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S2-02</span>
+        <div class="tbody">
+          <div class="tname">5-Image Carousel Below Main PDP Image</div>
+          <div class="tdetail">Current: main image as carousel only · Variant: 5-image carousel below the main image · Conversion Rate, Average Order Value, Revenue Per Visitor</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S2-03</span>
+        <div class="tbody">
+          <div class="tname">"Available in Stock" Above Product Title</div>
+          <div class="tdetail">Variant relocates stock availability above the title, shoppers confirm the product visually first, identifying details second, matching the natural scan pattern · clickthrough to Add-to-Cart</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S2-04</span>
+        <div class="tbody">
+          <div class="tname">"Add to List" &amp; "Get Sale Alert" Visible on Mobile</div>
+          <div class="tdetail">Current: hidden on mobile · Variant: visible, mobile shoppers save products and track price drops instead of leaving the site · Mobile only · clickthrough to Add-to-Cart</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S2-05</span>
+        <div class="tbody">
+          <div class="tname">Shipping Information With Icon Below Title &amp; Price</div>
+          <div class="tdetail">Current: not present · Variant: shipping information with icon below product title and price · trust lifts Conversion Rate and Revenue Per Visitor</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S2-06</span>
+        <div class="tbody">
+          <div class="tname">Bundles Before Protection Plans</div>
+          <div class="tdetail">Current: protection plans, then bundles · Variant: bundles first, higher-value package upgrades build on the base purchase before easier-to-skip add-ons · Average Order Value</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S2-07</span>
+        <div class="tbody">
+          <div class="tname">Product Description in an Accordion</div>
+          <div class="tdetail">Current: open-format description · Variant: description within an accordion, reduced visual clutter and cognitive load · Add-to-Cart Rate, Conversion Rate</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S2-08</span>
+        <div class="tbody">
+          <div class="tname">Sticky Add-to-Cart on Mobile</div>
+          <div class="tdetail">Sticky bar with quantity selector and Add-to-Cart activates once the user scrolls past the buy box, preserves purchase intent and shortens scroll-back · Mobile only · Revisions: Brandon &amp; Emily</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+    </div>
+    <div class="ad-footer-row">
+      <div class="ad-metric-chip">Metrics: Conversion Rate · Add-to-Cart Rate · Average Order Value · Revenue Per Visitor</div>
+      <div class="ad-effort">Tests: <b>8</b> &nbsp;|&nbsp; Split: <b>50/50</b> &nbsp;|&nbsp; Platform: <b>SiteSpect</b></div>
+    </div>
+  </div>
+
+  <!-- ============ STAGE 3 ============ -->
+  <div class="ad-phase" id="p3">
+    <div class="ad-phase-head">
+      <div class="lot">STAGE 03 // SITEWIDE ASSETS</div>
+      <h2>Optimize Sitewide Assets</h2>
+      <div class="where">Scope: Sitewide, Desktop + Mobile · Two single-variant A/B tests in SiteSpect, 50/50 split · Run sequentially, same page real estate</div>
+    </div>
+    <div class="ad-objective"><b>Objective:</b> Put a persistent, on-brand messaging surface on every page of the site, then make it inescapable. Two tests, run in sequence, that lift clickthrough and conversion without touching any page layout.</div>
+    <div class="ad-phase-body">
+      Adorama currently has no announcement bar. The first test <b>introduces one in Adorama's own brand palette</b>, a #F35125 background with white text, drawing attention to the offer inside it on every page of the site. The second test, run after the first concludes, <b>makes the bar sticky on scroll</b>, so the offer never leaves the viewport during the session. Because both tests occupy the same page real estate, they run <b>sequentially rather than simultaneously</b>, keeping each result independently attributable.
+    </div>
+    <div class="ad-tests">
+      <div class="ad-test-row">
+        <span class="tid">AD-S3-01</span>
+        <div class="tbody">
+          <div class="tname">Add Announcement Bar, Brand Color</div>
+          <div class="tdetail">Current: no announcement bar · Variant: announcement bar, #F35125 background with #FFFFFF text · Conversion Rate and Clickthrough Rate</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S3-02</span>
+        <div class="tbody">
+          <div class="tname">Sticky Announcement Bar</div>
+          <div class="tdetail">Current: non-sticky · Variant: sticky on scroll, lifts homepage clickthrough, PDP views, Add-to-Cart, and Conversion Rate with no layout changes · runs after AD-S3-01 concludes</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+    </div>
+    <div class="ad-footer-row">
+      <div class="ad-metric-chip">Metrics: Clickthrough Rate · Conversion Rate · Add-to-Cart Rate</div>
+      <div class="ad-effort">Tests: <b>2, sequential</b> &nbsp;|&nbsp; Split: <b>50/50</b> &nbsp;|&nbsp; Platform: <b>SiteSpect</b></div>
+    </div>
+  </div>
+
+  <!-- ============ STAGE 4 ============ -->
+  <div class="ad-phase" id="p4">
+    <div class="ad-phase-head">
+      <div class="lot">STAGE 04 // LANDING PAGE</div>
+      <h2>Landing Page Design &amp; Testing</h2>
+      <div class="where">Scope: New landing page, Desktop + Mobile · Deliverable: landing page design · Test roadmap specified once live</div>
+    </div>
+    <div class="ad-objective"><b>Objective:</b> Give paid traffic a page designed specifically to convert it, instead of sending ad clicks to a page doing double duty as a general browsing destination.</div>
+    <div class="ad-phase-body">
+      Ads currently point to a page built for browsing rather than conversion, sitewide navigation, competing offers, and messaging that doesn't mirror the ad itself. QCK designs a dedicated landing page for this traffic: <b>message match to ad copy, one offer above the fold, and navigation stripped down</b> to reduce exit paths. Once the page is live, it becomes its own testing lane, the first round of tests gets specified from initial performance data, following the same isolated single-variant format used across the rest of the roadmap.
+    </div>
+    <div class="ad-delivs">
+      <div class="ad-deliv">
+        <span class="dtag">Deliverable · In Production</span>
+        <h4>Dedicated Landing Page Design</h4>
+        <p>A new page designed specifically for ad traffic, matched messaging, single offer, single call to action, and a stripped-down layout with no competing navigation. Delivered as a complete design ready to take traffic before test variants are layered in.</p>
+      </div>
+    </div>
+    <div class="ad-footer-row">
+      <div class="ad-metric-chip">Metrics: Conversion Rate · Cost Per Acquisition · Bounce Rate</div>
+      <div class="ad-effort">Deliverable: <b>Landing Page Design</b> &nbsp;|&nbsp; Status: <b>In production, tests specified once live</b></div>
+    </div>
+  </div>
+
+  <!-- ============ STAGE 5 ============ -->
+  <div class="ad-phase" id="p5">
+    <div class="ad-phase-head">
+      <div class="lot">STAGE 05 // HOMEPAGE</div>
+      <h2>Optimize the Homepage</h2>
+      <div class="where">Scope: Homepage, Desktop + Mobile · Four single-variant A/B tests in SiteSpect, 50/50 split · Runs parallel to Stages 2, 3 &amp; 6</div>
+    </div>
+    <div class="ad-objective"><b>Objective:</b> Move visitors from the front door to the pages that convert. Every homepage test is judged on clickthrough to product pages and downstream Conversion Rate.</div>
+    <div class="ad-phase-body">
+      Four isolated tests restructure the top of the homepage. The hero: a <b>static image of a best-selling product</b> replaces the rotating carousel, one background image, one focused headline, one call to action, reducing choice paralysis and keeping the primary CTA permanently visible. The second section gets two competing hypotheses, tested separately: <b>"Today's Top Deals" promoted into the second section</b> so visitors reach actual products immediately, and a <b>tabbed product grid organized by category</b> replacing the category carousel, so shoppers browse real products without clicking through a carousel. Further down, an <b>FAQ accordion in the third section</b> handles common questions on-page.
+    </div>
+    <div class="ad-tests">
+      <div class="ad-test-row">
+        <span class="tid">AD-S5-01</span>
+        <div class="tbody">
+          <div class="tname">Hero Carousel vs Static Best-Seller Image</div>
+          <div class="tdetail">Current: carousel with various slides · Variant: static hero of a best-selling product, one image, one headline, one CTA · primary CTA clickthrough and Conversion Rate</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S5-02</span>
+        <div class="tbody">
+          <div class="tname">"Today's Top Deals" Into the Second Section</div>
+          <div class="tdetail">Current second section: product categories · Variant: "Today's Top Deals", visitors browse actual products immediately, reducing friction · Conversion Rate and Clickthrough Rate</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S5-03</span>
+        <div class="tbody">
+          <div class="tname">Second Section, Tabbed Product Grid by Category</div>
+          <div class="tdetail">Current: category carousel · Variant: product grid with tab functionality based on categories, shoppers browse actual products by category without manually clicking through a carousel · Conversion Rate and Clickthrough Rate</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S5-04</span>
+        <div class="tbody">
+          <div class="tname">FAQ Accordion, Third Section</div>
+          <div class="tdetail">Current: no FAQ section · Variant: FAQ section as an accordion in the third section · Revenue Per Visitor</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+    </div>
+    <div class="ad-footer-row">
+      <div class="ad-metric-chip">Metrics: Clickthrough Rate · Conversion Rate · Revenue Per Visitor</div>
+      <div class="ad-effort">Tests: <b>4</b> &nbsp;|&nbsp; Split: <b>50/50</b> &nbsp;|&nbsp; Platform: <b>SiteSpect</b></div>
+    </div>
+  </div>
+
+  <!-- ============ STAGE 6 ============ -->
+  <div class="ad-phase" id="p6">
+    <div class="ad-phase-head">
+      <div class="lot">STAGE 06 // COLLECTIONS</div>
+      <h2>Optimize Collections Pages for Discovery</h2>
+      <div class="where">Scope: Collections pages, Desktop + Mobile · Three single-variant A/B tests in SiteSpect, 50/50 split · Runs parallel to Stages 2, 3 &amp; 5</div>
+    </div>
+    <div class="ad-objective"><b>Objective:</b> Get shoppers from the collection grid to the right product page faster. Density, content order, and on-page objection handling are each tested in isolation.</div>
+    <div class="ad-phase-body">
+      Three tests reshape the discovery layer. Product density doubles: <b>two products per row replaces one</b> as the default view, so shoppers compare options side by side instead of relying on scroll memory. <b>SEO content relocates below the product grid</b>, search rankings preserved, products first. And an <b>FAQ accordion</b> joins the page, handling sizing and purchasing questions where they arise instead of sending shoppers away to find answers.
+    </div>
+    <div class="ad-tests">
+      <div class="ad-test-row">
+        <span class="tid">AD-S6-01</span>
+        <div class="tbody">
+          <div class="tname">Collections, 2 Products Per Row Default View</div>
+          <div class="tdetail">Current: 1 product per row · Variant: 2 products per row as the default view · Clickthrough Rate</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S6-02</span>
+        <div class="tbody">
+          <div class="tname">Relocate SEO Content Below Product Grid</div>
+          <div class="tdetail">Current: SEO content above the fold · Variant: SEO content below the product grid, rankings preserved, products first · Revenue Per Visitor</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+      <div class="ad-test-row">
+        <span class="tid">AD-S6-03</span>
+        <div class="tbody">
+          <div class="tname">FAQ Accordion on Collections Pages</div>
+          <div class="tdetail">Current: no FAQ section · Variant: FAQ section as an accordion in the third section · Revenue Per Visitor</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+    </div>
+    <div class="ad-footer-row">
+      <div class="ad-metric-chip">Metrics: Clickthrough Rate · Revenue Per Visitor · Collection-to-PDP Rate</div>
+      <div class="ad-effort">Tests: <b>3</b> &nbsp;|&nbsp; Split: <b>50/50</b> &nbsp;|&nbsp; Platform: <b>SiteSpect</b></div>
+    </div>
+  </div>
+
+  <!-- ============ STAGE 7 ============ -->
+  <div class="ad-phase hot" id="p7">
+    <div class="ad-phase-head">
+      <div class="lot">STAGE 07 // CART</div>
+      <h2>Optimize the Cart Experience</h2>
+      <div class="where">Scope: Cart, Sitewide, Desktop + Mobile · Single-variant A/B test in SiteSpect from the Figma design · Sequenced last by design</div>
+    </div>
+    <div class="ad-objective"><b>Objective:</b> Lift Conversion Rate, Average Order Value, and Revenue Per Visitor at the point closest to checkout by replacing the current cart handoff with a purpose-designed cart drawer.</div>
+    <div class="ad-phase-body">
+      This stage runs <b>last on purpose</b>. Cart behavior is downstream of everything upstream. If the PDP, sitewide, landing page, homepage, and collections lanes shift traffic quality and purchase intent, that needs to be reflected in the cart baseline before cart testing begins. Testing the cart first would mean measuring against a baseline that Stages 2-6 are about to invalidate. The variant comes directly from the <b>cart drawer design in the Stage 1 Figma deliverable</b>: shoppers stay in context when they add to cart instead of being handed off, keeping the path to checkout, and the next addition to the order, one motion away.
+    </div>
+    <div class="ad-tests">
+      <div class="ad-test-row">
+        <span class="tid">AD-S7-01</span>
+        <div class="tbody">
+          <div class="tname">Cart Drawer vs Current Cart</div>
+          <div class="tdetail">Current: no cart drawer · Variant: cart drawer from the Figma design · Conversion Rate, Average Order Value, Revenue Per Visitor · Sitewide</div>
+        </div>
+        <span class="tstat"><span class="ad-status queued">Specified</span></span>
+      </div>
+    </div>
+    <div class="ad-footer-row">
+      <div class="ad-metric-chip">Metrics: Conversion Rate · Average Order Value · Revenue Per Visitor</div>
+      <div class="ad-effort">Design source: <b>Figma deliverable</b> &nbsp;|&nbsp; Split: <b>50/50</b> &nbsp;|&nbsp; Platform: <b>SiteSpect</b></div>
+    </div>
+  </div>
+
+  <!-- ============ FULL ROADMAP ============ -->
+  <div class="ad-section" id="summary" style="padding-bottom:0;">
+    <div class="ad-section-head"><div class="bar"></div><h2>Full Roadmap: Every Test &amp; Deliverable</h2></div>
+    <p class="ad-lead">The complete 2026 program at a glance: 18 A/B tests and 4 deliverables across 7 stages. Every test is a single-variant, 50/50 experiment built and measured in SiteSpect; start dates populate in the roadmap as each test enters traffic.</p>
+  </div>
+  <div class="ad-table-wrap">
+    <table class="ad-summary">
+      <thead>
+        <tr><th>Ref</th><th>Test / Deliverable</th><th>Stage</th><th>Location</th><th>Device</th><th>Primary Metrics</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="ad-mono-cell">AD-S1-D1</td><td>CRO Roadmap, 18 specified tests</td><td>1 · Diagnose</td><td>Program</td><td>-</td><td>-</td><td><span class="ad-status done">Delivered</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S1-D2</td><td>PDP redesign, Figma file</td><td>1 · Diagnose</td><td>PDP + Cart</td><td>-</td><td>-</td><td><span class="ad-status live">In Production</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S1-D3</td><td>Initial Heatmap Audit (Heatmap.com)</td><td>1 · Diagnose</td><td>Sitewide</td><td>-</td><td>RPS · RPC</td><td><span class="ad-status next">Optional, Strongly Recommended</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S2-01</td><td>Gold review stars overtop image carousel</td><td>2 · PDP</td><td>PDP</td><td>Desktop/Mobile</td><td>CVR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S2-02</td><td>5-image carousel below main PDP image</td><td>2 · PDP</td><td>PDP</td><td>Desktop/Mobile</td><td>CVR · AOV · RPV</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S2-03</td><td>"Available in Stock" above product title</td><td>2 · PDP</td><td>PDP</td><td>Desktop/Mobile</td><td>ATC CTR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S2-04</td><td>"Add to List" &amp; "Get Sale Alert" visible on mobile</td><td>2 · PDP</td><td>PDP</td><td>Mobile</td><td>ATC CTR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S2-05</td><td>Shipping info with icon below title &amp; price</td><td>2 · PDP</td><td>PDP</td><td>Desktop/Mobile</td><td>CVR · RPV</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S2-06</td><td>Bundles before protection plans</td><td>2 · PDP</td><td>PDP</td><td>Desktop/Mobile</td><td>AOV</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S2-07</td><td>Product description in an accordion</td><td>2 · PDP</td><td>PDP</td><td>Desktop/Mobile</td><td>ATC Rate · CVR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S2-08</td><td>Sticky Add-to-Cart on mobile</td><td>2 · PDP</td><td>PDP</td><td>Mobile</td><td>CVR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S3-01</td><td>Announcement bar, #F35125 / #FFFFFF</td><td>3 · Sitewide</td><td>Sitewide</td><td>Desktop/Mobile</td><td>CVR · CTR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S3-02</td><td>Sticky announcement bar</td><td>3 · Sitewide</td><td>Sitewide</td><td>Desktop/Mobile</td><td>CTR · ATC · CVR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S4-D1</td><td>Dedicated landing page, design for ad traffic</td><td>4 · Landing Page</td><td>Landing Page</td><td>-</td><td>-</td><td><span class="ad-status live">In Production</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S5-01</td><td>Hero carousel vs static best-seller image</td><td>5 · Homepage</td><td>Homepage</td><td>Desktop/Mobile</td><td>CTA CTR · CVR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S5-02</td><td>"Today's Top Deals" into the second section</td><td>5 · Homepage</td><td>Homepage</td><td>Desktop/Mobile</td><td>CVR · CTR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S5-03</td><td>Second section, tabbed product grid by category</td><td>5 · Homepage</td><td>Homepage</td><td>Desktop/Mobile</td><td>CVR · CTR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S5-04</td><td>FAQ accordion, third section</td><td>5 · Homepage</td><td>Homepage</td><td>Desktop/Mobile</td><td>RPV</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S6-01</td><td>Collections, 2 products per row</td><td>6 · Collections</td><td>Collections</td><td>Desktop/Mobile</td><td>CTR</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S6-02</td><td>Relocate SEO content below product grid</td><td>6 · Collections</td><td>Collections</td><td>Desktop/Mobile</td><td>RPV</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S6-03</td><td>FAQ accordion on collections pages</td><td>6 · Collections</td><td>Collections</td><td>Desktop/Mobile</td><td>RPV</td><td><span class="ad-status queued">Specified</span></td></tr>
+        <tr><td class="ad-mono-cell">AD-S7-01</td><td>Cart drawer vs current cart</td><td>7 · Cart</td><td>Sitewide</td><td>Desktop/Mobile</td><td>CVR · AOV · RPV</td><td><span class="ad-status queued">Specified</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ad-endnote">
+    <b>Notes on sequencing.</b> Stage 1 gates everything. The roadmap is delivered, and prioritization stands on the funnel analysis and structural audit; if Adorama installs Heatmap.com, which we strongly recommend, revenue-tied behavioral data will further re-score priority within each lane as it accumulates. Stages 2, 3, 5, and 6 run as <b>parallel lanes</b> on separate page types and site surfaces, so no test contaminates another's results. The PDP lane never touches the homepage lane's pages and vice versa. Within Stage 3, the two announcement bar tests occupy the same page real estate and therefore run <b>sequentially, not simultaneously</b>, so each result stays attributable. Stage 4 (Landing Page) is designed and shipped as its own deliverable, and its test roadmap is specified once the page is live and initial traffic data is in hand. Stage 7 is sequenced last <b>deliberately</b>: cart behavior is downstream of everything upstream, and testing the cart before the other lanes conclude would mean measuring against a baseline those lanes are about to invalidate. Every test is built, targeted, and measured in <b>SiteSpect</b> on a 50/50 traffic split. Start dates populate in the roadmap as each test enters traffic. No dates appear in this plan because testing has not yet launched. Metric abbreviations: <b>CVR</b> (Conversion Rate), <b>CTR</b> (Clickthrough Rate), <b>ATC</b> (Add-to-Cart Rate), <b>AOV</b> (Average Order Value), <b>RPV</b> (Revenue Per Visitor), <b>RPS/RPC</b> (Revenue Per Session / Per Click). Spelled in full throughout the stage sections per QCK hypothesis standards.
+  </div>
+
+  <div class="ad-final-footer" style="display:flex;align-items:center;justify-content:space-between;">
+    <span style="display:flex;align-items:center;gap:12px;"><img src="data:image/png;base64,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" alt="QCK logo" style="height:16px;width:auto;display:block;">Prepared by QCK · Conversion Rate Optimization &amp; Behavioral Analytics</span>
+    <span class="right">Adorama Directional Plan · AD-2026</span>
+  </div>
+
+</div>
+</body>
+</html>
