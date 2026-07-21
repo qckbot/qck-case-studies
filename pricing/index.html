@@ -1629,10 +1629,13 @@
   </p>
 
 <script>
-  const LIST = { growth: 5000, core: 12500, pro: 20400 };
+  // LIST prices represent the base WITHOUT optional add-ons
+  // Core list = $8,333 → 12mo (40% off) = $5,000 base; +$2,500 CRO flat = $7,500 total
+  const LIST = { growth: 5000, core: 8333, pro: 20400 };
   const PR_ADDON = 1000; // flat, never discounted
+  const CRO_CORE_FLAT = 2500; // flat add-on for Core CRO, never discounted
   const ADS_DELTA = 3000;
-  const CRO_DELTA = { core: 2500, pro: 2000 };
+  const CRO_DELTA = { core: 0, pro: 2000 }; // core CRO handled as flat add-on above
   const DISC = { '3mo': 0.15, '6mo': 0.35, '12mo': 0.40 };
   const DISC_PRO_12MO = 0.45; // Pro 12mo gets deeper discount
   const MONTHS = { '3mo': 3, '6mo': 6, '12mo': 12 };
@@ -1668,7 +1671,9 @@
     const adsProOn  = document.getElementById('ads-pro').checked;
 
     const listGrow = LIST.growth;
-    const listCore = LIST.core - (croCoreOn ? 0 : CRO_DELTA.core);
+    // Core CRO is a flat add-on (not discounted)
+    const coreCroAddon = croCoreOn ? CRO_CORE_FLAT : 0;
+    const listCore = LIST.core - CRO_DELTA.core; // CRO_DELTA.core is 0 now
     const listPro  = LIST.pro  - (croProOn  ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0);
 
     // Growth PR add-on is always $1,000 flat regardless of term discount
@@ -1678,7 +1683,7 @@
     const discPro = (term === '12mo') ? DISC_PRO_12MO : disc;
 
     const pGrow = Math.round(listGrow * (1 - disc)) + prAddonTotal;
-    const pCore = Math.round(listCore * (1 - disc));
+    const pCore = Math.round(listCore * (1 - disc)) + coreCroAddon;
     const pPro  = Math.round(listPro  * (1 - discPro));
 
     // Card prices
@@ -1688,7 +1693,7 @@
 
     // Strikethrough list prices on cards
     set('pwas-growth', disc > 0 ? `List: ${fmt(LIST.growth + prAddonTotal)}/mo` : (prAddonChecked ? `Base: ${fmt(LIST.growth)}/mo + $1,000 PR` : ''));
-    set('pwas-core',   disc > 0 ? `List: ${fmt(LIST.core - (croCoreOn ? 0 : CRO_DELTA.core))}/mo` : '');
+    set('pwas-core',   disc > 0 ? `List: ${fmt(LIST.core + (croCoreOn ? CRO_CORE_FLAT : 0))}/mo` : '');
     set('pwas-pro',    disc > 0 ? `List: ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0))}/mo` : '');
 
     // Savings badges on cards
@@ -1722,7 +1727,7 @@
     set('score',      fmt(pCore));
     set('spro',       fmt(pPro));
     set('sgrowth-sub', disc > 0 ? `list ${fmt(LIST.growth + prAddonTotal)} · save ${Math.round(disc*100)}%` : 'list price');
-    set('score-sub',   disc > 0 ? `list ${fmt(LIST.core - (croCoreOn ? 0 : CRO_DELTA.core))} · save ${Math.round(disc*100)}%` : 'list price');
+    set('score-sub',   disc > 0 ? `list ${fmt(LIST.core)} · save ${Math.round(disc*100)}%` : 'list price');
     set('spro-sub',    discPro > 0 ? `list ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0))} · save ${Math.round(discPro*100)}%` : 'list price');
   }
 
