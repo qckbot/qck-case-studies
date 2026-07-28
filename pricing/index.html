@@ -1107,13 +1107,10 @@
           <li><span class="fi fi-up">↑</span>Translation SEO</li>
           <li><span class="fi fi-check">✓</span>Everything in Growth SEO</li>
         </ul>
-        <!-- Google Ads summary line - shown/hidden via JS (v2) -->
-        <div id="ads-summary-line" style="display:none"></div>
-
         <div class="section-hd">Conversion Optimization</div>
         <div class="toggle-row t-on-green" id="crorow-core">
           <div>
-            <div class="tr-title">1 Conversion Test / mo</div>
+            <div class="tr-title">3 Conversion Tests / mo</div>
             <div class="tr-sub" id="crosub-core">Execution included · toggle to remove</div>
           </div>
           <label class="toggle">
@@ -1168,14 +1165,14 @@
           <li><span class="fi fi-check">✓</span>Everything in Core SEO</li>
         </ul>
 
-        <!-- GOOGLE ADS TOGGLE -->
-        <div class="toggle-row t-on-blue" id="adsrow-pro">
+        <!-- REDDIT BRAND MANAGEMENT TOGGLE -->
+        <div class="toggle-row t-on-blue" id="redditrow-pro">
           <div>
-            <div class="tr-title">Full Google Ads Management</div>
-            <div class="tr-sub" id="adssub-pro">+$3,000/mo · toggle to remove</div>
+            <div class="tr-title">Reddit Brand Management</div>
+            <div class="tr-sub" id="redditsub-pro">+$2,500/mo · toggle to remove</div>
           </div>
           <label class="toggle ads-toggle">
-            <input type="checkbox" id="ads-pro" onchange="recalc()">
+            <input type="checkbox" id="reddit-pro" onchange="recalc()">
             <div class="ttrack"></div>
           </label>
         </div>
@@ -1243,7 +1240,7 @@
         <div class="compare-feat">Reddit Brand Management <span style="font-size:11px;color:#888">— AI citation seeding</span></div>
         <div class="compare-cell c-no">-</div>
         <div class="compare-cell c-no">-</div>
-        <div class="compare-cell c-yes">✓ included</div>
+        <div class="compare-cell" style="color:#d97706;font-size:11px;font-weight:700;">+$2.5K/mo</div>
       </div>
       <div class="compare-row">
         <div class="compare-feat">AI Visibility / LLM rankings</div>
@@ -1266,14 +1263,8 @@
       <div class="compare-row">
         <div class="compare-feat">Conversion tests / mo</div>
         <div class="compare-cell c-no">Roadmap only</div>
-        <div class="compare-cell c-val">1</div>
         <div class="compare-cell c-val">3</div>
-      </div>
-      <div class="compare-row">
-        <div class="compare-feat">Full Google Ads management</div>
-        <div class="compare-cell c-no">-</div>
-        <div class="compare-cell c-no">-</div>
-        <div class="compare-cell c-yes">Add-on</div>
+        <div class="compare-cell c-val">3</div>
       </div>
       <div class="compare-row">
         <div class="compare-feat">Dedicated account manager</div>
@@ -1634,7 +1625,7 @@
   const LIST = { growth: 5000, core: 8333, pro: 20400 };
   const PR_ADDON = 1000; // flat, never discounted
   const CRO_CORE_FLAT = 2500; // flat add-on for Core CRO, never discounted
-  const ADS_DELTA = 3000;
+  const REDDIT_FLAT = 2500; // flat, never discounted
   const CRO_DELTA = { core: 0, pro: 2000 }; // core CRO handled as flat add-on above
   const DISC = { '3mo': 0.15, '6mo': 0.35, '12mo': 0.40 };
   const DISC_PRO_12MO = 0.45; // Pro 12mo gets deeper discount
@@ -1666,15 +1657,15 @@
   function recalc() {
     const disc = DISC[term];
     const mos  = MONTHS[term];
-    const croCoreOn = document.getElementById('cro-core').checked;
-    const croProOn  = document.getElementById('cro-pro').checked;
-    const adsProOn  = document.getElementById('ads-pro').checked;
+    const croCoreOn    = document.getElementById('cro-core').checked;
+    const croProOn     = document.getElementById('cro-pro').checked;
+    const redditProOn  = document.getElementById('reddit-pro').checked;
 
     const listGrow = LIST.growth;
     // Core CRO is a flat add-on (not discounted)
     const coreCroAddon = croCoreOn ? CRO_CORE_FLAT : 0;
     const listCore = LIST.core - CRO_DELTA.core; // CRO_DELTA.core is 0 now
-    const listPro  = LIST.pro  - (croProOn  ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0);
+    const listPro  = LIST.pro  - (croProOn  ? 0 : CRO_DELTA.pro);
 
     // Growth PR add-on is always $1,000 flat regardless of term discount
     const prAddonTotal = prAddonChecked ? PR_ADDON : 0;
@@ -1684,7 +1675,7 @@
 
     const pGrow = Math.round(listGrow * (1 - disc)) + prAddonTotal;
     const pCore = Math.round(listCore * (1 - disc)) + coreCroAddon;
-    const pPro  = Math.round(listPro  * (1 - discPro));
+    const pPro  = Math.round(listPro  * (1 - discPro)) + (redditProOn ? REDDIT_FLAT : 0);
 
     // Card prices
     set('pnum-growth', fmt(pGrow));
@@ -1694,24 +1685,21 @@
     // Strikethrough list prices on cards
     set('pwas-growth', disc > 0 ? `List: ${fmt(LIST.growth + prAddonTotal)}/mo` : (prAddonChecked ? `Base: ${fmt(LIST.growth)}/mo + $1,000 PR` : ''));
     set('pwas-core',   disc > 0 ? `List: ${fmt(LIST.core + (croCoreOn ? CRO_CORE_FLAT : 0))}/mo` : '');
-    set('pwas-pro',    disc > 0 ? `List: ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0))}/mo` : '');
+    set('pwas-pro',    disc > 0 ? `List: ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (redditProOn ? REDDIT_FLAT : 0))}/mo` : '');
 
     // Savings badges on cards
     badge('pchip-growth', disc,    listGrow, mos);
     badge('pchip-core',   disc,    listCore, mos);
-    badge('pchip-pro',    discPro, listPro,  mos);
+    badge('pchip-pro',    discPro, listPro + (redditProOn ? 0 : 0),  mos);
 
     // Toggle sub-labels
     set('crosub-core', croCoreOn ? 'Execution included · toggle to remove' : 'Not included · toggle to add');
     set('crosub-pro',  croProOn  ? 'Incl. PDP testing · toggle to remove'  : 'Not included · toggle to add');
-    const adsDisplayPrice = disc > 0
-      ? `+${fmt(Math.round(ADS_DELTA * (1 - disc)))}/mo (list +${fmt(ADS_DELTA)}) · toggle to remove`
-      : `+${fmt(ADS_DELTA)}/mo · toggle to remove`;
-    set('adssub-pro', adsProOn ? adsDisplayPrice : 'Not included · toggle to add');
+    set('redditsub-pro', redditProOn ? `+${fmt(REDDIT_FLAT)}/mo · toggle to remove` : 'Not included · toggle to add');
 
     // Toggle row highlight states
-    const adsRow = document.getElementById('adsrow-pro');
-    if (adsRow) adsRow.classList.toggle('t-on-blue', adsProOn);
+    const redditRow = document.getElementById('redditrow-pro');
+    if (redditRow) redditRow.classList.toggle('t-on-blue', redditProOn);
     const croRowCore = document.getElementById('crorow-core');
     if (croRowCore) croRowCore.classList.toggle('t-on-green', croCoreOn);
     const croRowPro = document.getElementById('crorow-pro');
@@ -1728,7 +1716,7 @@
     set('spro',       fmt(pPro));
     set('sgrowth-sub', disc > 0 ? `list ${fmt(LIST.growth + prAddonTotal)} · save ${Math.round(disc*100)}%` : 'list price');
     set('score-sub',   disc > 0 ? `list ${fmt(LIST.core)} · save ${Math.round(disc*100)}%` : 'list price');
-    set('spro-sub',    discPro > 0 ? `list ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (adsProOn ? ADS_DELTA : 0))} · save ${Math.round(discPro*100)}%` : 'list price');
+    set('spro-sub',    discPro > 0 ? `list ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (redditProOn ? REDDIT_FLAT : 0))} · save ${Math.round(discPro*100)}%` : 'list price');
   }
 
   function badge(id, disc, list, mos) {
