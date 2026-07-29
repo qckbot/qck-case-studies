@@ -1626,7 +1626,8 @@
   const PR_ADDON = 1000; // flat, never discounted
   const CRO_CORE_FLAT = 2500; // flat add-on for Core CRO, never discounted
   const REDDIT_FLAT = 2500; // flat, never discounted
-  const CRO_DELTA = { core: 0, pro: 2000 }; // core CRO handled as flat add-on above
+  const CRO_PRO_FLAT = 2500; // Pro CRO is flat, never discounted (same as Core)
+  const CRO_DELTA = { core: 0, pro: 0 }; // both handled as flat add-ons
   const DISC = { '3mo': 0.15, '6mo': 0.35, '12mo': 0.40 };
   const DISC_PRO_12MO = 0.45; // Pro 12mo gets deeper discount
   const MONTHS = { '3mo': 3, '6mo': 6, '12mo': 12 };
@@ -1665,7 +1666,8 @@
     // Core CRO is a flat add-on (not discounted)
     const coreCroAddon = croCoreOn ? CRO_CORE_FLAT : 0;
     const listCore = LIST.core - CRO_DELTA.core; // CRO_DELTA.core is 0 now
-    const listPro  = LIST.pro  - (croProOn  ? 0 : CRO_DELTA.pro);
+    const proCroAddon = croProOn ? CRO_PRO_FLAT : 0;
+    const listPro  = LIST.pro;
 
     // Growth PR add-on is always $1,000 flat regardless of term discount
     const prAddonTotal = prAddonChecked ? PR_ADDON : 0;
@@ -1675,7 +1677,7 @@
 
     const pGrow = Math.round(listGrow * (1 - disc)) + prAddonTotal;
     const pCore = Math.round(listCore * (1 - disc)) + coreCroAddon;
-    const pPro  = Math.round(listPro  * (1 - discPro)) + (redditProOn ? REDDIT_FLAT : 0);
+    const pPro  = Math.round(listPro  * (1 - discPro)) + proCroAddon + (redditProOn ? REDDIT_FLAT : 0);
 
     // Card prices
     set('pnum-growth', fmt(pGrow));
@@ -1685,7 +1687,7 @@
     // Strikethrough list prices on cards
     set('pwas-growth', disc > 0 ? `List: ${fmt(LIST.growth + prAddonTotal)}/mo` : (prAddonChecked ? `Base: ${fmt(LIST.growth)}/mo + $1,000 PR` : ''));
     set('pwas-core',   disc > 0 ? `List: ${fmt(LIST.core + (croCoreOn ? CRO_CORE_FLAT : 0))}/mo` : '');
-    set('pwas-pro',    disc > 0 ? `List: ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (redditProOn ? REDDIT_FLAT : 0))}/mo` : '');
+    set('pwas-pro',    disc > 0 ? `List: ${fmt(LIST.pro + (croProOn ? CRO_PRO_FLAT : 0) + (redditProOn ? REDDIT_FLAT : 0))}/mo` : '');
 
     // Savings badges on cards
     badge('pchip-growth', disc,    listGrow, mos);
@@ -1716,7 +1718,7 @@
     set('spro',       fmt(pPro));
     set('sgrowth-sub', disc > 0 ? `list ${fmt(LIST.growth + prAddonTotal)} · save ${Math.round(disc*100)}%` : 'list price');
     set('score-sub',   disc > 0 ? `list ${fmt(LIST.core)} · save ${Math.round(disc*100)}%` : 'list price');
-    set('spro-sub',    discPro > 0 ? `list ${fmt(LIST.pro - (croProOn ? 0 : CRO_DELTA.pro) + (redditProOn ? REDDIT_FLAT : 0))} · save ${Math.round(discPro*100)}%` : 'list price');
+    set('spro-sub',    discPro > 0 ? `list ${fmt(LIST.pro + (croProOn ? CRO_PRO_FLAT : 0) + (redditProOn ? REDDIT_FLAT : 0))} · save ${Math.round(discPro*100)}%` : 'list price');
   }
 
   function badge(id, disc, list, mos) {
