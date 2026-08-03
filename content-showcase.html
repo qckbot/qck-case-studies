@@ -9,11 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0A0A0A; --panel:#111; --panel-alt:#1A1A1A; --border:#2A2A2A; --border-soft:#333;
-    --accent:#00C8FF; --accent-dim:rgba(0,200,255,0.10); --accent-dim2:rgba(0,200,255,0.06);
-    --green:#4ADE80; --green-dim:rgba(34,197,94,0.15);
-    --yellow:#FCD34D;
-    --text:rgba(255,255,255,0.82); --text-dim:rgba(255,255,255,0.52); --text-faint:rgba(255,255,255,0.32);
+    --bg:#0A0A0A; --panel:#111; --panel-alt:#161616; --border:#242424; --border-soft:#303030;
+    --accent:#00C8FF; --accent-dim:rgba(0,200,255,0.10);
+    --green:#4ADE80; --yellow:#FCD34D;
+    --text:rgba(255,255,255,0.82); --text-dim:rgba(255,255,255,0.50); --text-faint:rgba(255,255,255,0.28);
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
@@ -23,97 +22,115 @@
 
   /* ── NAV ── */
   header{
-    background:rgba(0,0,0,0.85);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(255,255,255,0.08);
+    background:rgba(5,5,5,0.92);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,0.07);
     padding:0 32px;
     position:sticky;top:0;z-index:100;
   }
-  .headerbar{display:flex;align-items:center;height:68px;max-width:1200px;margin:0 auto;gap:0;}
-  .logo-wrap{flex-shrink:0;margin-right:40px;}
-  .logo-wrap img{height:28px;width:auto;display:block;}
-  .nav-links{display:flex;align-items:center;gap:2px;}
+  .headerbar{display:flex;align-items:center;height:66px;max-width:1180px;margin:0 auto;}
+  .logo-wrap{flex-shrink:0;margin-right:48px;}
+  .logo-wrap img{height:26px;width:auto;display:block;}
+
+  /* Nav pill container */
+  .nav-links{
+    display:flex;align-items:center;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.09);
+    border-radius:10px;
+    padding:4px;
+    gap:2px;
+  }
   .nav-link{
-    font-size:13.5px;font-weight:500;color:rgba(255,255,255,0.55);
-    padding:7px 16px;border-radius:6px;
+    font-size:13px;font-weight:600;
+    color:rgba(255,255,255,0.5);
+    padding:7px 18px;
+    border-radius:7px;
     transition:background .15s,color .15s;
     cursor:pointer;border:none;background:none;
-    letter-spacing:0.01em;
+    letter-spacing:0.01em;white-space:nowrap;
   }
-  .nav-link:hover{background:rgba(255,255,255,0.07);color:#fff;text-decoration:none;}
+  .nav-link:hover{
+    background:rgba(255,255,255,0.1);
+    color:#fff;text-decoration:none;
+  }
   .spacer{flex:1;}
   .header-cta{
     background:var(--accent);color:#000;
     font-size:13px;font-weight:700;
-    padding:9px 20px;border-radius:7px;
+    padding:9px 22px;border-radius:8px;
     white-space:nowrap;letter-spacing:0.01em;
     transition:opacity .15s;
   }
   .header-cta:hover{text-decoration:none;opacity:0.88;}
 
   /* ── LAYOUT ── */
-  .wrap{max-width:1080px;margin:0 auto;padding:72px 48px 120px;}
+  .wrap{max-width:1060px;margin:0 auto;padding:72px 40px 120px;}
 
   /* ── HERO ── */
   .hero{text-align:center;padding-bottom:72px;border-bottom:1px solid var(--border);margin-bottom:88px;}
-  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
-  .hero h1{font-size:50px;font-weight:800;line-height:1.08;letter-spacing:-0.03em;color:#fff;margin-bottom:22px;max-width:800px;margin-left:auto;margin-right:auto;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
+  .hero h1{font-size:50px;font-weight:800;line-height:1.07;letter-spacing:-0.03em;color:#fff;margin-bottom:22px;max-width:820px;margin-left:auto;margin-right:auto;}
   .hero h1 em{font-style:normal;color:var(--accent);}
-  .hero-sub{font-size:17px;color:var(--text-dim);max-width:600px;margin:0 auto 44px;line-height:1.75;}
-  .trust-bar{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;}
+  .hero-sub{font-size:17px;color:var(--text-dim);max-width:580px;margin:0 auto 44px;line-height:1.75;}
+  .trust-bar{display:flex;justify-content:center;gap:52px;flex-wrap:wrap;}
   .trust-item .num{font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:700;color:var(--accent);}
-  .trust-item .lbl{font-size:11.5px;color:var(--text-dim);margin-top:4px;}
+  .trust-item .lbl{font-size:11px;color:var(--text-dim);margin-top:4px;}
 
   /* ── SECTION LABELS ── */
-  .section-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  .section-label{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
   .section-title{font-size:30px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:12px;}
-  .section-sub{font-size:15px;color:var(--text-dim);max-width:640px;line-height:1.75;margin-bottom:48px;}
+  .section-sub{font-size:15px;color:var(--text-dim);max-width:620px;line-height:1.75;margin-bottom:48px;}
 
   /* ── PROCESS ── */
   .process-section{margin-bottom:100px;}
-  .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-  .process-step{background:var(--panel);padding:34px 30px;}
+  .process-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+  .process-step{background:var(--panel);padding:34px 28px;}
   .process-step:not(:last-child){border-right:1px solid var(--border);}
   .step-num{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;color:var(--accent);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
   .step-num::after{content:'';flex:1;height:1px;background:var(--border);}
-  .step-icon{width:42px;height:42px;background:var(--accent-dim);border:1px solid rgba(0,200,255,0.2);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:19px;}
-  .process-step h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;}
+  .step-icon{width:40px;height:40px;background:var(--accent-dim);border:1px solid rgba(0,200,255,0.18);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px;}
+  .process-step h3{font-size:15.5px;font-weight:700;color:#fff;margin-bottom:10px;}
   .process-step p{font-size:13px;color:var(--text-dim);line-height:1.78;}
-  .role-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.08em;padding:3px 9px;border-radius:4px;margin-top:16px;text-transform:uppercase;}
-  .role-writer{background:rgba(0,200,255,0.12);color:var(--accent);}
-  .role-editor{background:rgba(245,158,11,0.12);color:var(--yellow);}
-  .role-cm{background:rgba(34,197,94,0.12);color:var(--green);}
+  .role-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.08em;padding:3px 9px;border-radius:4px;margin-top:16px;text-transform:uppercase;}
+  .role-writer{background:rgba(0,200,255,0.11);color:var(--accent);}
+  .role-editor{background:rgba(245,158,11,0.11);color:var(--yellow);}
+  .role-cm{background:rgba(34,197,94,0.11);color:var(--green);}
 
-  /* ── HOW WE WORK BOX ── */
-  .howwework{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:38px 42px;margin-top:36px;}
-  .hww-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px;}
+  .howwework{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:36px 40px;margin-top:32px;}
+  .hww-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:20px;}
   .hww-item{display:flex;gap:14px;align-items:flex-start;}
-  .hww-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0;}
+  .hww-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:9px;flex-shrink:0;}
   .hww-item p{font-size:13.5px;color:var(--text-dim);line-height:1.7;}
   .hww-item strong{color:#fff;}
 
-  /* ── CLIENT SECTION ── */
+  /* ── CLIENT BLOCKS ── */
   .content-section{margin-bottom:100px;}
-  .client-block{margin-bottom:40px;}
-  .client-header{display:flex;align-items:flex-start;gap:20px;padding:28px 32px;background:var(--panel);border:1px solid var(--border);border-radius:14px 14px 0 0;border-bottom:none;}
-  .client-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);}
-  .client-name{font-size:22px;font-weight:800;color:#fff;margin-top:4px;}
-  .client-challenge{font-size:13.5px;color:var(--text-dim);line-height:1.7;margin-top:8px;max-width:640px;}
-  .client-feedback-wrap{margin-top:20px;}
-  .feedback-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;}
-  .feedback-img{border:1px solid var(--border-soft);border-radius:10px;overflow:hidden;max-width:480px;}
-  .feedback-img img{width:100%;display:block;}
+  .client-block{margin-bottom:36px;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+
+  .client-header{padding:28px 32px 24px;background:var(--panel);}
+  .client-tag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+  .client-name{font-size:22px;font-weight:800;color:#fff;margin-bottom:10px;}
+  .client-challenge{font-size:13.5px;color:var(--text-dim);line-height:1.72;max-width:680px;}
+
+  .feedback-strip{padding:20px 32px;background:var(--panel-alt);border-top:1px solid var(--border);}
+  .feedback-label{font-family:'IBM Plex Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;}
+  .feedback-img{border:1px solid var(--border-soft);border-radius:9px;overflow:hidden;display:inline-block;max-width:100%;}
+  .feedback-img img{display:block;max-width:520px;width:100%;}
+  /* Two screenshots side by side */
+  .feedback-duo{display:flex;gap:12px;flex-wrap:wrap;}
+  .feedback-duo .feedback-img img{max-width:360px;}
 
   /* ── ARTICLE ROWS ── */
-  .articles-wrap{background:var(--panel-alt);border:1px solid var(--border);border-radius:0 0 14px 14px;}
-  .article-row{display:flex;align-items:center;gap:20px;padding:18px 32px;border-top:1px solid var(--border);}
+  .articles-wrap{border-top:1px solid var(--border);}
+  .article-row{display:flex;align-items:center;gap:20px;padding:16px 32px;border-top:1px solid var(--border);background:var(--bg);}
   .article-row:first-child{border-top:none;}
-  .article-num{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--text-faint);flex-shrink:0;width:24px;}
+  .article-num{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--text-faint);flex-shrink:0;width:22px;}
   .article-info{flex:1;}
-  .article-title{font-size:14.5px;font-weight:600;color:#fff;}
+  .article-title{font-size:14px;font-weight:600;color:#fff;}
   .article-desc{font-size:12.5px;color:var(--text-dim);margin-top:2px;line-height:1.5;}
-  .article-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--accent);border:1px solid rgba(0,200,255,0.22);padding:7px 14px;border-radius:6px;white-space:nowrap;flex-shrink:0;transition:background .15s;}
+  .article-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--accent);border:1px solid rgba(0,200,255,0.2);padding:7px 14px;border-radius:6px;white-space:nowrap;flex-shrink:0;transition:background .15s;}
   .article-link:hover{background:var(--accent-dim);text-decoration:none;}
   .article-link svg{width:12px;height:12px;}
 
@@ -133,13 +150,13 @@
   @media(max-width:768px){
     .wrap{padding:40px 20px 80px;}
     .hero h1{font-size:34px;}
-    .trust-bar{gap:24px;}
+    .trust-bar{gap:28px;}
     header{padding:0 16px;}
     .nav-links{display:none;}
     .cta-section{padding:40px 24px;}
-    .client-header{flex-direction:column;}
-    .article-row{flex-direction:column;align-items:flex-start;gap:12px;}
-    .howwework{padding:28px 24px;}
+    .article-row{flex-direction:column;align-items:flex-start;gap:10px;}
+    .howwework{padding:28px 20px;}
+    .client-header,.feedback-strip,.article-row{padding-left:20px;padding-right:20px;}
   }
 </style>
 </head>
@@ -166,24 +183,12 @@
   <section class="hero">
     <div class="eyebrow">Content That Converts - Written by Humans, Built for Experts</div>
     <h1>Your customers know when they're reading <em>real expertise.</em> So do ours.</h1>
-    <p class="hero-sub">Every piece we produce goes through a three-tier review process - writer, editor, and content manager - before a single word goes live. Below is a live portfolio of exactly what that looks like.</p>
+    <p class="hero-sub">Every piece we produce goes through a three-tier review process - writer, editor, and content manager - before a single word goes live.</p>
     <div class="trust-bar">
-      <div class="trust-item">
-        <div class="num">150+</div>
-        <div class="lbl">Active Clients</div>
-      </div>
-      <div class="trust-item">
-        <div class="num">3-Tier</div>
-        <div class="lbl">Review Process</div>
-      </div>
-      <div class="trust-item">
-        <div class="num">Human</div>
-        <div class="lbl">Written, Every Time</div>
-      </div>
-      <div class="trust-item">
-        <div class="num">Expert</div>
-        <div class="lbl">Audience-Ready</div>
-      </div>
+      <div class="trust-item"><div class="num">150+</div><div class="lbl">Active Clients</div></div>
+      <div class="trust-item"><div class="num">3-Tier</div><div class="lbl">Review Process</div></div>
+      <div class="trust-item"><div class="num">Human</div><div class="lbl">Written, Every Time</div></div>
+      <div class="trust-item"><div class="num">Expert</div><div class="lbl">Audience-Ready</div></div>
     </div>
   </section>
 
@@ -192,50 +197,36 @@
     <div class="section-label">How We Work</div>
     <div class="section-title">Ghostwriting, perfected through systems.</div>
     <p class="section-sub">Writing for expert audiences is not a matter of effort - it is a matter of process. Here is exactly how every piece of QCK content is built, reviewed, and approved.</p>
-
     <div class="process-grid">
       <div class="process-step">
         <div class="step-num">Step 01</div>
         <div class="step-icon">&#9997;&#65039;</div>
         <h3>The Writer</h3>
-        <p>Every client is assigned a dedicated writer with relevant domain knowledge. They use a custom-built AI research assistant - tuned to your brand voice and messaging guide - to power the research phase. The actual writing is done by a human, every time. No AI-generated copy goes to clients.</p>
+        <p>Every client is assigned a dedicated writer with relevant domain knowledge. They use a custom-built AI research assistant tuned to your brand voice to power the research phase. The actual writing is done by a human, every time.</p>
         <span class="role-badge role-writer">Writer</span>
       </div>
       <div class="process-step">
         <div class="step-num">Step 02</div>
         <div class="step-icon">&#128269;</div>
         <h3>The Editor</h3>
-        <p>A dedicated editor reviews every draft before it moves forward. Their job: verify dos and don'ts from your messaging guide are followed, confirm tone and voice are on-brand, and catch anything a subject-matter expert in your audience would catch. Nothing moves without their sign-off.</p>
+        <p>A dedicated editor reviews every draft before it moves forward - verifying tone, brand voice, and catching anything a subject-matter expert in your audience would catch. Nothing moves without their sign-off.</p>
         <span class="role-badge role-editor">Editor</span>
       </div>
       <div class="process-step">
         <div class="step-num">Step 03</div>
         <div class="step-icon">&#9989;</div>
         <h3>The Content Manager</h3>
-        <p>The content manager is your primary point of contact and the final quality gate. They review for flow, consistency, and strategic alignment - and coordinate feedback loops in month one until every piece feels like it came from inside your team.</p>
+        <p>Your primary contact and final quality gate. Reviews for flow, consistency, and strategic alignment - and runs the feedback loop in month one until every piece feels like it came from inside your team.</p>
         <span class="role-badge role-cm">Content Manager</span>
       </div>
     </div>
-
     <div class="howwework">
       <div class="section-label" style="margin-bottom:6px;">Additional Details</div>
       <div class="hww-grid">
-        <div class="hww-item">
-          <div class="hww-dot"></div>
-          <p><strong>Batched delivery, not a firehose.</strong> Content goes live in scheduled batches throughout the month - not all at once. This keeps quality consistent and your editorial calendar manageable.</p>
-        </div>
-        <div class="hww-item">
-          <div class="hww-dot"></div>
-          <p><strong>Messaging guide built before kickoff.</strong> Before a single word is written, we document your tone, voice, dos, don'ts, and brand-specific rules. This guide is the writer and editor's bible.</p>
-        </div>
-        <div class="hww-item">
-          <div class="hww-dot"></div>
-          <p><strong>Client validation built into month one.</strong> We treat the first 30 days as a calibration period. Your feedback directly updates the messaging guide so every subsequent piece gets sharper.</p>
-        </div>
-        <div class="hww-item">
-          <div class="hww-dot"></div>
-          <p><strong>Your team can meet the whole crew.</strong> Most clients work directly with their content manager. But if you want to pull in the writer and editor for a deeper review session, that's always on the table.</p>
-        </div>
+        <div class="hww-item"><div class="hww-dot"></div><p><strong>Batched delivery, not a firehose.</strong> Content goes live in scheduled batches throughout the month - keeping quality consistent and your calendar manageable.</p></div>
+        <div class="hww-item"><div class="hww-dot"></div><p><strong>Messaging guide built before kickoff.</strong> We document your tone, voice, dos, and don'ts before a single word is written. This guide is the writer and editor's bible.</p></div>
+        <div class="hww-item"><div class="hww-dot"></div><p><strong>Client validation built into month one.</strong> We treat the first 30 days as a calibration period. Your feedback updates the messaging guide so every piece gets sharper.</p></div>
+        <div class="hww-item"><div class="hww-dot"></div><p><strong>Your team can meet the whole crew.</strong> Most clients work directly with their content manager - but you can pull in the writer and editor anytime.</p></div>
       </div>
     </div>
   </section>
@@ -244,86 +235,286 @@
   <section class="content-section" id="examples">
     <div class="section-label">Live Examples</div>
     <div class="section-title">Real clients. Real content. Live on their sites.</div>
-    <p class="section-sub">These are not mockups or internal drafts - they are live pieces, published on client websites, read by their customers every day. Click through and read them yourself.</p>
+    <p class="section-sub">These are not mockups or internal drafts - they are live pieces, published on client websites, read by their customers every day.</p>
 
-    <!-- GOCOFFEEGO -->
+    <!-- 1. HEALTHY BONES CO -->
     <div class="client-block">
       <div class="client-header">
-        <div style="flex:1;">
-          <div class="client-tag">E-Commerce / Coffee</div>
-          <div class="client-name">GoCoffeeGo</div>
-          <p class="client-challenge">GoCoffeeGo's audience is not casual drinkers - they're serious coffee people. Third-wave focused, the kind of readers who know the difference between bloom time and extraction yield. Generic coffee content gets ignored. Expert-level content gets bookmarked, shared, and linked.</p>
-          <div class="client-feedback-wrap">
-            <div class="feedback-label">Direct client feedback - Jun 20</div>
-            <div class="feedback-img">
-              <img src="/oliver-email-feedback.png" alt="Oliver at GoCoffeeGo: Overall VERY VERY good articles. Excellent Job!!">
-            </div>
-          </div>
-        </div>
+        <div class="client-tag">Health / Supplements</div>
+        <div class="client-name">Healthy Bones Co</div>
+        <p class="client-challenge">Bone health supplements require clinical precision that most content agencies cannot deliver. Kevin's audience includes practitioners and highly educated consumers who immediately notice when the nuance is missing - or wrong.</p>
       </div>
-      <div class="articles-wrap">
-        <div class="article-row">
-          <div class="article-num">01</div>
-          <div class="article-info">
-            <div class="article-title">How to Make French Press Coffee</div>
-            <div class="article-desc">Covers ratio science, grind particle size, steep variables, and bean sourcing - written for enthusiasts who already know the basics.</div>
-          </div>
-          <a class="article-link" href="https://www.gocoffeego.com/blogs/gocoffeego/how-to-make-french-press-coffee" target="_blank">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
-            Read Live
-          </a>
-        </div>
-        <div class="article-row">
-          <div class="article-num">02</div>
-          <div class="article-info">
-            <div class="article-title">Medium Roast Coffee Collection</div>
-            <div class="article-desc">Category page copy written for coffee-literate buyers - flavor profiles, roast science, and sourcing context that earns trust.</div>
-          </div>
-          <a class="article-link" href="https://www.gocoffeego.com/collections/medium-roast-coffee" target="_blank">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
-            Read Live
-          </a>
-        </div>
-        <div class="article-row">
-          <div class="article-num">03</div>
-          <div class="article-info">
-            <div class="article-title">Light Roast Coffee Collection</div>
-            <div class="article-desc">Nuanced copy that speaks to the distinct character of light roasts - origin notes, acidity, and brew method pairing for serious coffee drinkers.</div>
-          </div>
-          <a class="article-link" href="https://www.gocoffeego.com/collections/light-roast-coffee" target="_blank">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
-            Read Live
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- HEALTHY BONES CO -->
-    <div class="client-block">
-      <div class="client-header">
-        <div style="flex:1;">
-          <div class="client-tag">Health / Supplements</div>
-          <div class="client-name">Healthy Bones Co</div>
-          <p class="client-challenge">Bone health supplements require a level of clinical precision that most content agencies cannot deliver. Kevin's audience includes practitioners and highly educated consumers who notice immediately when the nuance is missing - or wrong.</p>
-          <div class="client-feedback-wrap">
-            <div class="feedback-label">Direct client feedback</div>
-            <div class="feedback-img">
-              <img src="/kevin-feedback.png" alt="Kevin at Healthy Bones Co: You Freakin Nailed it. Every word of it. Even the nuance that my brain naturally knows to look for.">
-            </div>
-          </div>
-        </div>
+      <div class="feedback-strip">
+        <div class="feedback-label">Direct client feedback</div>
+        <div class="feedback-img"><img src="/kevin-feedback.png" alt="Kevin: You Freakin Nailed it. Every word of it. Even the nuance that my brain naturally knows to look for."></div>
       </div>
       <div class="articles-wrap">
         <div class="article-row">
           <div class="article-num">01</div>
           <div class="article-info">
             <div class="article-title">Bone Health Vitamins Collection</div>
-            <div class="article-desc">Category-level copy that navigates clinical credibility without sacrificing readability - the kind of content that earns "You Freakin Nailed it" from a practitioner audience.</div>
+            <div class="article-desc">Category copy navigating clinical credibility without sacrificing readability - earning "You Freakin Nailed it" from a practitioner audience.</div>
           </div>
-          <a class="article-link" href="https://healthybonesco.com/collections/bone-health-vitamins" target="_blank">
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
-            Read Live
-          </a>
+          <a class="article-link" href="https://healthybonesco.com/collections/bone-health-vitamins" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. GOCOFFEEGO -->
+    <div class="client-block">
+      <div class="client-header">
+        <div class="client-tag">E-Commerce / Coffee</div>
+        <div class="client-name">GoCoffeeGo</div>
+        <p class="client-challenge">GoCoffeeGo's audience is not casual drinkers - they are serious coffee people. Third-wave focused, the kind of readers who know the difference between bloom time and extraction yield. Generic coffee content gets ignored. Expert-level content gets bookmarked, shared, and linked.</p>
+      </div>
+      <div class="feedback-strip">
+        <div class="feedback-label">Direct client feedback - Jun 20</div>
+        <div class="feedback-img"><img src="/oliver-email-feedback.png" alt="Oliver at GoCoffeeGo: Overall VERY VERY good articles. Excellent Job!!"></div>
+      </div>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">How to Make French Press Coffee</div>
+            <div class="article-desc">Ratio science, grind particle size, steep variables, and bean sourcing - written for enthusiasts who already know the basics.</div>
+          </div>
+          <a class="article-link" href="https://www.gocoffeego.com/blogs/gocoffeego/how-to-make-french-press-coffee" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">02</div>
+          <div class="article-info">
+            <div class="article-title">Medium Roast Coffee Collection</div>
+            <div class="article-desc">Flavor profiles, roast science, and sourcing context for coffee-literate buyers.</div>
+          </div>
+          <a class="article-link" href="https://www.gocoffeego.com/collections/medium-roast-coffee" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">03</div>
+          <div class="article-info">
+            <div class="article-title">Light Roast Coffee Collection</div>
+            <div class="article-desc">Origin notes, acidity, and brew method pairing for serious coffee drinkers.</div>
+          </div>
+          <a class="article-link" href="https://www.gocoffeego.com/collections/light-roast-coffee" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. MORGASM -->
+    <div class="client-block">
+      <div class="client-header">
+        <div class="client-tag">E-Commerce / Sexual Wellness</div>
+        <div class="client-name">Morgasm</div>
+        <p class="client-challenge">Sexual wellness content demands a rare combination: clinical accuracy, comfort with sensitive topics, and a brand voice that is premium without being clinical. Jeff's response said it all - zero edits needed, ready to post immediately.</p>
+      </div>
+      <div class="feedback-strip">
+        <div class="feedback-label">Direct client feedback</div>
+        <div class="feedback-img"><img src="/jeff-fortenbacher-feedback.png" alt="Jeff Fortenbacher: These are fantastic!! No edits are needed and we can get started posting these pieces."></div>
+      </div>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">Best Natural Lube for Sex Collection</div>
+            <div class="article-desc">Category copy that balances ingredient transparency, safety, and a premium brand tone - ready to post with zero edits.</div>
+          </div>
+          <a class="article-link" href="https://morgasm.com/collections/best-natural-lube-for-sex" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">02</div>
+          <div class="article-info">
+            <div class="article-title">Luxury Sexual Wellness Products Collection</div>
+            <div class="article-desc">Premium positioning copy that earns the price point - ingredient-forward, tone-precise, audience-aware.</div>
+          </div>
+          <a class="article-link" href="https://morgasm.com/collections/luxury-sexual-wellness-products" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. CROSS + CONCORD ELECTRONICS -->
+    <div class="client-block">
+      <div class="client-header">
+        <div class="client-tag">Lifestyle / Marine Electronics</div>
+        <div class="client-name">Cross Pens &amp; Concord Electronics</div>
+        <p class="client-challenge">Michael Robilio at Concord Electronics called it "a grand slam home run." These clients represent two different expertise thresholds - refined lifestyle buyers and serious marine electronics users - both demanding content that clearly knows its subject.</p>
+      </div>
+      <div class="feedback-strip">
+        <div class="feedback-label">Direct client feedback</div>
+        <div class="feedback-img"><img src="/michael-robilio-feedback.png" alt="Michael Robilio: Wow!!! That's a grand slam home run!!! Great piece of content. Love all the links. Great work guys!!"></div>
+      </div>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">Types of Pens - Cross</div>
+            <div class="article-desc">Authoritative guide for pen enthusiasts - nib types, fill mechanisms, and craftsmanship details that earn trust from serious collectors.</div>
+          </div>
+          <a class="article-link" href="https://cross.com/blogs/news/types-of-pens" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">02</div>
+          <div class="article-info">
+            <div class="article-title">Raymarine Chartplotter - Concord Electronics</div>
+            <div class="article-desc">Technical marine electronics content written for serious boaters - specs, comparisons, and buying guidance that earns "grand slam home run" from the client.</div>
+          </div>
+          <a class="article-link" href="https://shop.concordelectronics.com/blogs/news/raymarine-chartplotter" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. ESSENTIAL OIL WIZARDRY -->
+    <div class="client-block">
+      <div class="client-header">
+        <div class="client-tag">Health / Aromatherapy</div>
+        <div class="client-name">Essential Oil Wizardry</div>
+        <p class="client-challenge">Essential oil content has a highly educated, skeptical audience. Practitioners and perfumers can spot shallow research instantly. The client's feedback - a simple "&lt;3 Doc" - came from someone who knows the subject deeply enough to recognize when content truly nails it.</p>
+      </div>
+      <div class="feedback-strip">
+        <div class="feedback-label">Direct client feedback</div>
+        <div class="feedback-img"><img src="/doc-feedback.png" alt="Doc: Wonderful articles, thanks for covering for Daniel while he is away, we are loving the articles so far. <3 Doc"></div>
+      </div>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">Essential Oil Tinctures vs Oils</div>
+            <div class="article-desc">Technically precise comparison written for practitioners - extraction methods, concentration, and application differences explained with authority.</div>
+          </div>
+          <a class="article-link" href="https://essentialoilwizardry.com/essential-oil-tinctures-vs-oils/" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">02</div>
+          <div class="article-info">
+            <div class="article-title">Best Absolute Extracts for Perfumery</div>
+            <div class="article-desc">Deep-dive guide for serious perfumers - botanical sourcing, extraction nuance, and scent profile guidance that earns credibility with expert readers.</div>
+          </div>
+          <a class="article-link" href="https://essentialoilwizardry.com/best-absolute-extracts-for-perfumery/" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">03</div>
+          <div class="article-info">
+            <div class="article-title">Essential Oils for Emotional Healing</div>
+            <div class="article-desc">Research-grounded content that bridges aromatherapy science and emotional wellness - written with the depth this audience demands.</div>
+          </div>
+          <a class="article-link" href="https://essentialoilwizardry.com/essential-oils-for-emotional-healing/" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. PLANT THERAPY -->
+    <div class="client-block">
+      <div class="client-header">
+        <div class="client-tag">Health / Essential Oils</div>
+        <div class="client-name">Plant Therapy</div>
+        <p class="client-challenge">Plant Therapy's audience ranges from everyday wellness buyers to serious aromatherapy practitioners. Katrina Scampini's message - "As always, great content. No requests from me!" - reflects the consistency this program delivers at scale.</p>
+      </div>
+      <div class="feedback-strip">
+        <div class="feedback-label">Direct client feedback</div>
+        <div class="feedback-img"><img src="/katrina-scampini-feedback.png" alt="Katrina Scampini: As always, great content. No requests from me! Thank you"></div>
+      </div>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">Essential Oils for Sinus Congestion Collection</div>
+            <div class="article-desc">Category content that bridges product benefits with the science behind them - written for buyers who actually research what they put in their bodies.</div>
+          </div>
+          <a class="article-link" href="https://www.planttherapy.com/collections/essential-oils-for-sinus-congestion" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">02</div>
+          <div class="article-info">
+            <div class="article-title">How to Get Rid of Roaches Overnight DIY</div>
+            <div class="article-desc">Practical, research-backed guide that positions Plant Therapy's products within real-world pest control - useful content that earns organic traffic.</div>
+          </div>
+          <a class="article-link" href="https://www.planttherapy.com/blogs/blog/how-to-get-rid-of-roaches-overnight-diy" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">03</div>
+          <div class="article-info">
+            <div class="article-title">Rose Essential Oil Benefits</div>
+            <div class="article-desc">Thorough, accurate guide covering therapeutic, cosmetic, and emotional applications - written with the depth aromatherapy enthusiasts expect.</div>
+          </div>
+          <a class="article-link" href="https://www.planttherapy.com/blogs/blog/rose-essential-oil-benefits" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. TERRASLATE -->
+    <div class="client-block">
+      <div class="client-header">
+        <div class="client-tag">B2B / Specialty Paper</div>
+        <div class="client-name">TerraSlate</div>
+        <p class="client-challenge">TerraSlate sells to engineers, architects, and industrial buyers who spec materials for demanding environments. Ryan Smith approved content for immediate posting with minimal edits - twice - on highly technical subject matter.</p>
+      </div>
+      <div class="feedback-strip">
+        <div class="feedback-label">Direct client feedback</div>
+        <div class="feedback-duo">
+          <div class="feedback-img"><img src="/ryan-smith-feedback-1.png" alt="Ryan Smith: Love it, great work and thanks for turning it around so quickly. It is good to post."></div>
+          <div class="feedback-img"><img src="/ryan-smith-feedback-2.png" alt="Ryan Smith: thank you!!!! great work"></div>
+        </div>
+      </div>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">Types of Synthetic Paper</div>
+            <div class="article-desc">Technical breakdown of synthetic paper categories for industrial and commercial buyers - material science explained accessibly without dumbing it down.</div>
+          </div>
+          <a class="article-link" href="https://www.terraslate.com/blogs/news/types-of-synthetic-paper" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">02</div>
+          <div class="article-info">
+            <div class="article-title">A4 vs A5 Paper</div>
+            <div class="article-desc">Comparison guide covering format standards, use cases, and printing considerations - practical, accurate, and immediately approved for posting.</div>
+          </div>
+          <a class="article-link" href="https://www.terraslate.com/blogs/news/a4-vs-a5-paper" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. COUNTRY PROUD USA -->
+    <div class="client-block">
+      <div class="client-header">
+        <div class="client-tag">Home Decor / Metal Art</div>
+        <div class="client-name">Country Proud USA</div>
+        <p class="client-challenge">Home decor buyers research extensively before purchasing large statement pieces. Laura's reaction - "more info on metal wall art than I ever wanted to know" - is exactly the point. Thorough content builds the trust that converts browsers into buyers.</p>
+      </div>
+      <div class="feedback-strip">
+        <div class="feedback-label">Direct client feedback</div>
+        <div class="feedback-img"><img src="/laura-feedback.png" alt="Laura: I went through the blog content and it looks great! more info on metal wall art than I ever wanted to know - lol thank you."></div>
+      </div>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">Metal Wall Art Size Guide</div>
+            <div class="article-desc">Comprehensive sizing guide covering room proportions, placement, and visual balance - the kind of depth that removes buying hesitation.</div>
+          </div>
+          <a class="article-link" href="https://www.countryproudusa.com/blogs/news/metal-wall-art-size" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. MICEDIRECT (last, with screenshot) -->
+    <div class="client-block">
+      <div class="client-header">
+        <div class="client-tag">Pet / Reptile Supplies</div>
+        <div class="client-name">MiceDirect</div>
+        <p class="client-challenge">MiceDirect's audience is serious reptile keepers - people who research feeding habits, prey sizing, and nutritional requirements with real rigor. John at MiceDirect put it simply: "I really like what you have put together."</p>
+      </div>
+      <div class="feedback-strip">
+        <div class="feedback-label">Direct client feedback</div>
+        <div class="feedback-img"><img src="/john-callaham-feedback.png" alt="John Callaham at MiceDirect: I have finished all the editing. Very good work! I really like what you have put together."></div>
+      </div>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">What Insects Do Frogs Eat</div>
+            <div class="article-desc">Detailed feeding guide for serious reptile and amphibian keepers - prey types, nutritional value, and feeding frequency written with genuine expertise.</div>
+          </div>
+          <a class="article-link" href="https://micedirect.com/blogs/news/what-insects-do-frogs-eat" target="_blank"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>Read Live</a>
         </div>
       </div>
     </div>
