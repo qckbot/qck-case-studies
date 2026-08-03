@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QCK — Content That Experts Trust</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0A; --panel:#111; --panel-alt:#1A1A1A; --border:#2A2A2A; --border-soft:#333;
+    --accent:#00C8FF; --accent-dim:rgba(0,200,255,0.10); --accent-dim2:rgba(0,200,255,0.06);
+    --green:#4ADE80; --green-dim:rgba(34,197,94,0.15);
+    --yellow:#FCD34D; --yellow-dim:rgba(245,158,11,0.15);
+    --red:#ff8a80;
+    --text:rgba(255,255,255,0.82); --text-dim:rgba(255,255,255,0.52); --text-faint:rgba(255,255,255,0.32);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  /* ── HEADER ── */
+  header{background:#000;border-bottom:1px solid var(--border);padding:0 32px;position:sticky;top:0;z-index:100;}
+  .headerbar{display:flex;align-items:center;height:64px;max-width:1200px;margin:0 auto;gap:20px;}
+  .qck-wordmark{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:600;color:#fff;letter-spacing:0.04em;}
+  .qck-wordmark span{color:var(--accent);}
+  .header-tag{font-size:11px;font-weight:600;color:var(--text-dim);background:var(--panel-alt);border:1px solid var(--border-soft);padding:4px 10px;border-radius:20px;}
+  .spacer{flex:1;}
+  .header-cta{background:var(--accent);color:#000;font-size:12.5px;font-weight:700;padding:8px 18px;border-radius:6px;white-space:nowrap;}
+  .header-cta:hover{text-decoration:none;opacity:0.9;}
+
+  /* ── LAYOUT ── */
+  .wrap{max-width:1080px;margin:0 auto;padding:64px 48px 120px;}
+
+  /* ── HERO ── */
+  .hero{text-align:center;padding-bottom:72px;border-bottom:1px solid var(--border);margin-bottom:80px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
+  .hero h1{font-size:48px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:#fff;margin-bottom:20px;max-width:780px;margin-left:auto;margin-right:auto;}
+  .hero h1 em{font-style:normal;color:var(--accent);}
+  .hero-sub{font-size:17px;color:var(--text-dim);max-width:620px;margin:0 auto 40px;line-height:1.75;}
+  .trust-bar{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
+  .trust-item{text-align:center;}
+  .trust-item .num{font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:700;color:var(--accent);}
+  .trust-item .lbl{font-size:11.5px;color:var(--text-dim);margin-top:4px;}
+
+  /* ── SECTION LABEL ── */
+  .section-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
+  .section-title{font-size:28px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:12px;}
+  .section-sub{font-size:15px;color:var(--text-dim);max-width:640px;line-height:1.75;margin-bottom:48px;}
+
+  /* ── PROCESS SECTION ── */
+  .process-section{margin-bottom:96px;}
+  .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .process-step{background:var(--panel);padding:32px 28px;position:relative;}
+  .process-step:not(:last-child){border-right:1px solid var(--border);}
+  .step-num{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;color:var(--accent);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+  .step-num::after{content:'';flex:1;height:1px;background:var(--border);}
+  .step-icon{width:40px;height:40px;background:var(--accent-dim);border:1px solid rgba(0,200,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px;}
+  .process-step h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;}
+  .process-step p{font-size:13px;color:var(--text-dim);line-height:1.75;}
+  .process-step .role-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.08em;padding:3px 8px;border-radius:4px;margin-top:14px;text-transform:uppercase;}
+  .role-writer{background:rgba(0,200,255,0.12);color:var(--accent);}
+  .role-editor{background:rgba(245,158,11,0.12);color:var(--yellow);}
+  .role-cm{background:rgba(34,197,94,0.12);color:var(--green);}
+
+  /* ── PROCESS CONNECTORS ── */
+  .process-flow{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:24px;}
+  .flow-step{display:flex;align-items:center;gap:12px;}
+  .flow-pill{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;border-radius:20px;border:1px solid var(--border);color:var(--text-dim);}
+  .flow-arrow{color:var(--border-soft);font-size:18px;padding:0 4px;}
+
+  /* ── HOW WE WORK ── */
+  .howwework{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:36px 40px;margin-top:36px;}
+  .hww-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:24px;}
+  .hww-item{display:flex;gap:16px;align-items:flex-start;}
+  .hww-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:7px;flex-shrink:0;}
+  .hww-item p{font-size:13.5px;color:var(--text-dim);line-height:1.7;}
+  .hww-item strong{color:#fff;}
+
+  /* ── CONTENT CARDS ── */
+  .content-section{margin-bottom:96px;}
+  .content-grid{display:flex;flex-direction:column;gap:28px;}
+  .content-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s;}
+  .content-card:hover{border-color:var(--border-soft);}
+  .card-inner{display:grid;grid-template-columns:1fr 2fr;gap:0;}
+  .card-meta{padding:32px 28px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:8px;}
+  .client-name{font-size:18px;font-weight:700;color:#fff;}
+  .client-industry{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+  .challenge-label{font-size:10.5px;font-weight:600;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.08em;margin-top:12px;}
+  .challenge-text{font-size:13px;color:var(--text-dim);line-height:1.7;margin-top:4px;}
+  .card-content{padding:32px 32px;}
+  .piece-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
+  .piece-desc{font-size:13.5px;color:var(--text-dim);line-height:1.75;margin-bottom:20px;}
+  .piece-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--accent);border:1px solid rgba(0,200,255,0.25);padding:8px 16px;border-radius:6px;transition:background .15s;}
+  .piece-link:hover{background:var(--accent-dim);text-decoration:none;}
+  .piece-link svg{width:14px;height:14px;flex-shrink:0;}
+
+  /* ── CLIENT COMMENT ── */
+  .client-comment{background:var(--panel-alt);border:1px solid var(--border-soft);border-radius:8px;padding:16px 20px;margin-top:20px;display:flex;gap:14px;align-items:flex-start;}
+  .comment-avatar{width:36px;height:36px;border-radius:50%;background:var(--accent-dim);border:1px solid rgba(0,200,255,0.2);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--accent);flex-shrink:0;font-family:'IBM Plex Mono',monospace;}
+  .comment-body{}
+  .comment-name{font-size:12.5px;font-weight:600;color:#fff;margin-bottom:2px;}
+  .comment-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--text-faint);margin-bottom:8px;}
+  .comment-text{font-size:13.5px;color:var(--text);line-height:1.65;}
+  .screenshot-note{font-size:11px;color:var(--text-faint);font-style:italic;margin-top:6px;}
+
+  /* ── PLACEHOLDER CARD for more examples ── */
+  .placeholder-card{background:var(--panel-alt);border:1px dashed var(--border-soft);border-radius:12px;padding:40px;text-align:center;}
+  .placeholder-card p{font-size:14px;color:var(--text-faint);}
+
+  /* ── CTA ── */
+  .cta-section{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:64px 48px;text-align:center;margin-top:80px;}
+  .cta-section h2{font-size:32px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:12px;}
+  .cta-section p{font-size:16px;color:var(--text-dim);max-width:520px;margin:0 auto 32px;}
+  .cta-btn{display:inline-block;background:var(--accent);color:#000;font-size:14px;font-weight:700;padding:14px 32px;border-radius:8px;}
+  .cta-btn:hover{text-decoration:none;opacity:0.9;}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:768px){
+    .wrap{padding:40px 20px 80px;}
+    .hero h1{font-size:32px;}
+    .process-grid{grid-template-columns:1fr;}
+    .process-step:not(:last-child){border-right:none;border-bottom:1px solid var(--border);}
+    .card-inner{grid-template-columns:1fr;}
+    .card-meta{border-right:none;border-bottom:1px solid var(--border);}
+    .hww-grid{grid-template-columns:1fr;}
+    .trust-bar{gap:24px;}
+    .hero h1{font-size:30px;}
+    header{padding:0 16px;}
+    .cta-section{padding:40px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="headerbar">
+    <div class="qck-wordmark">QCK<span>.</span></div>
+    <div class="header-tag">Content Showcase</div>
+    <div class="spacer"></div>
+    <a class="header-cta" href="https://qckbotdesign.com/free-audit" target="_blank">Get a Free Audit →</a>
+  </div>
+</header>
+
+<!-- ── MAIN ── -->
+<main class="wrap">
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <div class="eyebrow">Content That Converts — Written by Humans, Built for Experts</div>
+    <h1>Your customers know when they're reading <em>real expertise.</em> So do ours.</h1>
+    <p class="hero-sub">Every piece of content we produce goes through a three-tier review process — writer, editor, and content manager — before a single word goes live. Below is a live portfolio of exactly what that looks like.</p>
+    <div class="trust-bar">
+      <div class="trust-item">
+        <div class="num">150+</div>
+        <div class="lbl">Active Clients</div>
+      </div>
+      <div class="trust-item">
+        <div class="num">3-Tier</div>
+        <div class="lbl">Review Process</div>
+      </div>
+      <div class="trust-item">
+        <div class="num">Human</div>
+        <div class="lbl">Written, Every Time</div>
+      </div>
+      <div class="trust-item">
+        <div class="num">Expert</div>
+        <div class="lbl">Audience-Ready</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── OUR PROCESS ── -->
+  <section class="process-section" id="process">
+    <div class="section-label">How We Work</div>
+    <div class="section-title">Ghostwriting, perfected through systems.</div>
+    <p class="section-sub">Writing for expert audiences isn't a matter of effort — it's a matter of process. Here's exactly how every piece of QCK content is built, reviewed, and approved.</p>
+
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-num">Step 01</div>
+        <div class="step-icon">✍️</div>
+        <h3>The Writer</h3>
+        <p>Every client is assigned a dedicated writer with relevant domain knowledge. They use a custom-built AI research assistant — tuned specifically to your brand voice and messaging guide — to power the research phase. The actual writing is done by a human, every time. No AI-generated copy goes to clients.</p>
+        <span class="role-badge role-writer">Writer</span>
+      </div>
+      <div class="process-step">
+        <div class="step-num">Step 02</div>
+        <div class="step-icon">🔍</div>
+        <h3>The Editor</h3>
+        <p>A dedicated editor reviews every draft before it moves forward. Their job: verify that all do's and don'ts from your messaging guide are followed, confirm tone and voice are on-brand, and catch anything a subject-matter expert in your audience would catch. Nothing moves without their sign-off.</p>
+        <span class="role-badge role-editor">Editor</span>
+      </div>
+      <div class="process-step">
+        <div class="step-num">Step 03</div>
+        <div class="step-icon">✅</div>
+        <h3>The Content Manager</h3>
+        <p>The content manager is your primary point of contact and the final quality gate. They review for overall flow, consistency, and strategic alignment. They also coordinate feedback loops with you — especially in month one — to calibrate the messaging guide until every piece feels like it came from inside your team.</p>
+        <span class="role-badge role-cm">Content Manager</span>
+      </div>
+    </div>
+
+    <div class="howwework">
+      <div class="section-label" style="margin-bottom:8px;">Additional Details</div>
+      <div class="hww-grid">
+        <div class="hww-item">
+          <div class="hww-dot"></div>
+          <p><strong>Batched delivery, not a firehose.</strong> Content goes live in scheduled batches throughout the month — not all at once. This keeps quality consistent and your editorial calendar manageable.</p>
+        </div>
+        <div class="hww-item">
+          <div class="hww-dot"></div>
+          <p><strong>Messaging guide built before kickoff.</strong> Before a single word is written, we document your tone, voice, do's, don'ts, and brand-specific rules. This guide is the writer and editor's bible.</p>
+        </div>
+        <div class="hww-item">
+          <div class="hww-dot"></div>
+          <p><strong>Client validation is built into month one.</strong> We treat the first 30 days as a calibration period. Your feedback directly updates the messaging guide so every subsequent piece gets sharper.</p>
+        </div>
+        <div class="hww-item">
+          <div class="hww-dot"></div>
+          <p><strong>Your team can meet the whole crew.</strong> Most clients work directly with their content manager. But if you want to pull in the writer and editor for a deeper review session, that's always on the table.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTENT EXAMPLES ── -->
+  <section class="content-section" id="examples">
+    <div class="section-label">Live Examples</div>
+    <div class="section-title">Real clients. Real content. Live on their sites.</div>
+    <p class="section-sub">These aren't mockups or internal drafts — they're live pieces, published on client websites, read by their customers every day. Click through and read them yourself.</p>
+
+    <div class="content-grid">
+
+      <!-- ── GOCOFFEEGO ── -->
+      <div class="content-card">
+        <div class="card-inner">
+          <div class="card-meta">
+            <div class="client-industry">E-Commerce · Coffee</div>
+            <div class="client-name">GoCoffeeGo</div>
+            <div class="challenge-label">The Challenge</div>
+            <div class="challenge-text">GoCoffeeGo's audience isn't casual drinkers — they're serious coffee people. San Francisco-based, third-wave focused, the kind of readers who know the difference between bloom time and extraction yield. Generic coffee content gets ignored. Expert-level content gets bookmarked, shared, and linked.</div>
+          </div>
+          <div class="card-content">
+            <div class="piece-title">How to Make French Press Coffee</div>
+            <p class="piece-desc">A deep-dive guide written for coffee enthusiasts who already know the basics — not a beginner's overview. Covers ratio science, grind particle size, steep variables, and bean sourcing with the depth that separates a transcendent brew from a mediocre one. The writing earned a direct comment from the client: <em>"Yeah this is very very good actually."</em></p>
+            <a class="piece-link" href="https://www.gocoffeego.com/blogs/gocoffeego/how-to-make-french-press-coffee" target="_blank">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+              Read the Article Live
+            </a>
+
+            <!-- Client comment from screenshot -->
+            <div class="client-comment">
+              <div class="comment-avatar">O</div>
+              <div class="comment-body">
+                <div class="comment-name">Oliver</div>
+                <div class="comment-meta">Client Feedback · Jun 26</div>
+                <div class="comment-text">"Yeah this is very very good actually."</div>
+                <div class="screenshot-note">Direct client feedback on this piece</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── H2OCEAN ── -->
+      <div class="content-card">
+        <div class="card-inner">
+          <div class="card-meta">
+            <div class="client-industry">E-Commerce · Body Care</div>
+            <div class="client-name">H2Ocean</div>
+            <div class="challenge-label">The Challenge</div>
+            <div class="challenge-text">H2Ocean's content can't just sound authoritative — it has to be. Their audience includes professional tattoo artists, piercers, and body modification specialists who spot bad information immediately. Every claim needs to be technically accurate, and the tone needs to match the culture of the industry.</div>
+          </div>
+          <div class="card-content">
+            <div class="piece-title">H2Ocean SEO Growth Plan</div>
+            <p class="piece-desc">An in-depth strategic content plan that maps H2Ocean's 150-day organic search trajectory — built on verified Ahrefs data, a full site crawl, and keyword gap analysis. This is what expert-level, data-grounded SEO content looks like when it's done properly.</p>
+            <a class="piece-link" href="https://cs.qck.co/h2ocean-seo-growth-plan" target="_blank">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+              View the Growth Plan
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PLACEHOLDER — more coming ── -->
+      <div class="placeholder-card">
+        <p>More client examples coming — drop the links and screenshots in and they'll be added here.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta-section">
+    <div class="eyebrow">Ready to See What This Looks Like for Your Brand?</div>
+    <h2>Get a free content audit.</h2>
+    <p>We'll review your existing content, identify the gaps, and show you exactly what a QCK content program would look like for your audience.</p>
+    <a class="cta-btn" href="https://qckbotdesign.com/free-audit" target="_blank">Get My Free Audit →</a>
+  </section>
+
+</main>
+
+</body>
+</html>
