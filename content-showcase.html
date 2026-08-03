@@ -12,119 +12,134 @@
     --bg:#0A0A0A; --panel:#111; --panel-alt:#1A1A1A; --border:#2A2A2A; --border-soft:#333;
     --accent:#00C8FF; --accent-dim:rgba(0,200,255,0.10); --accent-dim2:rgba(0,200,255,0.06);
     --green:#4ADE80; --green-dim:rgba(34,197,94,0.15);
-    --yellow:#FCD34D; --yellow-dim:rgba(245,158,11,0.15);
-    --red:#ff8a80;
+    --yellow:#FCD34D;
     --text:rgba(255,255,255,0.82); --text-dim:rgba(255,255,255,0.52); --text-faint:rgba(255,255,255,0.32);
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
   body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;}
-  .mono{font-family:'IBM Plex Mono',monospace;}
   a{color:var(--accent);text-decoration:none;}
   a:hover{text-decoration:underline;}
 
-  /* NAV */
-  header{background:#000;border-bottom:1px solid var(--border);padding:0 32px;position:sticky;top:0;z-index:100;}
-  .headerbar{display:flex;align-items:center;height:64px;max-width:1200px;margin:0 auto;gap:24px;}
-  .logo-wrap{flex-shrink:0;}
-  .logo-wrap img{height:32px;width:auto;display:block;}
-  .nav-links{display:flex;align-items:center;gap:4px;}
-  .nav-link{font-size:13px;font-weight:500;color:var(--text-dim);padding:6px 14px;border-radius:6px;transition:background .15s,color .15s;cursor:pointer;border:none;background:none;}
-  .nav-link:hover{background:var(--panel-alt);color:#fff;text-decoration:none;}
+  /* ── NAV ── */
+  header{
+    background:rgba(0,0,0,0.85);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    padding:0 32px;
+    position:sticky;top:0;z-index:100;
+  }
+  .headerbar{display:flex;align-items:center;height:68px;max-width:1200px;margin:0 auto;gap:0;}
+  .logo-wrap{flex-shrink:0;margin-right:40px;}
+  .logo-wrap img{height:28px;width:auto;display:block;}
+  .nav-links{display:flex;align-items:center;gap:2px;}
+  .nav-link{
+    font-size:13.5px;font-weight:500;color:rgba(255,255,255,0.55);
+    padding:7px 16px;border-radius:6px;
+    transition:background .15s,color .15s;
+    cursor:pointer;border:none;background:none;
+    letter-spacing:0.01em;
+  }
+  .nav-link:hover{background:rgba(255,255,255,0.07);color:#fff;text-decoration:none;}
   .spacer{flex:1;}
-  .header-cta{background:var(--accent);color:#000;font-size:12.5px;font-weight:700;padding:8px 18px;border-radius:6px;white-space:nowrap;}
-  .header-cta:hover{text-decoration:none;opacity:0.9;}
+  .header-cta{
+    background:var(--accent);color:#000;
+    font-size:13px;font-weight:700;
+    padding:9px 20px;border-radius:7px;
+    white-space:nowrap;letter-spacing:0.01em;
+    transition:opacity .15s;
+  }
+  .header-cta:hover{text-decoration:none;opacity:0.88;}
 
-  /* LAYOUT */
-  .wrap{max-width:1080px;margin:0 auto;padding:64px 48px 120px;}
+  /* ── LAYOUT ── */
+  .wrap{max-width:1080px;margin:0 auto;padding:72px 48px 120px;}
 
-  /* HERO */
-  .hero{text-align:center;padding-bottom:72px;border-bottom:1px solid var(--border);margin-bottom:80px;}
+  /* ── HERO ── */
+  .hero{text-align:center;padding-bottom:72px;border-bottom:1px solid var(--border);margin-bottom:88px;}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
-  .hero h1{font-size:48px;font-weight:800;line-height:1.1;letter-spacing:-0.03em;color:#fff;margin-bottom:20px;max-width:780px;margin-left:auto;margin-right:auto;}
+  .hero h1{font-size:50px;font-weight:800;line-height:1.08;letter-spacing:-0.03em;color:#fff;margin-bottom:22px;max-width:800px;margin-left:auto;margin-right:auto;}
   .hero h1 em{font-style:normal;color:var(--accent);}
-  .hero-sub{font-size:17px;color:var(--text-dim);max-width:620px;margin:0 auto 40px;line-height:1.75;}
-  .trust-bar{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;}
-  .trust-item{text-align:center;}
+  .hero-sub{font-size:17px;color:var(--text-dim);max-width:600px;margin:0 auto 44px;line-height:1.75;}
+  .trust-bar{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;}
   .trust-item .num{font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:700;color:var(--accent);}
   .trust-item .lbl{font-size:11.5px;color:var(--text-dim);margin-top:4px;}
 
-  /* SECTION LABEL */
-  .section-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;}
-  .section-title{font-size:28px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:12px;}
+  /* ── SECTION LABELS ── */
+  .section-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  .section-title{font-size:30px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:12px;}
   .section-sub{font-size:15px;color:var(--text-dim);max-width:640px;line-height:1.75;margin-bottom:48px;}
 
-  /* PROCESS */
-  .process-section{margin-bottom:96px;}
-  .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-  .process-step{background:var(--panel);padding:32px 28px;position:relative;}
+  /* ── PROCESS ── */
+  .process-section{margin-bottom:100px;}
+  .process-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+  .process-step{background:var(--panel);padding:34px 30px;}
   .process-step:not(:last-child){border-right:1px solid var(--border);}
-  .step-num{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;color:var(--accent);text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+  .step-num{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.14em;color:var(--accent);text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
   .step-num::after{content:'';flex:1;height:1px;background:var(--border);}
-  .step-icon{width:40px;height:40px;background:var(--accent-dim);border:1px solid rgba(0,200,255,0.2);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px;}
+  .step-icon{width:42px;height:42px;background:var(--accent-dim);border:1px solid rgba(0,200,255,0.2);border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:19px;}
   .process-step h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:10px;}
-  .process-step p{font-size:13px;color:var(--text-dim);line-height:1.75;}
-  .role-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.08em;padding:3px 8px;border-radius:4px;margin-top:14px;text-transform:uppercase;}
+  .process-step p{font-size:13px;color:var(--text-dim);line-height:1.78;}
+  .role-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.08em;padding:3px 9px;border-radius:4px;margin-top:16px;text-transform:uppercase;}
   .role-writer{background:rgba(0,200,255,0.12);color:var(--accent);}
   .role-editor{background:rgba(245,158,11,0.12);color:var(--yellow);}
   .role-cm{background:rgba(34,197,94,0.12);color:var(--green);}
 
-  /* HOW WE WORK */
-  .howwework{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:36px 40px;margin-top:36px;}
-  .hww-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:24px;}
-  .hww-item{display:flex;gap:16px;align-items:flex-start;}
-  .hww-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:7px;flex-shrink:0;}
+  /* ── HOW WE WORK BOX ── */
+  .howwework{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:38px 42px;margin-top:36px;}
+  .hww-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px;}
+  .hww-item{display:flex;gap:14px;align-items:flex-start;}
+  .hww-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0;}
   .hww-item p{font-size:13.5px;color:var(--text-dim);line-height:1.7;}
   .hww-item strong{color:#fff;}
 
-  /* CONTENT CARDS */
-  .content-section{margin-bottom:96px;}
-  .content-grid{display:flex;flex-direction:column;gap:28px;}
-  .content-card{background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s;}
-  .content-card:hover{border-color:var(--border-soft);}
-  .card-inner{display:grid;grid-template-columns:1fr 2fr;gap:0;}
-  .card-meta{padding:32px 28px;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:8px;}
-  .client-name{font-size:18px;font-weight:700;color:#fff;}
-  .client-industry{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
-  .challenge-label{font-size:10.5px;font-weight:600;color:var(--text-faint);text-transform:uppercase;letter-spacing:0.08em;margin-top:12px;}
-  .challenge-text{font-size:13px;color:var(--text-dim);line-height:1.7;margin-top:4px;}
-  .card-content{padding:32px 32px;}
-  .piece-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px;}
-  .piece-desc{font-size:13.5px;color:var(--text-dim);line-height:1.75;margin-bottom:20px;}
-  .piece-link{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--accent);border:1px solid rgba(0,200,255,0.25);padding:8px 16px;border-radius:6px;transition:background .15s;}
-  .piece-link:hover{background:var(--accent-dim);text-decoration:none;}
-  .piece-link svg{width:14px;height:14px;flex-shrink:0;}
+  /* ── CLIENT SECTION ── */
+  .content-section{margin-bottom:100px;}
+  .client-block{margin-bottom:40px;}
+  .client-header{display:flex;align-items:flex-start;gap:20px;padding:28px 32px;background:var(--panel);border:1px solid var(--border);border-radius:14px 14px 0 0;border-bottom:none;}
+  .client-tag{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);}
+  .client-name{font-size:22px;font-weight:800;color:#fff;margin-top:4px;}
+  .client-challenge{font-size:13.5px;color:var(--text-dim);line-height:1.7;margin-top:8px;max-width:640px;}
+  .client-feedback-wrap{margin-top:20px;}
+  .feedback-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;}
+  .feedback-img{border:1px solid var(--border-soft);border-radius:10px;overflow:hidden;max-width:480px;}
+  .feedback-img img{width:100%;display:block;}
 
-  /* SCREENSHOT COMMENT */
-  .screenshot-wrapper{margin-top:24px;}
-  .screenshot-label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-faint);margin-bottom:10px;}
-  .screenshot-img{border:1px solid var(--border-soft);border-radius:10px;overflow:hidden;max-width:420px;}
-  .screenshot-img img{width:100%;display:block;}
+  /* ── ARTICLE ROWS ── */
+  .articles-wrap{background:var(--panel-alt);border:1px solid var(--border);border-radius:0 0 14px 14px;}
+  .article-row{display:flex;align-items:center;gap:20px;padding:18px 32px;border-top:1px solid var(--border);}
+  .article-row:first-child{border-top:none;}
+  .article-num{font-family:'IBM Plex Mono',monospace;font-size:10px;font-weight:600;color:var(--text-faint);flex-shrink:0;width:24px;}
+  .article-info{flex:1;}
+  .article-title{font-size:14.5px;font-weight:600;color:#fff;}
+  .article-desc{font-size:12.5px;color:var(--text-dim);margin-top:2px;line-height:1.5;}
+  .article-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--accent);border:1px solid rgba(0,200,255,0.22);padding:7px 14px;border-radius:6px;white-space:nowrap;flex-shrink:0;transition:background .15s;}
+  .article-link:hover{background:var(--accent-dim);text-decoration:none;}
+  .article-link svg{width:12px;height:12px;}
 
-  /* PLACEHOLDER */
-  .placeholder-card{background:var(--panel-alt);border:1px dashed var(--border-soft);border-radius:12px;padding:40px;text-align:center;}
-  .placeholder-card p{font-size:14px;color:var(--text-faint);}
-
-  /* CTA */
+  /* ── CTA ── */
   .cta-section{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:64px 48px;text-align:center;margin-top:80px;}
-  .cta-section h2{font-size:32px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:12px;}
-  .cta-section p{font-size:16px;color:var(--text-dim);max-width:520px;margin:0 auto 32px;}
-  .cta-btn{display:inline-block;background:var(--accent);color:#000;font-size:14px;font-weight:700;padding:14px 32px;border-radius:8px;}
+  .cta-section h2{font-size:34px;font-weight:800;color:#fff;letter-spacing:-0.02em;margin-bottom:12px;}
+  .cta-section p{font-size:16px;color:var(--text-dim);max-width:500px;margin:0 auto 32px;}
+  .cta-btn{display:inline-block;background:var(--accent);color:#000;font-size:14px;font-weight:700;padding:14px 34px;border-radius:8px;}
   .cta-btn:hover{text-decoration:none;opacity:0.9;}
 
-  /* RESPONSIVE */
-  @media(max-width:768px){
-    .wrap{padding:40px 20px 80px;}
-    .hero h1{font-size:32px;}
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
     .process-grid{grid-template-columns:1fr;}
     .process-step:not(:last-child){border-right:none;border-bottom:1px solid var(--border);}
-    .card-inner{grid-template-columns:1fr;}
-    .card-meta{border-right:none;border-bottom:1px solid var(--border);}
     .hww-grid{grid-template-columns:1fr;}
+  }
+  @media(max-width:768px){
+    .wrap{padding:40px 20px 80px;}
+    .hero h1{font-size:34px;}
     .trust-bar{gap:24px;}
     header{padding:0 16px;}
-    .cta-section{padding:40px 24px;}
     .nav-links{display:none;}
+    .cta-section{padding:40px 24px;}
+    .client-header{flex-direction:column;}
+    .article-row{flex-direction:column;align-items:flex-start;gap:12px;}
+    .howwework{padding:28px 24px;}
   }
 </style>
 </head>
@@ -134,7 +149,7 @@
 <header>
   <div class="headerbar">
     <a href="/" class="logo-wrap">
-      <img src="/qck-logo.svg" alt="QCK">
+      <img src="/qck-logo-real.svg" alt="QCK">
     </a>
     <nav class="nav-links">
       <a class="nav-link" href="#process">How We Work</a>
@@ -145,14 +160,13 @@
   </div>
 </header>
 
-<!-- MAIN -->
 <main class="wrap">
 
   <!-- HERO -->
   <section class="hero">
     <div class="eyebrow">Content That Converts - Written by Humans, Built for Experts</div>
     <h1>Your customers know when they're reading <em>real expertise.</em> So do ours.</h1>
-    <p class="hero-sub">Every piece of content we produce goes through a three-tier review process - writer, editor, and content manager - before a single word goes live. Below is a live portfolio of exactly what that looks like.</p>
+    <p class="hero-sub">Every piece we produce goes through a three-tier review process - writer, editor, and content manager - before a single word goes live. Below is a live portfolio of exactly what that looks like.</p>
     <div class="trust-bar">
       <div class="trust-item">
         <div class="num">150+</div>
@@ -177,34 +191,34 @@
   <section class="process-section" id="process">
     <div class="section-label">How We Work</div>
     <div class="section-title">Ghostwriting, perfected through systems.</div>
-    <p class="section-sub">Writing for expert audiences is not a matter of effort - it's a matter of process. Here's exactly how every piece of QCK content is built, reviewed, and approved.</p>
+    <p class="section-sub">Writing for expert audiences is not a matter of effort - it is a matter of process. Here is exactly how every piece of QCK content is built, reviewed, and approved.</p>
 
     <div class="process-grid">
       <div class="process-step">
         <div class="step-num">Step 01</div>
         <div class="step-icon">&#9997;&#65039;</div>
         <h3>The Writer</h3>
-        <p>Every client is assigned a dedicated writer with relevant domain knowledge. They use a custom-built AI research assistant - tuned specifically to your brand voice and messaging guide - to power the research phase. The actual writing is done by a human, every time. No AI-generated copy goes to clients.</p>
+        <p>Every client is assigned a dedicated writer with relevant domain knowledge. They use a custom-built AI research assistant - tuned to your brand voice and messaging guide - to power the research phase. The actual writing is done by a human, every time. No AI-generated copy goes to clients.</p>
         <span class="role-badge role-writer">Writer</span>
       </div>
       <div class="process-step">
         <div class="step-num">Step 02</div>
         <div class="step-icon">&#128269;</div>
         <h3>The Editor</h3>
-        <p>A dedicated editor reviews every draft before it moves forward. Their job: verify that all dos and don'ts from your messaging guide are followed, confirm tone and voice are on-brand, and catch anything a subject-matter expert in your audience would catch. Nothing moves without their sign-off.</p>
+        <p>A dedicated editor reviews every draft before it moves forward. Their job: verify dos and don'ts from your messaging guide are followed, confirm tone and voice are on-brand, and catch anything a subject-matter expert in your audience would catch. Nothing moves without their sign-off.</p>
         <span class="role-badge role-editor">Editor</span>
       </div>
       <div class="process-step">
         <div class="step-num">Step 03</div>
         <div class="step-icon">&#9989;</div>
         <h3>The Content Manager</h3>
-        <p>The content manager is your primary point of contact and the final quality gate. They review for overall flow, consistency, and strategic alignment. They also coordinate feedback loops with you - especially in month one - to calibrate the messaging guide until every piece feels like it came from inside your team.</p>
+        <p>The content manager is your primary point of contact and the final quality gate. They review for flow, consistency, and strategic alignment - and coordinate feedback loops in month one until every piece feels like it came from inside your team.</p>
         <span class="role-badge role-cm">Content Manager</span>
       </div>
     </div>
 
     <div class="howwework">
-      <div class="section-label" style="margin-bottom:8px;">Additional Details</div>
+      <div class="section-label" style="margin-bottom:6px;">Additional Details</div>
       <div class="hww-grid">
         <div class="hww-item">
           <div class="hww-dot"></div>
@@ -216,7 +230,7 @@
         </div>
         <div class="hww-item">
           <div class="hww-dot"></div>
-          <p><strong>Client validation is built into month one.</strong> We treat the first 30 days as a calibration period. Your feedback directly updates the messaging guide so every subsequent piece gets sharper.</p>
+          <p><strong>Client validation built into month one.</strong> We treat the first 30 days as a calibration period. Your feedback directly updates the messaging guide so every subsequent piece gets sharper.</p>
         </div>
         <div class="hww-item">
           <div class="hww-dot"></div>
@@ -230,55 +244,100 @@
   <section class="content-section" id="examples">
     <div class="section-label">Live Examples</div>
     <div class="section-title">Real clients. Real content. Live on their sites.</div>
-    <p class="section-sub">These aren't mockups or internal drafts - they're live pieces, published on client websites, read by their customers every day. Click through and read them yourself.</p>
+    <p class="section-sub">These are not mockups or internal drafts - they are live pieces, published on client websites, read by their customers every day. Click through and read them yourself.</p>
 
-    <div class="content-grid">
-
-      <!-- GOCOFFEEGO -->
-      <div class="content-card">
-        <div class="card-inner">
-          <div class="card-meta">
-            <div class="client-industry">E-Commerce / Coffee</div>
-            <div class="client-name">GoCoffeeGo</div>
-            <div class="challenge-label">The Challenge</div>
-            <div class="challenge-text">GoCoffeeGo's audience isn't casual drinkers - they're serious coffee people. San Francisco-based, third-wave focused, the kind of readers who know the difference between bloom time and extraction yield. Generic coffee content gets ignored. Expert-level content gets bookmarked, shared, and linked.</div>
-          </div>
-          <div class="card-content">
-            <div class="piece-title">How to Make French Press Coffee</div>
-            <p class="piece-desc">A deep-dive guide written for coffee enthusiasts who already know the basics - not a beginner's overview. Covers ratio science, grind particle size, steep variables, and bean sourcing with the depth that separates a transcendent brew from a mediocre one.</p>
-            <a class="piece-link" href="https://www.gocoffeego.com/blogs/gocoffeego/how-to-make-french-press-coffee" target="_blank">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
-              Read the Article Live
-            </a>
-
-            <!-- Actual client screenshot -->
-            <div class="screenshot-wrapper">
-              <div class="screenshot-label">Direct client feedback - Jun 26</div>
-              <div class="screenshot-img">
-                <img src="/oliver-feedback.png" alt="Oliver's feedback: Yeah this is very very good actually.">
-              </div>
+    <!-- GOCOFFEEGO -->
+    <div class="client-block">
+      <div class="client-header">
+        <div style="flex:1;">
+          <div class="client-tag">E-Commerce / Coffee</div>
+          <div class="client-name">GoCoffeeGo</div>
+          <p class="client-challenge">GoCoffeeGo's audience is not casual drinkers - they're serious coffee people. Third-wave focused, the kind of readers who know the difference between bloom time and extraction yield. Generic coffee content gets ignored. Expert-level content gets bookmarked, shared, and linked.</p>
+          <div class="client-feedback-wrap">
+            <div class="feedback-label">Direct client feedback - Jun 20</div>
+            <div class="feedback-img">
+              <img src="/oliver-email-feedback.png" alt="Oliver at GoCoffeeGo: Overall VERY VERY good articles. Excellent Job!!">
             </div>
           </div>
         </div>
       </div>
-
-      <!-- PLACEHOLDER -->
-      <div class="placeholder-card">
-        <p>More client examples coming - drop the links and screenshots in and they'll be added here.</p>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">How to Make French Press Coffee</div>
+            <div class="article-desc">Covers ratio science, grind particle size, steep variables, and bean sourcing - written for enthusiasts who already know the basics.</div>
+          </div>
+          <a class="article-link" href="https://www.gocoffeego.com/blogs/gocoffeego/how-to-make-french-press-coffee" target="_blank">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Read Live
+          </a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">02</div>
+          <div class="article-info">
+            <div class="article-title">Medium Roast Coffee Collection</div>
+            <div class="article-desc">Category page copy written for coffee-literate buyers - flavor profiles, roast science, and sourcing context that earns trust.</div>
+          </div>
+          <a class="article-link" href="https://www.gocoffeego.com/collections/medium-roast-coffee" target="_blank">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Read Live
+          </a>
+        </div>
+        <div class="article-row">
+          <div class="article-num">03</div>
+          <div class="article-info">
+            <div class="article-title">Light Roast Coffee Collection</div>
+            <div class="article-desc">Nuanced copy that speaks to the distinct character of light roasts - origin notes, acidity, and brew method pairing for serious coffee drinkers.</div>
+          </div>
+          <a class="article-link" href="https://www.gocoffeego.com/collections/light-roast-coffee" target="_blank">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Read Live
+          </a>
+        </div>
       </div>
-
     </div>
+
+    <!-- HEALTHY BONES CO -->
+    <div class="client-block">
+      <div class="client-header">
+        <div style="flex:1;">
+          <div class="client-tag">Health / Supplements</div>
+          <div class="client-name">Healthy Bones Co</div>
+          <p class="client-challenge">Bone health supplements require a level of clinical precision that most content agencies cannot deliver. Kevin's audience includes practitioners and highly educated consumers who notice immediately when the nuance is missing - or wrong.</p>
+          <div class="client-feedback-wrap">
+            <div class="feedback-label">Direct client feedback</div>
+            <div class="feedback-img">
+              <img src="/kevin-feedback.png" alt="Kevin at Healthy Bones Co: You Freakin Nailed it. Every word of it. Even the nuance that my brain naturally knows to look for.">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="articles-wrap">
+        <div class="article-row">
+          <div class="article-num">01</div>
+          <div class="article-info">
+            <div class="article-title">Bone Health Vitamins Collection</div>
+            <div class="article-desc">Category-level copy that navigates clinical credibility without sacrificing readability - the kind of content that earns "You Freakin Nailed it" from a practitioner audience.</div>
+          </div>
+          <a class="article-link" href="https://healthybonesco.com/collections/bone-health-vitamins" target="_blank">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 8h12M9 3l5 5-5 5"/></svg>
+            Read Live
+          </a>
+        </div>
+      </div>
+    </div>
+
   </section>
 
   <!-- CTA -->
   <section class="cta-section">
     <div class="eyebrow">Ready to See What This Looks Like for Your Brand?</div>
     <h2>Get a free content audit.</h2>
-    <p>We'll review your existing content, identify the gaps, and show you exactly what a QCK content program would look like for your audience.</p>
+    <p>We will review your existing content, identify the gaps, and show you exactly what a QCK content program would look like for your audience.</p>
     <a class="cta-btn" href="https://qckbotdesign.com/free-audit" target="_blank">Get My Free Audit</a>
   </section>
 
 </main>
-
 </body>
 </html>
