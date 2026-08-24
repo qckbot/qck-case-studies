@@ -1,6 +1,11 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "functions": {
+    "api/generate-report.js": {
+      "maxDuration": 300
+    }
+  },
   "rewrites": [
     {
       "source": "/brand-snapshot",
