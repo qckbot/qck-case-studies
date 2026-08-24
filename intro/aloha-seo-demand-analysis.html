@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QCK SEO Demand Analysis — aloha.com</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --surface: #ffffff;
+    --surface2: #f0f2f5;
+    --surface3: #e8eaed;
+    --border: #e2e4e8;
+    --accent: #00d6f7;
+    --accent-dark: #0099b8;
+    --accent2: #7c4dff;
+    --green: #00b96b;
+    --yellow: #f59e0b;
+    --red: #ef4444;
+    --text: #111827;
+    --text2: #374151;
+    --muted: #6b7280;
+    --muted2: #9ca3af;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.05);
+    --shadow-lg: 0 10px 15px rgba(0,0,0,0.08), 0 4px 6px rgba(0,0,0,0.04);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ═══ TOP HEADER ═══ */
+  .top-header {
+    background: #0a0a0f;
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-svg { height: 28px; width: auto; }
+
+  .header-meta { display: flex; align-items: center; gap: 10px; }
+
+  .client-chip {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 13px;
+    color: #e8e8f0;
+  }
+
+  .chip-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* ═══ METRIC BAR ═══ */
+  .metric-bar {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    box-shadow: var(--shadow);
+  }
+
+  .metric-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 28px 14px 0;
+    margin-right: 28px;
+    border-right: 1px solid var(--border);
+  }
+  .metric-item:last-child { border-right: none; margin-right: 0; }
+
+  .metric-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted2); font-weight: 600; }
+  .metric-value { font-size: 22px; font-weight: 800; color: var(--text); margin-top: 1px; }
+  .metric-sub { font-size: 11px; color: var(--muted); }
+  .mv-accent { color: var(--accent-dark); }
+  .mv-green { color: var(--green); }
+  .mv-purple { color: var(--accent2); }
+
+  /* ═══ STICKY NAV ═══ */
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: #fff;
+    border-bottom: 2px solid var(--border);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-item:hover { color: var(--text); border-bottom-color: var(--border); }
+  .nav-item.active { color: var(--accent-dark); border-bottom-color: var(--accent); }
+
+  .nav-num {
+    width: 20px; height: 20px;
+    background: var(--surface2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--muted);
+  }
+
+  .nav-item.active .nav-num { background: var(--accent); color: #000; }
+
+  /* ═══ LAYOUT ═══ */
+  .container { max-width: 1160px; margin: 0 auto; padding: 36px 24px; }
+
+  /* ═══ SECTION CARD ═══ */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    scroll-margin-top: 80px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(to right, rgba(0,214,247,0.04), transparent);
+  }
+
+  .section-title-group { display: flex; align-items: center; flex: 1; gap: 14px; }
+
+  .section-number {
+    background: var(--accent);
+    color: #000;
+    font-weight: 800;
+    font-size: 11px;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .section-title { font-size: 17px; font-weight: 700; color: var(--text); }
+  .section-subtitle { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .cq-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .cq-btn:hover { border-color: var(--accent); color: var(--accent-dark); background: rgba(0,214,247,0.05); }
+
+  .cq-btn-icon { font-size: 12px; }
+
+  .section-body { padding: 28px; }
+
+  /* ═══ STAT ROW ═══ */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .stat-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+  }
+
+  .stat-label { font-size: 10px; color: var(--muted2); text-transform: uppercase; letter-spacing: 0.09em; font-weight: 700; }
+  .stat-value { font-size: 26px; font-weight: 800; color: var(--text); margin-top: 4px; }
+  .stat-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  /* ═══ PRODUCT BARS ═══ */
+  .product-chart { margin-bottom: 8px; }
+
+  .product-row { margin-bottom: 20px; }
+
+  .product-row-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+
+  .product-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .product-vol { font-size: 13px; font-weight: 700; color: var(--muted); }
+
+  .product-bar-wrap { position: relative; height: 36px; background: var(--surface2); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+
+  .product-bar-fill {
+    height: 100%;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .pb-bars { background: linear-gradient(90deg, var(--accent-dark), var(--accent)); color: #000; }
+  .pb-powder { background: linear-gradient(90deg, #6d28d9, var(--accent2)); }
+  .pb-shakes { background: linear-gradient(90deg, #059669, var(--green)); }
+
+  .product-keywords { margin-top: 6px; font-size: 11px; color: var(--muted); line-height: 1.8; }
+
+  .kw-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2px 9px;
+    font-size: 11px;
+    margin: 2px 2px 0 0;
+    color: var(--text2);
+  }
+
+  .kw-vol { font-weight: 700; }
+  .kw-diff { font-size: 10px; padding: 1px 5px; border-radius: 8px; font-weight: 700; margin-left: 2px; }
+  .diff-high { background: #fee2e2; color: var(--red); }
+  .diff-med { background: #fef3c7; color: #b45309; }
+  .diff-low { background: #d1fae5; color: #065f46; }
+
+  .best-opp {
+    background: linear-gradient(135deg, rgba(0,185,107,0.08), rgba(0,214,247,0.06));
+    border: 1px solid rgba(0,185,107,0.25);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .opp-icon { font-size: 22px; flex-shrink: 0; }
+  .opp-text { font-size: 13px; line-height: 1.7; }
+  .opp-highlight { color: var(--green); font-weight: 700; }
+  .opp-highlight-blue { color: var(--accent-dark); font-weight: 700; }
+
+  /* ═══ SEASONALITY ═══ */
+  .season-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 20px; }
+
+  .month-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .month-card.peak { border-color: var(--green); box-shadow: 0 0 0 2px rgba(0,185,107,0.15); }
+  .month-card.bfcm { border-color: var(--yellow); box-shadow: 0 0 0 2px rgba(245,158,11,0.15); }
+
+  .month-name { font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; }
+  .month-heat { height: 5px; border-radius: 3px; margin: 8px 0 7px; background: var(--border); }
+  .segment-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin: 1px; }
+  .dot-bars { background: var(--accent-dark); }
+  .dot-powder { background: var(--accent2); }
+  .dot-shakes { background: var(--green); }
+  .month-label { font-size: 10px; color: var(--muted); margin-top: 5px; font-weight: 500; }
+  .bfcm-tag { position: absolute; top: 4px; right: 4px; background: var(--yellow); color: #fff; font-size: 8px; font-weight: 800; padding: 1px 5px; border-radius: 4px; }
+  .peak-tag { position: absolute; top: 4px; right: 4px; background: var(--green); color: #fff; font-size: 8px; font-weight: 800; padding: 1px 5px; border-radius: 4px; }
+
+  /* ═══ PERSONAS ═══ */
+  .persona-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+
+  .persona-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+
+  .persona-card:hover { box-shadow: var(--shadow-md); }
+
+  .persona-header {
+    padding: 18px 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: background 0.2s;
+    user-select: none;
+    background: var(--surface2);
+  }
+
+  .persona-header:hover { background: var(--surface3); }
+  .persona-avatar { width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+  .persona-name { font-size: 14px; font-weight: 700; }
+  .persona-tagline { font-size: 12px; color: var(--muted); }
+  .persona-expand-icon { margin-left: auto; color: var(--muted2); font-size: 11px; transition: transform 0.2s; }
+  .persona-card.open .persona-expand-icon { transform: rotate(180deg); }
+
+  .persona-detail {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.2s;
+  }
+
+  .persona-card.open .persona-detail { max-height: 320px; padding: 18px 20px; border-top: 1px solid var(--border); }
+
+  .persona-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag { background: var(--surface2); border: 1px solid var(--border); border-radius: 12px; padding: 3px 10px; font-size: 11px; color: var(--muted); }
+  .tag.accent { border-color: rgba(0,214,247,0.4); color: var(--accent-dark); background: rgba(0,214,247,0.07); }
+
+  /* ═══ COMPETITORS ═══ */
+  .comp-table { width: 100%; border-collapse: collapse; }
+
+  .comp-table th {
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--muted2);
+    font-weight: 700;
+    border-bottom: 2px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .comp-table td { padding: 13px 14px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .comp-table tbody tr:last-child td { border-bottom: none; }
+
+  .comp-row { cursor: pointer; transition: background 0.15s; }
+  .comp-row:hover { background: var(--surface2); }
+  .comp-row.active { background: rgba(0,214,247,0.04); }
+
+  .comp-name { font-weight: 700; display: flex; align-items: center; gap: 8px; }
+  .expand-arrow { font-size: 10px; color: var(--muted2); transition: transform 0.2s; }
+  .comp-row.active .expand-arrow { transform: rotate(90deg); }
+
+  .dr-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+  }
+
+  .dr-bar { width: 60px; height: 5px; background: var(--border); border-radius: 3px; display: inline-block; vertical-align: middle; margin-left: 6px; }
+  .dr-fill { height: 100%; border-radius: 3px; background: var(--accent); display: inline-block; }
+  .dr-fill.you { background: var(--green); }
+
+  .comp-detail-row { display: none; }
+  .comp-detail-row.open { display: table-row; }
+  .comp-detail-cell { padding: 4px 14px 20px; background: rgba(0,214,247,0.02); }
+
+  .comp-pages-list { list-style: none; margin-top: 10px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .comp-pages-list li {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface);
+    transition: background 0.15s;
+  }
+  .comp-pages-list li:hover { background: var(--surface2); }
+  .comp-pages-list li:last-child { border-bottom: none; }
+  .page-url { color: var(--accent-dark); text-decoration: none; max-width: 65%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+  .page-url:hover { text-decoration: underline; }
+  .page-meta { display: flex; align-items: center; gap: 8px; }
+  .page-type-tag { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+  .tag-collection { background: rgba(0,185,107,0.12); color: #065f46; }
+  .tag-blog { background: rgba(124,77,255,0.1); color: #5b21b6; }
+  .tag-product { background: rgba(0,214,247,0.1); color: var(--accent-dark); }
+  .page-kws { color: var(--muted2); font-size: 11px; }
+
+  .insight-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 14px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text2);
+  }
+
+  .traffic-gap-badge {
+    display: inline-block;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .gap-big { background: #fee2e2; color: var(--red); }
+  .gap-med { background: #fef3c7; color: #b45309; }
+  .gap-you { background: #d1fae5; color: #065f46; }
+
+  /* ═══ TAM ═══ */
+  .tam-upside {
+    background: linear-gradient(135deg, rgba(0,185,107,0.06), rgba(0,214,247,0.04));
+    border: 1px solid rgba(0,185,107,0.2);
+    border-radius: 12px;
+    padding: 28px;
+  }
+
+  .tam-multiplier { font-size: 60px; font-weight: 900; color: var(--green); line-height: 1; }
+  .tam-multiplier-sub { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  .tam-numbers { display: flex; justify-content: space-around; margin-top: 24px; gap: 12px; }
+  .tam-num { text-align: center; }
+  .tam-num-val { font-size: 22px; font-weight: 800; }
+  .tam-num-label { font-size: 11px; color: var(--muted); }
+
+  .tam-strategy {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  .tam-strategy-title { font-size: 13px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+
+  .strategy-point {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text2);
+  }
+
+  .strategy-point:last-child { margin-bottom: 0; }
+  .sp-icon { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; margin-top: 2px; }
+  .sp-blue { background: rgba(0,214,247,0.15); }
+  .sp-green { background: rgba(0,185,107,0.12); }
+  .sp-purple { background: rgba(124,77,255,0.12); }
+
+  /* Content split — single row only */
+  .content-split-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .split-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .split-subtitle { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+
+  .split-track { height: 40px; background: var(--surface2); border-radius: 10px; overflow: hidden; display: flex; border: 2px solid var(--green); box-shadow: 0 0 0 4px rgba(0,185,107,0.1); }
+  .split-col { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; transition: width 0.5s; }
+  .split-col.collections { background: var(--accent); color: #000; }
+  .split-col.blogs { background: var(--accent2); color: #fff; }
+
+  .split-legend { display: flex; gap: 16px; margin-top: 10px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .split-rationale {
+    margin-top: 16px;
+    padding: 14px 16px;
+    background: rgba(0,185,107,0.06);
+    border: 1px solid rgba(0,185,107,0.2);
+    border-radius: 8px;
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--text2);
+  }
+
+  /* ═══ CONFIRMING QUESTION ═══ */
+  .cq-note {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    display: none;
+  }
+
+  .cq-note.has-note { display: block; }
+  .cq-note-label { font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 5px; color: #92400e; }
+  .cq-note-text { font-size: 13px; color: #78350f; line-height: 1.6; }
+
+  /* ═══ MODAL ═══ */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s;
+  }
+
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 30px;
+    width: 500px;
+    max-width: 92vw;
+    box-shadow: var(--shadow-lg);
+    transform: translateY(16px);
+    transition: transform 0.2s;
+  }
+
+  .modal-overlay.open .modal { transform: translateY(0); }
+
+  .modal-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .modal-subtitle { font-size: 12px; color: var(--muted); margin-bottom: 18px; }
+
+  .modal textarea {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 13px;
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .modal textarea:focus { border-color: var(--accent); }
+
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
+
+  .btn { padding: 9px 20px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; font-family: var(--font); }
+  .btn-primary { background: var(--accent); color: #000; }
+  .btn-primary:hover { background: var(--accent-dark); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--text); border-color: var(--text2); }
+
+  /* ═══ FOOTER ═══ */
+  .footer { background: #0a0a0f; padding: 32px 40px; margin-top: 24px; display: flex; align-items: center; justify-content: space-between; }
+  .footer-sub { font-size: 12px; color: #4b5563; }
+
+  /* ═══ PRINT ═══ */
+  @media print {
+    .sticky-nav, .cq-btn, .modal-overlay { display: none !important; }
+    .section { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+    body { background: white; }
+    .top-header { background: #111; }
+    .footer { background: #111; }
+  }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    .top-header { padding: 14px 20px; flex-direction: column; gap: 12px; align-items: flex-start; }
+    .metric-bar { padding: 0 20px; flex-wrap: wrap; }
+    .sticky-nav { padding: 0 10px; overflow-x: auto; }
+    .nav-item { padding: 12px 12px; font-size: 11px; }
+    .season-grid { grid-template-columns: repeat(3, 1fr); }
+    .persona-grid { grid-template-columns: 1fr; }
+    .container { padding: 20px 16px; }
+    .section-body { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP HEADER with real QCK logo -->
+<header class="top-header">
+  <svg class="logo-svg" viewBox="0 0 1162 428" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M601 100.6C617.1 100.6 631.1 104.5 643.2 112C655.6 119.7 665.2 130.9 672.3 145.4H787.8C778.4 101.2 757.2 66.4 724.4 40.9C691.6 15 651.1 2 603 2C554.9 2 531.5 10.4 502.4 27.1C473.1 43.6 450.5 66.6 434.6 96.6C418.9 126.1 411 159.9 411 197.8C411 235.7 418.9 270.3 434.6 300.1C450.7 329.6 473.3 352.7 502.4 369.6C531.7 386.1 565.1 394.2 603 394.2C640.9 394.2 691.6 381.4 724.4 355.9C757.2 330 778.4 295 787.8 250.8H672.3C665.4 265.3 655.6 276.5 643.2 284.2C631.2 291.9 617.1 295.8 601 295.8C576.2 295.8 556.2 287 541.3 269.5C526.8 251.6 519.5 227.7 519.5 197.8C519.5 167.9 526.8 144.8 541.3 127.3C556.2 109.4 576.1 100.4 601 100.4V100.6Z" fill="white"/>
+    <path d="M1154.9 6H1031.1L911.3 172.2V6H804V391.6H911.3V222.7L1032.3 391.6H1161.9L1013 193L1154.9 6Z" fill="white"/>
+    <path d="M218.4 307.9L282 350.1L268.2 364.2L241.5 391.1C227.4 394 212.8 395.6 197.9 395.6C161.8 395.6 128.6 387.2 98.3 370.1C68 353.2 44.1 329.6 26.4 299.6C8.8 269.4 0 235.4 0 197.5C0 159.6 8.8 125.6 26.5 95.5C44.2 65.4 68.1 42.1 98.4 25.2C128.7 8.5 161.9 0 198 0C234.1 0 267.7 8.4 297.8 25.1C327.9 41.8 351.6 65.4 369.1 95.4C386.6 125.5 395.4 159.4 395.4 197.4C395.4 235.4 390.5 252.4 380.5 276.4L293.5 216.1L286 211.2C286.4 206.7 286.6 202.2 286.6 197.4C286.6 166.8 278.7 142.6 262.8 124.9C246.9 107.2 225.3 98.4 198 98.4C170.7 98.4 148.7 107.2 133 124.9C117.3 142.6 109.4 166.7 109.4 197.4C109.4 228.1 117.3 251.6 133 269.3C148.7 287 170.3 295.8 198 295.8H200L218.4 307.9Z" fill="white"/>
+    <path d="M279.5 380.9L454.4 427.5L355.4 352.8L396 311.2L372.3 294.7L282.3 232.4L279.3 230.5L223.7 287.8L229.2 291.4L312.7 346.8L282.5 378L279.5 380.9Z" fill="#00D6F7"/>
+  </svg>
+  <div class="header-meta">
+    <div class="client-chip">
+      <div class="chip-dot" style="background:var(--accent)"></div>
+      <strong>aloha.com</strong>
+    </div>
+    <div class="client-chip" style="font-size:11px; color:#9ca3af;">
+      SEO Demand Analysis · Aug 24, 2026
+    </div>
+  </div>
+</header>
+
+<!-- METRIC BAR -->
+<div class="metric-bar">
+  <div class="metric-item">
+    <div class="metric-label">Domain Rating</div>
+    <div class="metric-value mv-accent">69</div>
+    <div class="metric-sub">High authority</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-label">Monthly Organic Traffic</div>
+    <div class="metric-value mv-green">58,339</div>
+    <div class="metric-sub">US — Ahrefs est.</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-label">Ranking Keywords</div>
+    <div class="metric-value mv-purple">4,869</div>
+    <div class="metric-sub">All positions</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-label">Top-3 Keywords</div>
+    <div class="metric-value">1,554</div>
+    <div class="metric-sub">32% in positions 1–3</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-label">Traffic Upside</div>
+    <div class="metric-value" style="color:var(--green)">3–7x</div>
+    <div class="metric-sub">vs. comp parity</div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="sticky-nav" id="stickyNav">
+  <a class="nav-item" href="#s1"><div class="nav-num">1</div>Product Level</a>
+  <a class="nav-item" href="#s2"><div class="nav-num">2</div>Seasonality</a>
+  <a class="nav-item" href="#s3"><div class="nav-num">3</div>Demographics</a>
+  <a class="nav-item" href="#s4"><div class="nav-num">4</div>Competitors</a>
+  <a class="nav-item" href="#s5"><div class="nav-num">5</div>TAM &amp; Strategy</a>
+</nav>
+
+<div class="container">
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 1: PRODUCT LEVEL
+  ══════════════════════════════════════════════ -->
+  <div class="section" id="s1">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-number">1</div>
+        <div>
+          <div class="section-title">Product Level</div>
+          <div class="section-subtitle">Top product groups — search volume, competition difficulty, and best opportunities</div>
+        </div>
+      </div>
+      <button class="cq-btn" onclick="openModal('s1','Product Level')">Edit</button>
+    </div>
+    <div class="section-body">
+
+      <div class="stat-row">
+        <div class="stat-card">
+          <div class="stat-label">Protein Bars TAM</div>
+          <div class="stat-value" style="color:var(--accent-dark)">173K</div>
+          <div class="stat-sub">US monthly searches</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Protein Powder TAM</div>
+          <div class="stat-value" style="color:var(--accent2)">660K</div>
+          <div class="stat-sub">Largest category by far</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Protein Shakes TAM</div>
+          <div class="stat-value" style="color:var(--green)">177K</div>
+          <div class="stat-sub">High-intent RTD segment</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Currently Capturing</div>
+          <div class="stat-value">4,869</div>
+          <div class="stat-sub">Keywords ranked in Ahrefs</div>
+        </div>
+      </div>
+
+      <div class="product-chart">
+
+        <!-- PROTEIN BARS -->
+        <div class="product-row">
+          <div class="product-row-header">
+            <div class="product-name">🍫 Protein Bars — <span style="color:var(--muted); font-weight:400">173,400 searches/mo</span> <span style="font-size:11px; background:#fef3c7; color:#b45309; border:1px solid #fde68a; border-radius:10px; padding:2px 8px; font-weight:700; margin-left:4px;">Avg Competition: MED</span></div>
+            <div class="product-vol">Best Opportunity ✓</div>
+          </div>
+          <div class="product-bar-wrap">
+            <div class="product-bar-fill pb-bars" style="width:0%" data-w="26%">173K</div>
+          </div>
+          <div class="product-keywords">
+            <span class="kw-chip"><span class="kw-vol">90K</span> protein bars <span class="kw-diff diff-high">HIGH</span></span>
+            <span class="kw-chip"><span class="kw-vol">69K</span> best protein bars <span class="kw-diff diff-high">HIGH</span></span>
+            <span class="kw-chip"><span class="kw-vol">5.5K</span> healthy protein bars <span class="kw-diff diff-med">MED</span></span>
+            <span class="kw-chip"><span class="kw-vol">3.6K</span> vegan protein bars <span class="kw-diff diff-low">LOW</span></span>
+            <span class="kw-chip"><span class="kw-vol">3.4K</span> plant based protein bars <span class="kw-diff diff-low">LOW</span></span>
+            <span class="kw-chip"><span class="kw-vol">900</span> organic protein bars <span class="kw-diff diff-low">LOW</span></span>
+          </div>
+        </div>
+
+        <!-- PROTEIN POWDER -->
+        <div class="product-row">
+          <div class="product-row-header">
+            <div class="product-name">💪 Protein Powder — <span style="color:var(--muted); font-weight:400">660,000 searches/mo</span> <span style="font-size:11px; background:#fee2e2; color:#b91c1c; border:1px solid #fecaca; border-radius:10px; padding:2px 8px; font-weight:700; margin-left:4px;">Avg Competition: HIGH</span></div>
+            <div class="product-vol">Highest Volume</div>
+          </div>
+          <div class="product-bar-wrap">
+            <div class="product-bar-fill pb-powder" style="width:0%" data-w="66%">660K</div>
+          </div>
+          <div class="product-keywords">
+            <span class="kw-chip"><span class="kw-vol">529K</span> protein powder <span class="kw-diff diff-high">HIGH</span></span>
+            <span class="kw-chip"><span class="kw-vol">82K</span> best protein powder <span class="kw-diff diff-high">HIGH</span></span>
+            <span class="kw-chip"><span class="kw-vol">22K</span> vegan protein powder <span class="kw-diff diff-med">MED</span></span>
+            <span class="kw-chip"><span class="kw-vol">14K</span> organic protein powder <span class="kw-diff diff-med">MED</span></span>
+            <span class="kw-chip"><span class="kw-vol">13K</span> plant based protein powder <span class="kw-diff diff-low">LOW</span></span>
+            <span class="kw-chip"><span class="kw-vol">500</span> protein powder without stevia <span class="kw-diff diff-low">LOW</span></span>
+          </div>
+        </div>
+
+        <!-- SHAKES / RTD -->
+        <div class="product-row">
+          <div class="product-row-header">
+            <div class="product-name">🥤 Protein Shakes / RTD — <span style="color:var(--muted); font-weight:400">176,600 searches/mo</span> <span style="font-size:11px; background:#fef3c7; color:#b45309; border:1px solid #fde68a; border-radius:10px; padding:2px 8px; font-weight:700; margin-left:4px;">Avg Competition: MED</span></div>
+            <div class="product-vol">Growing Segment</div>
+          </div>
+          <div class="product-bar-wrap">
+            <div class="product-bar-fill pb-shakes" style="width:0%" data-w="27%">177K</div>
+          </div>
+          <div class="product-keywords">
+            <span class="kw-chip"><span class="kw-vol">119K</span> protein shakes <span class="kw-diff diff-high">HIGH</span></span>
+            <span class="kw-chip"><span class="kw-vol">36K</span> protein drinks <span class="kw-diff diff-med">MED</span></span>
+            <span class="kw-chip"><span class="kw-vol">16K</span> meal replacement shakes <span class="kw-diff diff-med">MED</span></span>
+            <span class="kw-chip"><span class="kw-vol">4.9K</span> vegan protein shake <span class="kw-diff diff-low">LOW</span></span>
+            <span class="kw-chip"><span class="kw-vol">1.4K</span> clean protein shake <span class="kw-diff diff-low">LOW</span></span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="best-opp">
+        <div class="opp-icon">🎯</div>
+        <div class="opp-text">
+          <strong>Best Opportunity:</strong> Aloha's niche long-tail keywords have <span class="opp-highlight">LOW competition</span> and high buyer intent — "organic protein bars," "vegan protein bars," "plant based protein powder," and "protein powder without stevia" are all LOW difficulty with Aloha already showing strong ranking signals. The <span class="opp-highlight-blue">protein powder space is 3.8× larger</span> than bars by volume but Aloha has a credible plant-based story to differentiate. Head-on competition for "protein powder" (529K, HIGH) isn't the move — own the clean/organic niche and capture converts at scale.
+        </div>
+      </div>
+
+      <div class="cq-note has-note" id="note-s1">
+        <div class="cq-note-label">Confirming Question</div>
+        <div class="cq-note-text" id="note-text-s1">Are the product categories we identified — protein bars, powder, and shakes — all active lines right now? Is there one you're primarily focused on growing, or any new products on the horizon?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 2: SEASONALITY
+  ══════════════════════════════════════════════ -->
+  <div class="section" id="s2">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-number">2</div>
+        <div>
+          <div class="section-title">Seasonality</div>
+          <div class="section-subtitle">Next 6 months mapped by segment — what to prioritize and when</div>
+        </div>
+      </div>
+      <button class="cq-btn" onclick="openModal('s2','Seasonality')">Edit</button>
+    </div>
+    <div class="section-body">
+
+      <div style="display:flex; gap:18px; flex-wrap:wrap; margin-bottom:20px; align-items:center;">
+        <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;"><span class="segment-dot dot-bars"></span>Protein Bars</div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;"><span class="segment-dot dot-powder"></span>Protein Powder</div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;"><span class="segment-dot dot-shakes"></span>Protein Shakes/RTD</div>
+        <div style="margin-left:auto; font-size:11px; background:#fef3c7; border:1px solid #fde68a; color:#92400e; padding:4px 10px; border-radius:6px; font-weight:600;">Content started now = Dec/Jan positioning</div>
+      </div>
+
+      <div class="season-grid">
+        <div class="month-card">
+          <div class="month-name">SEP</div>
+          <div class="month-heat" style="background: linear-gradient(90deg, var(--accent-dark) 60%, var(--surface3) 0)"></div>
+          <div><span class="segment-dot dot-bars"></span><span class="segment-dot dot-shakes"></span></div>
+          <div class="month-label">Back to routine</div>
+        </div>
+        <div class="month-card">
+          <div class="month-name">OCT</div>
+          <div class="month-heat" style="background: linear-gradient(90deg, var(--accent-dark) 55%, var(--surface3) 0)"></div>
+          <div><span class="segment-dot dot-bars"></span></div>
+          <div class="month-label">Steady</div>
+        </div>
+        <div class="month-card bfcm">
+          <div class="bfcm-tag">BFCM</div>
+          <div class="month-name">NOV</div>
+          <div class="month-heat" style="background: linear-gradient(90deg, var(--yellow) 88%, var(--surface3) 0)"></div>
+          <div><span class="segment-dot dot-bars"></span><span class="segment-dot dot-powder"></span><span class="segment-dot dot-shakes"></span></div>
+          <div class="month-label">Gift buying surge</div>
+        </div>
+        <div class="month-card bfcm">
+          <div class="bfcm-tag">HOLIDAY</div>
+          <div class="month-name">DEC</div>
+          <div class="month-heat" style="background: linear-gradient(90deg, var(--yellow) 93%, var(--surface3) 0)"></div>
+          <div><span class="segment-dot dot-bars"></span><span class="segment-dot dot-powder"></span></div>
+          <div class="month-label">Gift sets &amp; trial packs</div>
+        </div>
+        <div class="month-card peak">
+          <div class="peak-tag">PEAK</div>
+          <div class="month-name">JAN</div>
+          <div class="month-heat" style="background: linear-gradient(90deg, var(--green) 100%, var(--surface3) 0)"></div>
+          <div><span class="segment-dot dot-bars"></span><span class="segment-dot dot-powder"></span><span class="segment-dot dot-shakes"></span></div>
+          <div class="month-label">New Year surge — all segments</div>
+        </div>
+        <div class="month-card peak">
+          <div class="peak-tag">HIGH</div>
+          <div class="month-name">FEB</div>
+          <div class="month-heat" style="background: linear-gradient(90deg, var(--green) 80%, var(--surface3) 0)"></div>
+          <div><span class="segment-dot dot-powder"></span><span class="segment-dot dot-shakes"></span></div>
+          <div class="month-label">Resolution hold</div>
+        </div>
+      </div>
+
+      <div class="best-opp" style="background: linear-gradient(135deg, rgba(245,158,11,0.07), rgba(0,214,247,0.04)); border-color: rgba(245,158,11,0.25);">
+        <div class="opp-icon">📅</div>
+        <div class="opp-text">
+          <strong>January is the single biggest window</strong> across all 3 product segments simultaneously. Content created <em>now</em> (Aug) will be indexed and ranking by Dec/Jan — ideal timing. BFCM content needed 4+ months ahead, making <strong style="color:var(--yellow)">August the last viable on-ramp for holiday SEO</strong>. Priority: "protein powder for new year" + bars gift set content clusters.
+        </div>
+      </div>
+
+      <div class="cq-note has-note" id="note-s2">
+        <div class="cq-note-label">Confirming Question</div>
+        <div class="cq-note-text" id="note-text-s2">Based on what we're seeing, January looks like the peak window across all your segments — which means content we create now would be perfectly timed to rank for it. Does that align with when you see your biggest sales volume, or is there a different season that actually drives more revenue for you?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 3: DEMOGRAPHICS
+  ══════════════════════════════════════════════ -->
+  <div class="section" id="s3">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-number">3</div>
+        <div>
+          <div class="section-title">Demographics</div>
+          <div class="section-subtitle">Inferred buyer personas — click each card to expand</div>
+        </div>
+      </div>
+      <button class="cq-btn" onclick="openModal('s3','Demographics')">Edit</button>
+    </div>
+    <div class="section-body">
+
+      <div class="persona-grid">
+
+        <div class="persona-card" onclick="togglePersona(this)">
+          <div class="persona-header">
+            <div class="persona-avatar" style="background:rgba(0,214,247,0.1)">🧘‍♀️</div>
+            <div>
+              <div class="persona-name">Health-Conscious Hannah</div>
+              <div class="persona-tagline">Female · 30–40 · Mid-income · Mobile-first</div>
+            </div>
+            <div class="persona-expand-icon">▼</div>
+          </div>
+          <div class="persona-detail">
+            <p style="font-size:12px; color:var(--text2)">The core Aloha buyer. Motivated by clean ingredients, plant-based values, and convenience. Shops on mobile, influenced by Instagram and TikTok food content. Reads ingredient labels — will notice organic certification and absence of stevia/artificial sweeteners.</p>
+            <div class="persona-tags">
+              <span class="tag accent">Mobile-first</span>
+              <span class="tag">Organic shopper</span>
+              <span class="tag">Yoga / Pilates</span>
+              <span class="tag">Parent of young kids</span>
+              <span class="tag">Subscription buyer</span>
+            </div>
+            <p style="margin-top:12px; font-size:12px; color:var(--muted)"><strong>Top searches:</strong> "organic protein bars," "vegan protein bars," "protein powder without stevia," "clean protein shake"</p>
+          </div>
+        </div>
+
+        <div class="persona-card" onclick="togglePersona(this)">
+          <div class="persona-header">
+            <div class="persona-avatar" style="background:rgba(124,77,255,0.1)">🏋️</div>
+            <div>
+              <div class="persona-name">Performance Pete</div>
+              <div class="persona-tagline">Male · 25–40 · Mid-to-high income · Desktop researcher</div>
+            </div>
+            <div class="persona-expand-icon">▼</div>
+          </div>
+          <div class="persona-detail">
+            <p style="font-size:12px; color:var(--text2)">Fitness-focused buyer who evaluates protein content, amino acid profiles, and price-per-serving. Less brand-loyal — will switch for better macros. Searches extensively before buying and reads comparison articles. Aloha's plant-based angle is secondary to performance metrics.</p>
+            <div class="persona-tags">
+              <span class="tag accent">Comparison shopper</span>
+              <span class="tag">Gym-goer</span>
+              <span class="tag">Reviews-driven</span>
+              <span class="tag">Subscription averse</span>
+              <span class="tag">Amazon buyer</span>
+            </div>
+            <p style="margin-top:12px; font-size:12px; color:var(--muted)"><strong>Top searches:</strong> "best protein powder," "best protein bars for muscle gain," "plant based protein powder review," "protein powder without stevia"</p>
+          </div>
+        </div>
+
+        <div class="persona-card" onclick="togglePersona(this)">
+          <div class="persona-header">
+            <div class="persona-avatar" style="background:rgba(0,185,107,0.1)">🎒</div>
+            <div>
+              <div class="persona-name">Gifter Grace</div>
+              <div class="persona-tagline">Female · 28–45 · BFCM driver · Gift intent</div>
+            </div>
+            <div class="persona-expand-icon">▼</div>
+          </div>
+          <div class="persona-detail">
+            <p style="font-size:12px; color:var(--text2)">Buys Aloha as a gift or discovers it during holiday shopping. High-value session — often buys variety packs or sample sets. Not a regular health food buyer but trusts wellness brands as "safe" health gifts. Critical BFCM and holiday content target.</p>
+            <div class="persona-tags">
+              <span class="tag accent">Gift intent</span>
+              <span class="tag">BFCM shopper</span>
+              <span class="tag">Variety packs</span>
+              <span class="tag">Brand-trust driven</span>
+              <span class="tag">One-time purchaser</span>
+            </div>
+            <p style="margin-top:12px; font-size:12px; color:var(--muted)"><strong>Top searches:</strong> "healthy gift ideas," "protein bar gift set," "best healthy snacks gift," "aloha protein bars"</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="cq-note has-note" id="note-s3">
+        <div class="cq-note-label">Confirming Question</div>
+        <div class="cq-note-text" id="note-text-s3">Based on what we're seeing, Health-Conscious Hannah looks like your primary buyer. Is that the demographic that drives the most revenue for you — and does that match what you're seeing on your paid channels? (Think about your Meta ad performance and which audiences convert at the highest rate.) Are there any buyer types we're missing?</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 4: COMPETITORS
+  ══════════════════════════════════════════════ -->
+  <div class="section" id="s4">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-number">4</div>
+        <div>
+          <div class="section-title">Competitors</div>
+          <div class="section-subtitle">5 competitors — DR parity, traffic gap, top pages with live links. Click any row to expand.</div>
+        </div>
+      </div>
+      <button class="cq-btn" onclick="openModal('s4','Competitors')">Edit</button>
+    </div>
+    <div class="section-body">
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>Domain Rating</th>
+            <th>Est. Organic Traffic</th>
+            <th>Content Mix</th>
+            <th>Traffic Gap</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- ALOHA — expandable too -->
+          <tr class="comp-row" id="row-aloha" onclick="toggleComp('aloha')">
+            <td>
+              <div class="comp-name">
+                <span class="expand-arrow" id="arrow-aloha">▶</span>
+                aloha.com
+                <span style="font-size:10px; background:#d1fae5; color:#065f46; padding:2px 7px; border-radius:10px; font-weight:700;">YOU</span>
+              </div>
+            </td>
+            <td>
+              <span class="dr-pill">69 <span class="dr-bar"><span class="dr-fill you" style="width:69%"></span></span></span>
+            </td>
+            <td style="font-weight:700; color:var(--green)">58,339</td>
+            <td>Collections 70% / Blogs 30%</td>
+            <td><span class="traffic-gap-badge gap-you">Baseline</span></td>
+          </tr>
+          <tr class="comp-detail-row" id="detail-aloha">
+            <td colspan="5" class="comp-detail-cell">
+              <div style="font-size:12px; color:var(--muted); margin-bottom:8px;">Your top 15 pages by keyword count — real Ahrefs data.</div>
+              <ul class="comp-pages-list">
+                <li><a class="page-url" href="https://aloha.com/collections/protein-bars" target="_blank">aloha.com/collections/protein-bars</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">130 kws · Pos #1</span></div></li>
+                <li><a class="page-url" href="https://aloha.com/collections/protein-drinks" target="_blank">aloha.com/collections/protein-drinks</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">123 kws · Pos #1</span></div></li>
+                <li><a class="page-url" href="https://aloha.com/collections/protein-powder-without-stevia" target="_blank">/collections/protein-powder-without-stevia</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">139 kws · Pos #2</span></div></li>
+                <li><a class="page-url" href="https://aloha.com/collections/healthiest-protein-bars" target="_blank">/collections/healthiest-protein-bars</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">70 kws · Pos #9</span></div></li>
+                <li><a class="page-url" href="https://aloha.com/collections/protein-bars-gluten-free" target="_blank">/collections/protein-bars-gluten-free</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">46 kws · Pos #7</span></div></li>
+                <li><a class="page-url" href="https://aloha.com/collections/clean-protein-shakes" target="_blank">/collections/clean-protein-shakes</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">42 kws · Pos #5</span></div></li>
+                <li><a class="page-url" href="https://aloha.com/blogs/articles/what-is-taro" target="_blank">/blogs/articles/what-is-taro</a><div class="page-meta"><span class="page-type-tag tag-blog">Blog</span><span class="page-kws">85 kws · Pos #5</span></div></li>
+                <li><a class="page-url" href="https://aloha.com/" target="_blank">aloha.com/ (homepage)</a><div class="page-meta"><span class="page-type-tag tag-product">Home</span><span class="page-kws">77 kws · Pos #4</span></div></li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- RXBAR -->
+          <tr class="comp-row" id="row-rxbar" onclick="toggleComp('rxbar')">
+            <td><div class="comp-name"><span class="expand-arrow" id="arrow-rxbar">▶</span> rxbar.com</div></td>
+            <td><span class="dr-pill">70 <span class="dr-bar"><span class="dr-fill" style="width:70%"></span></span></span></td>
+            <td style="font-weight:700; color:var(--yellow)">~210K</td>
+            <td>Collections 45% / Blogs 55%</td>
+            <td><span class="traffic-gap-badge gap-big">3.6× more</span></td>
+          </tr>
+          <tr class="comp-detail-row" id="detail-rxbar">
+            <td colspan="5" class="comp-detail-cell">
+              <div class="insight-box">Nearly identical DR (70 vs 69) but 3.6× the traffic — driven almost entirely by blog content targeting "how much protein," "best bars for X," and ingredient queries. Aloha's collection pages are stronger; RXBAR's blog is the gap. <em style="color:var(--muted2); font-size:11px;">(Note: rxbar.com blocks automated crawlers — links go to main sections)</em></div>
+              <ul class="comp-pages-list">
+                <li><a class="page-url" href="https://www.rxbar.com" target="_blank">rxbar.com (main site)</a><div class="page-meta"><span class="page-type-tag tag-collection">Home</span><span class="page-kws">~30K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.rxbar.com/learn" target="_blank">rxbar.com/learn (content hub)</a><div class="page-meta"><span class="page-type-tag tag-blog">Blog Hub</span><span class="page-kws">~65K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.rxbar.com/products" target="_blank">rxbar.com/products</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">~50K traffic</span></div></li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- QUEST -->
+          <tr class="comp-row" id="row-quest" onclick="toggleComp('quest')">
+            <td><div class="comp-name"><span class="expand-arrow" id="arrow-quest">▶</span> questnutrition.com</div></td>
+            <td><span class="dr-pill">64 <span class="dr-bar"><span class="dr-fill" style="width:64%"></span></span></span></td>
+            <td style="font-weight:700; color:var(--red)">~380K</td>
+            <td>Blogs 75% / Collections 25%</td>
+            <td><span class="traffic-gap-badge gap-big">6.5× more</span></td>
+          </tr>
+          <tr class="comp-detail-row" id="detail-quest">
+            <td colspan="5" class="comp-detail-cell">
+              <div class="insight-box" style="background:rgba(239,68,68,0.05); border-color:rgba(239,68,68,0.2);">
+                <strong>The single most important data point in this report:</strong> Quest has DR 64 — 5 points LOWER than Aloha's 69 — yet pulls 6.5× more organic traffic. Entirely through blog content. Aloha has more authority and less traffic. The ROI case for content practically writes itself.
+              </div>
+              <ul class="comp-pages-list">
+                <li><a class="page-url" href="https://www.questnutrition.com/blogs/news/" target="_blank">questnutrition.com/blogs/news/ (blog hub)</a><div class="page-meta"><span class="page-type-tag tag-blog">Blog Hub</span><span class="page-kws">~180K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.questnutrition.com/collections/protein-bars" target="_blank">/collections/protein-bars</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">~80K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.questnutrition.com/collections/protein-cookies" target="_blank">/collections/protein-cookies</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">~35K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.questnutrition.com/blogs/news/meet-our-questletes" target="_blank">/blogs/news/meet-our-questletes</a><div class="page-meta"><span class="page-type-tag tag-blog">Blog</span><span class="page-kws">~12K traffic</span></div></li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- KIND SNACKS -->
+          <tr class="comp-row" id="row-kind" onclick="toggleComp('kind')">
+            <td><div class="comp-name"><span class="expand-arrow" id="arrow-kind">▶</span> kindsnacks.com</div></td>
+            <td><span class="dr-pill">72 <span class="dr-bar"><span class="dr-fill" style="width:72%"></span></span></span></td>
+            <td style="font-weight:700; color:var(--yellow)">~140K</td>
+            <td>Products 60% / Content Hub 40%</td>
+            <td><span class="traffic-gap-badge gap-big">2.4× more</span></td>
+          </tr>
+          <tr class="comp-detail-row" id="detail-kind">
+            <td colspan="5" class="comp-detail-cell">
+              <div class="insight-box">KIND has 3 DR points more (72 vs 69) but 2.4× the traffic, capturing "healthy snack" adjacent queries. They use product pages + a content hub (Nourishment Hub) instead of a traditional blog.</div>
+              <ul class="comp-pages-list">
+                <li><a class="page-url" href="https://www.kindsnacks.com/products/nut-bar" target="_blank">kindsnacks.com/products/nut-bar</a><div class="page-meta"><span class="page-type-tag tag-product">Product</span><span class="page-kws">~35K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.kindsnacks.com/products/protein" target="_blank">/products/protein</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">~25K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.kindsnacks.com/products/protein-max" target="_blank">/products/protein-max</a><div class="page-meta"><span class="page-type-tag tag-product">Product</span><span class="page-kws">~18K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.kindsnacks.com/nourishment-hub" target="_blank">/nourishment-hub (content hub)</a><div class="page-meta"><span class="page-type-tag tag-blog">Content</span><span class="page-kws">~22K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.kindsnacks.com/products/all-snacks" target="_blank">/products/all-snacks</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">~15K traffic</span></div></li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- VEGA SPORT -->
+          <tr class="comp-row" id="row-vega" onclick="toggleComp('vega')">
+            <td><div class="comp-name"><span class="expand-arrow" id="arrow-vega">▶</span> vegasport.com</div></td>
+            <td><span class="dr-pill">62 <span class="dr-bar"><span class="dr-fill" style="width:62%"></span></span></span></td>
+            <td style="font-weight:700; color:var(--muted)">~45K</td>
+            <td>Collections 55% / Blogs 45%</td>
+            <td><span class="traffic-gap-badge gap-med">Similar range</span></td>
+          </tr>
+          <tr class="comp-detail-row" id="detail-vega">
+            <td colspan="5" class="comp-detail-cell">
+              <div class="insight-box">Vega Sport is the most direct plant-based competitor — nearly identical positioning to Aloha. Lower DR (62) and lower traffic (~45K). Watch for keyword overlap on "plant based protein powder" and "vegan protein shake" — Aloha can outrank with stronger collection pages and targeted blog posts.</div>
+              <ul class="comp-pages-list">
+                <li><a class="page-url" href="https://vegasport.com/collections/protein" target="_blank">vegasport.com/collections/protein</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">~12K traffic</span></div></li>
+                <li><a class="page-url" href="https://vegasport.com/blogs/all/best-plant-based-protein-powder" target="_blank">/blogs/best-plant-based-protein-powder</a><div class="page-meta"><span class="page-type-tag tag-blog">Blog</span><span class="page-kws">~8K traffic</span></div></li>
+                <li><a class="page-url" href="https://vegasport.com/blogs/all/vegan-protein-shake-recipes" target="_blank">/blogs/vegan-protein-shake-recipes</a><div class="page-meta"><span class="page-type-tag tag-blog">Blog</span><span class="page-kws">~6K traffic</span></div></li>
+              </ul>
+            </td>
+          </tr>
+
+          <!-- ORGAIN -->
+          <tr class="comp-row" id="row-orgain" onclick="toggleComp('orgain')">
+            <td><div class="comp-name"><span class="expand-arrow" id="arrow-orgain">▶</span> orgain.com</div></td>
+            <td><span class="dr-pill">67 <span class="dr-bar"><span class="dr-fill" style="width:67%"></span></span></span></td>
+            <td style="font-weight:700; color:var(--yellow)">~95K</td>
+            <td>Collections 40% / Blogs 60%</td>
+            <td><span class="traffic-gap-badge gap-big">1.6× more</span></td>
+          </tr>
+          <tr class="comp-detail-row" id="detail-orgain">
+            <td colspan="5" class="comp-detail-cell">
+              <div class="insight-box">Orgain is the most comparable organic/clean brand — DR 67 (2 below Aloha) but 1.6× more traffic through blog-heavy strategy targeting "organic protein powder" and "clean protein shake" — the exact queries Aloha ranks for but doesn't dominate yet.</div>
+              <ul class="comp-pages-list">
+                <li><a class="page-url" href="https://www.orgain.com/collections/protein-powder" target="_blank">orgain.com/collections/protein-powder</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">~22K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.orgain.com/blogs/news" target="_blank">/blogs/news (blog hub)</a><div class="page-meta"><span class="page-type-tag tag-blog">Blog Hub</span><span class="page-kws">~35K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.orgain.com/blogs/news/warmer-weather-longer-days-better-workouts-get-spring-training" target="_blank">/blogs/news/spring-training-workouts</a><div class="page-meta"><span class="page-type-tag tag-blog">Blog</span><span class="page-kws">~8K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.orgain.com/blogs/news/eating-more-lose-weight" target="_blank">/blogs/news/eating-more-lose-weight</a><div class="page-meta"><span class="page-type-tag tag-blog">Blog</span><span class="page-kws">~10K traffic</span></div></li>
+                <li><a class="page-url" href="https://www.orgain.com/collections/all-products" target="_blank">/collections/all-products</a><div class="page-meta"><span class="page-type-tag tag-collection">Collection</span><span class="page-kws">~12K traffic</span></div></li>
+              </ul>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <div class="cq-note has-note" id="note-s4">
+        <div class="cq-note-label">Confirming Question</div>
+        <div class="cq-note-text" id="note-text-s4">Are there any competitors we're missing that you'd want us to include in the research? If so, drop their URL and we'll pull the data and add them in.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       SECTION 5: TAM + STRATEGY
+  ══════════════════════════════════════════════ -->
+  <div class="section" id="s5">
+    <div class="section-header">
+      <div class="section-title-group">
+        <div class="section-number">5</div>
+        <div>
+          <div class="section-title">TAM &amp; Strategy</div>
+          <div class="section-subtitle">Traffic upside, content mix, and keyword strategy synthesis</div>
+        </div>
+      </div>
+      <button class="cq-btn" onclick="openModal('s5','TAM &amp; Strategy')">Edit</button>
+    </div>
+    <div class="section-body">
+
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px; margin-bottom:24px;">
+
+        <!-- UPSIDE -->
+        <div class="tam-upside">
+          <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--muted); margin-bottom:8px; font-weight:700;">Realistic Traffic Upside</div>
+          <div class="tam-multiplier">3–7×</div>
+          <div class="tam-multiplier-sub">Based on 5 competitor benchmarks at similar DR</div>
+
+          <div class="tam-numbers">
+            <div class="tam-num">
+              <div class="tam-num-val" style="color:var(--muted)">58K</div>
+              <div class="tam-num-label">Current/mo</div>
+            </div>
+            <div style="display:flex; align-items:center; color:var(--muted2); font-size:20px;">→</div>
+            <div class="tam-num">
+              <div class="tam-num-val" style="color:var(--accent-dark)">175K</div>
+              <div class="tam-num-label">Conservative 3×</div>
+            </div>
+            <div style="display:flex; align-items:center; color:var(--muted2); font-size:20px;">→</div>
+            <div class="tam-num">
+              <div class="tam-num-val" style="color:var(--green)">380K+</div>
+              <div class="tam-num-label">Quest parity</div>
+            </div>
+          </div>
+
+          <div style="font-size:11px; color:var(--muted); margin-top:16px; line-height:1.7; padding-top:14px; border-top:1px solid rgba(0,185,107,0.2);">
+            Quest (DR 64) pulls 380K/mo with <em>less authority</em> than Aloha. Orgain (DR 67, 2 below Aloha) pulls 95K. The gap is purely content volume — Aloha's authority is already there.
+          </div>
+        </div>
+
+        <!-- CONTENT SPLIT — single matching row only -->
+        <div class="content-split-card">
+          <div class="split-title">Content Mix — Recommendation for aloha.com</div>
+          <div class="split-subtitle">Based on DR 69 — high authority tier</div>
+
+          <div class="split-track">
+            <div class="split-col collections" style="width:70%">70% Collections</div>
+            <div class="split-col blogs" style="width:30%">30% Blogs</div>
+          </div>
+
+          <div class="split-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Collection pages (high-intent buyers)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:var(--accent2)"></div>Blog content (discovery traffic)</div>
+          </div>
+
+          <div class="split-rationale">
+            <strong>Why 70/30:</strong> At DR 69, Aloha's collection pages already rank #1 for core queries. Collections capture high-intent buyers ready to purchase. Blogs capture the discovery traffic competitors (especially Quest) dominate — the 30% blog investment targets "best protein bars for X" and ingredient comparison queries that feed directly into collection page conversions. You still need blogs — they're how new collection pages get indexed and linked to.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- STRATEGY SYNTHESIS -->
+      <div class="tam-strategy">
+        <div class="tam-strategy-title">Keyword &amp; Content Strategy — What We'd Target and Why</div>
+
+        <div class="strategy-point">
+          <div class="sp-icon sp-blue">🎯</div>
+          <div><strong>Priority 1 — Low-difficulty, high-intent niche queries (collections):</strong> "Vegan protein bars" (3.6K, LOW), "plant based protein powder" (13K, LOW), "organic protein bars" (900, LOW), "protein powder without stevia" (500, LOW). These are exact Aloha brand matches with LOW competition — easy wins that drive purchase-ready traffic. Build one collection per variant.</div>
+        </div>
+
+        <div class="strategy-point">
+          <div class="sp-icon sp-green">📅</div>
+          <div><strong>Priority 2 — Seasonality-aligned content clusters (blogs + collections):</strong> January window opens in 5 months. Build "new year protein challenge," "best protein bars for new year goals," and "plant based protein for weight loss" clusters now for January peak capture. BFCM: "protein bar gift set" + "healthy holiday gifts" — must be live by end of September.</div>
+        </div>
+
+        <div class="strategy-point">
+          <div class="sp-icon sp-purple">🏁</div>
+          <div><strong>Priority 3 — Competitor keyword conquest (blogs):</strong> Quest and RXBAR dominate "high protein foods," "best protein bars for weight loss," and "calories in a protein bar" — all MED difficulty. Aloha's higher DR (69 vs Quest's 64) means a well-structured blog post will outrank them. 5–7 targeted blog posts on these queries = 50–100K additional monthly traffic potential.</div>
+        </div>
+
+      </div>
+
+      <div class="cq-note has-note" id="note-s5">
+        <div class="cq-note-label">Confirming Question</div>
+        <div class="cq-note-text" id="note-text-s5">Based on everything we've mapped out — the keyword opportunities, your seasonality window, and where competitors are outpacing you — does this match how you'd prioritize your SEO investment? Is there anything here that surprises you, or any area you'd want us to focus on first?</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <svg style="height:28px; width:auto;" viewBox="0 0 1162 428" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M601 100.6C617.1 100.6 631.1 104.5 643.2 112C655.6 119.7 665.2 130.9 672.3 145.4H787.8C778.4 101.2 757.2 66.4 724.4 40.9C691.6 15 651.1 2 603 2C554.9 2 531.5 10.4 502.4 27.1C473.1 43.6 450.5 66.6 434.6 96.6C418.9 126.1 411 159.9 411 197.8C411 235.7 418.9 270.3 434.6 300.1C450.7 329.6 473.3 352.7 502.4 369.6C531.7 386.1 565.1 394.2 603 394.2C640.9 394.2 691.6 381.4 724.4 355.9C757.2 330 778.4 295 787.8 250.8H672.3C665.4 265.3 655.6 276.5 643.2 284.2C631.2 291.9 617.1 295.8 601 295.8C576.2 295.8 556.2 287 541.3 269.5C526.8 251.6 519.5 227.7 519.5 197.8C519.5 167.9 526.8 144.8 541.3 127.3C556.2 109.4 576.1 100.4 601 100.4V100.6Z" fill="white"/>
+    <path d="M1154.9 6H1031.1L911.3 172.2V6H804V391.6H911.3V222.7L1032.3 391.6H1161.9L1013 193L1154.9 6Z" fill="white"/>
+    <path d="M218.4 307.9L282 350.1L268.2 364.2L241.5 391.1C227.4 394 212.8 395.6 197.9 395.6C161.8 395.6 128.6 387.2 98.3 370.1C68 353.2 44.1 329.6 26.4 299.6C8.8 269.4 0 235.4 0 197.5C0 159.6 8.8 125.6 26.5 95.5C44.2 65.4 68.1 42.1 98.4 25.2C128.7 8.5 161.9 0 198 0C234.1 0 267.7 8.4 297.8 25.1C327.9 41.8 351.6 65.4 369.1 95.4C386.6 125.5 395.4 159.4 395.4 197.4C395.4 235.4 390.5 252.4 380.5 276.4L293.5 216.1L286 211.2C286.4 206.7 286.6 202.2 286.6 197.4C286.6 166.8 278.7 142.6 262.8 124.9C246.9 107.2 225.3 98.4 198 98.4C170.7 98.4 148.7 107.2 133 124.9C117.3 142.6 109.4 166.7 109.4 197.4C109.4 228.1 117.3 251.6 133 269.3C148.7 287 170.3 295.8 198 295.8H200L218.4 307.9Z" fill="white"/>
+    <path d="M279.5 380.9L454.4 427.5L355.4 352.8L396 311.2L372.3 294.7L282.3 232.4L279.3 230.5L223.7 287.8L229.2 291.4L312.7 346.8L282.5 378L279.5 380.9Z" fill="#00D6F7"/>
+  </svg>
+  <div class="footer-sub">SEO · CRO · AEO — qck.co &nbsp;·&nbsp; Data powered by Ahrefs &nbsp;·&nbsp; Generated Aug 24, 2026</div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-title" id="modalTitle">Confirming Question</div>
+    <div class="modal-subtitle">Edit the confirming question for this section. Changes auto-save and persist across sessions.</div>
+    <textarea id="modalTextarea" placeholder="e.g. 'Are you primarily focused on bars or are powder and shakes equally important to grow?'"></textarea>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="saveNote()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── MODAL ──
+  let currentSection = null;
+
+  function openModal(id, label) {
+    currentSection = id;
+    document.getElementById('modalTitle').textContent = 'Confirming Question — ' + label;
+    const t = document.getElementById('note-text-' + id);
+    document.getElementById('modalTextarea').value = t ? t.textContent.trim() : '';
+    document.getElementById('editModal').classList.add('open');
+    setTimeout(() => document.getElementById('modalTextarea').focus(), 200);
+  }
+
+  function closeModal() {
+    document.getElementById('editModal').classList.remove('open');
+    currentSection = null;
+  }
+
+  function saveNote() {
+    if (!currentSection) return;
+    const text = document.getElementById('modalTextarea').value.trim();
+    const noteEl = document.getElementById('note-' + currentSection);
+    const noteText = document.getElementById('note-text-' + currentSection);
+    if (noteEl && noteText) {
+      noteText.textContent = text;
+      noteEl.classList.toggle('has-note', !!text);
+    }
+    saveNoteToStorage(currentSection, text);
+    closeModal();
+  }
+
+  document.getElementById('editModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ── PERSONA TOGGLE ──
+  function togglePersona(card) { card.classList.toggle('open'); }
+
+  // ── COMPETITOR TOGGLE ──
+  function toggleComp(name) {
+    const row = document.getElementById('row-' + name);
+    const detail = document.getElementById('detail-' + name);
+    const arrow = document.getElementById('arrow-' + name);
+    if (!row || !detail) return;
+    const isOpen = row.classList.contains('active');
+    row.classList.toggle('active', !isOpen);
+    detail.classList.toggle('open', !isOpen);
+  }
+
+  // ── BAR ANIMATION ──
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.querySelectorAll('.product-bar-fill[data-w]').forEach(function(el) {
+        el.style.width = el.getAttribute('data-w');
+      });
+    }, 300);
+  });
+
+  // ── STICKY NAV ACTIVE STATE ──
+  const sections = ['s1','s2','s3','s4','s5'];
+  const navItems = document.querySelectorAll('.nav-item');
+
+  function updateNav() {
+    const scrollY = window.scrollY || window.pageYOffset;
+    const windowH = window.innerHeight;
+    let active = 's1';
+    sections.forEach(function(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        const top = el.getBoundingClientRect().top + scrollY;
+        // activate when section top is within top 40% of viewport
+        if (scrollY + windowH * 0.4 >= top) active = id;
+      }
+    });
+    navItems.forEach(function(item) {
+      const href = item.getAttribute('href');
+      item.classList.toggle('active', href === '#' + active);
+    });
+  }
+
+  window.addEventListener('scroll', updateNav, { passive: true });
+  updateNav();
+
+  // ── SMOOTH SCROLL with correct offset for sticky nav ──
+  document.querySelectorAll('.nav-item[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (!target) return;
+      const navHeight = document.getElementById('stickyNav').offsetHeight;
+      const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    });
+  });
+
+  // ── LOCALSTORAGE PERSISTENCE ──
+  const STORAGE_KEY = 'qck-demand-aloha-notes';
+
+  function loadSavedNotes() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      Object.keys(saved).forEach(function(id) {
+        const noteEl = document.getElementById('note-' + id);
+        const noteText = document.getElementById('note-text-' + id);
+        if (noteEl && noteText && saved[id]) {
+          noteText.textContent = saved[id];
+          noteEl.classList.add('has-note');
+        }
+      });
+    } catch(e) {}
+  }
+
+  function saveNoteToStorage(id, text) {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      if (text) { saved[id] = text; } else { delete saved[id]; }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+    } catch(e) {}
+  }
+
+  loadSavedNotes();
+</script>
+
+</body>
+</html>
