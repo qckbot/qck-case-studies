@@ -466,11 +466,10 @@
           </td>
           <td>
             <div class="date-col">Aug 24, 2026</div>
-            <div class="date-note">v4 — nav fix + questions</div>
           </td>
           <td>
             <div class="actions-col">
-              <button class="btn btn-view" onclick="window.open('aloha-seo-demand-analysis','_blank')">👁 View</button>
+              <button class="btn btn-view" onclick="window.open('/intro/aloha-seo-demand-analysis','_blank')">👁 View</button>
               <button class="btn btn-content-plan" id="cp-aloha.com" onclick="handleContentPlan('aloha.com')">＋ Create Content Plan</button>
               <button class="btn btn-danger" onclick="confirmDelete('aloha.com')" title="Delete">🗑</button>
             </div>
@@ -516,6 +515,11 @@
     let domain = raw.replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*$/, '').toLowerCase();
     if (!domain) return;
 
+    if (document.getElementById('row-' + domain)) {
+      showToast('A report for ' + domain + ' already exists.');
+      return;
+    }
+
     document.getElementById('generateBtn').disabled = true;
     document.getElementById('genDomain').textContent = domain;
     document.getElementById('generatingBar').classList.add('active');
@@ -524,26 +528,50 @@
     const stepEl = document.getElementById('genStep');
     stepEl.textContent = genSteps[0];
     const interval = setInterval(function() {
-      step++;
-      if (step < genSteps.length) stepEl.textContent = genSteps[step];
-    }, 8000);
+      step = Math.min(step + 1, genSteps.length - 1);
+      stepEl.textContent = genSteps[step];
+    }, 10000);
 
-    // Placeholder — real generation API call goes here
-    setTimeout(function() {
+    // Call the real generation API
+    fetch('/api/generate-report', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ domain: domain })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(result) {
       clearInterval(interval);
       document.getElementById('generatingBar').classList.remove('active');
       document.getElementById('generateBtn').disabled = false;
       document.getElementById('domainInput').value = '';
-      addReportRow(domain, new Date());
-      showToast('✅ Report for ' + domain + ' is live.');
-    }, 58000);
+
+      if (result.ok) {
+        addReportRow(domain, new Date(), result);
+        showToast('✅ Report for ' + domain + ' is live.');
+      } else {
+        showToast('❌ Generation failed: ' + (result.error || 'unknown error'));
+      }
+    })
+    .catch(function(err) {
+      clearInterval(interval);
+      document.getElementById('generatingBar').classList.remove('active');
+      document.getElementById('generateBtn').disabled = false;
+      showToast('❌ Error: ' + err.message);
+    });
   }
 
-  function addReportRow(domain, created) {
+  function addReportRow(domain, created, result) {
     if (document.getElementById('row-' + domain)) return;
     const tbody = document.getElementById('reportTableBody');
     const dateStr = created.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-    const slug = domain.replace(/\./g, '-') + '-seo-demand-analysis';
+    const slug = '/intro/' + domain.replace(/\./g, '-') + '-seo-demand-analysis';
+    const dr = result && result.dr ? result.dr : null;
+    const traffic = result && result.traffic ? result.traffic.toLocaleString() : null;
+    const keywords = result && result.keywords ? result.keywords.toLocaleString() : null;
+    const metaHtml = dr
+      ? `<span class="dr-badge">DR ${Math.round(dr)}</span>&nbsp;· ${traffic} organic/mo · ${keywords} keywords`
+      : 'Newly generated';
+
     const tr = document.createElement('tr');
     tr.id = 'row-' + domain;
     tr.innerHTML = `
@@ -552,17 +580,17 @@
           <div class="domain-icon">🌐</div>
           <div>
             <div>${domain}</div>
-            <div class="report-meta">Newly generated</div>
+            <div class="report-meta">${metaHtml}</div>
           </div>
         </div>
       </td>
       <td><span class="status-pill status-live"><span class="status-dot"></span>Live</span></td>
       <td><div class="date-col">${dateStr}</div></td>
-      <td><div class="date-col">${dateStr}</div><div class="date-note">v1 — initial</div></td>
+      <td><div class="date-col">${dateStr}</div></td>
       <td>
         <div class="actions-col">
           <button class="btn btn-view" onclick="window.open('${slug}','_blank')">👁 View</button>
-          <button class="btn btn-content-plan" id="cp-${domain}" onclick="handleContentPlan('${domain}')">＋ Create Content Plan</button>
+          <button class="btn btn-content-plan" id="cp-${domain}" onclick="handleContentPlan('${domain}')">&#xFF0B; Create Content Plan</button>
           <button class="btn btn-danger" onclick="confirmDelete('${domain}')" title="Delete">🗑</button>
         </div>
       </td>`;
